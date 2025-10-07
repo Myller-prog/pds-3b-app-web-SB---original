@@ -1,0 +1,96 @@
+﻿@page "/funcionarios/novo"
+@rendermode InteractiveServer
+
+@using AppWeb.Models;
+@inject FuncionarioDAO funcionarioDAO;
+@inject NavigationManager Navigation;
+
+<PageTitle>Funcionário - Novo</PageTitle>
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Funcionário</h1>
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+
+<div class="row">
+    <div class="col">
+        <EditForm Model="_novoFuncionario" OnSubmit="Salvar">
+
+            <div class="form-group mb-4">
+                <label>Nome</label>
+                <input @bind-value="_novoFuncionario!.Nome" type="text" class="form-control" name="nome"
+                       placeholder="Nome completo do funcionário" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Cargo</label>
+                <input @bind-value="_novoFuncionario!.Cargo" type="text" class="form-control" name="cargo"
+                       placeholder="Cargo/Função" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Data de Nascimento</label>
+                <input @bind-value="_novoFuncionario!.DataNasc" type="text" class="form-control" name="dataNasc"
+                       placeholder="Ex: DD/MM/AAAA" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Email</label>
+                <input @bind-value="_novoFuncionario!.Email" type="email" class="form-control" name="email"
+                       placeholder="email@exemplo.com" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Telefone</label>
+                <input @bind-value="_novoFuncionario!.Telefone" type="tel" class="form-control" name="telefone"
+                       placeholder="Ex: (XX) XXXX-XXXX" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>CPF</label>
+                <input @bind-value="_novoFuncionario!.Cpf" type="number" class="form-control" name="cpf"
+                       placeholder="Apenas números" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>CEP</label>
+                <input @bind-value="_novoFuncionario!.Cep" type="text" class="form-control" name="cep"
+                       placeholder="Ex: XXXXX-XXX" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Funcionario? _novoFuncionario { get; set; } = new Funcionario();
+
+
+    private void Salvar()
+    {
+        try
+        {
+            // Exemplo de validação mínima
+            if (string.IsNullOrEmpty(_novoFuncionario.Nome))
+            {
+                throw new Exception(message: "O campo Nome é obrigatório.");
+            }
+
+            funcionarioDAO.Inserir(_novoFuncionario);
+
+            Navigation.NavigateTo(uri: "/funcionarios");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao salvar: {ex.Message}";
+        }
+
+    }
+}

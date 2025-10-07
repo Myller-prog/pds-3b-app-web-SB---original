@@ -1,0 +1,59 @@
+﻿@page "/funcionarios"
+
+@inject FuncionarioDAO funcionarioDAO;
+
+<PageTitle>Funcionários</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Funcionarios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Cpf</th>
+            <th>Cep</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var funcionario in listarFuncionario)
+            {
+                <tr>
+                    <td>@funcionario.Id</td>
+                    <td>@funcionario.Nome</td>
+                    <td>@funcionario.Cargo</td>
+                    <td>@funcionario.Email</td>
+                    <td>@funcionario.Telefone</td>
+                    <td>@funcionario.Cpf</td>
+                    <td>@funcionario.Cep</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Funcionario> listarFuncionario = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listarFuncionario = funcionarioDAO.listarTodos();
+    }
+
+}
+
+
