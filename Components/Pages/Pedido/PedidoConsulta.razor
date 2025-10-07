@@ -1,5 +1,57 @@
-﻿<h3>PedidoConsulta</h3>
+﻿@page "/pedidos"
+
+@inject PedidoDAO pedidoDAO;
+
+<PageTitle>Pedidos</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Pedidos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome do cliente</th>
+            <th>Forma de pagamento</th>
+            <th>Status</th>
+            <th>Numero do pedido</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var pedido in listaPedidos)
+            {
+                <tr>
+                    <td>@pedido.Id</td>
+                    <td>@pedido.NomeCliente</td>
+                    <td>@pedido.FormaPagamento</td>
+                    <td>@pedido.Status</td>
+                    <td>@pedido.NumeroPedido</td>
+                    <td>@pedido.Total</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+</table>
 
 @code {
+    private List<Pedido> listaPedidos = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listaPedidos = pedidoDAO.listarTodos();
+    }
 
 }
+
+
