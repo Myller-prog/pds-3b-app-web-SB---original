@@ -1,0 +1,70 @@
+﻿@page "/pedidos/novo"
+@rendermode InteractiveServer
+
+@using AppWeb.Models;
+@inject PedidoDAO pedidoDAO;
+@inject NavigationManager Navigation;
+
+<PageTitle>Pedido - Novo</PageTitle>
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Pedido</h1>
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+
+<div class="row">
+    <div class="col">
+        <EditForm Model="_novoPedido" OnSubmit="Salvar">
+            <div class="form-group mb-4">
+                <label>Nome do cliente</label>
+                <input @bind-value="_novoPedido!.NomeCliente" type="text" class="form-control"
+                       placeholder="Informe o nome do cliente" />
+            </div>
+
+
+    
+            <div class="form-group mb-4">
+                <label>Nº Pedido</label>
+                <input @bind-value="_novoPedido!.NumeroPedido" type="text" class="form-control"
+                       placeholder="Número do pedido" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Total</label>
+                <input @bind-value="_novoPedido!.Total" type="text" class="form-control"
+                       placeholder="Valor total do pedido" />
+            </div>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Pedido? _novoPedido { get; set; } = new Pedido();
+
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novoPedido.NomeCliente is null || _novoPedido.NomeCliente == "")
+            {
+                throw new Exception(message: "O campo nome do cliente é obrigatório");
+            }
+            pedidoDAO.Inserir(_novoPedido);
+
+            Navigation.NavigateTo(uri: "/pedidos");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+
+    }
+}
