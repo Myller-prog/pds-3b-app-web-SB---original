@@ -124,8 +124,18 @@ insert into funcionarios values (null, 'Maria', 'cozinheira', '1988-10-30', 'mar
 insert into funcionarios values (null, 'Joana', 'boleira', '1965-1-20', 'joana@gmail.com', '11 454546511',  '565.888.988-88', '54656698');
 insert into funcionarios values (null, 'Miguel', 'entregador', '1990-05-23', 'miguel@gmail.com', '69 5555 4444', '998.999.789-55', '5465623'); 
 
+CREATE TABLE 
+  pedido (
+  id_ped INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  NomeCliente VARCHAR (255) NOT NULL,
+  forma_pagamento VARCHAR (15),
+  numero_pedido VARCHAR (15),
+  status_ped VARCHAR (255)
+  );
+  alter table pedido add column total decimal;
 
-
+INSERT INTO pedido VALUES (null,'Madalena', 'Pendente', 'Pix', 'n 1', '7.00');
+INSERT INTO pedido VALUES (null, 'Ana Souza', 'Pronto', 'Dinheiro', 'n 3', '50.00');
 
 
 
