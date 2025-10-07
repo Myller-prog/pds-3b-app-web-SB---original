@@ -104,7 +104,7 @@ valor_ali int,
 ingrediente_ali varchar (200)
 );
 
-insert into alimento values (null, 'iorgute', 'Laticinio', '15.00', 'leite');
+insert into alimento values (null, 'não', 'Laticinio', '15.00', 'leite');
 insert into alimento values (null, 'pão', 'carboidrato', '12.00', 'leite, ovos, trigo...');
 insert into alimento values (null, 'torta', 'carboidrato', '14.00', 'frango, leite, ovos...');
 

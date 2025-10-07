@@ -1,74 +1,43 @@
-﻿@page "/produtos/novo"
-@rendermode InteractiveServer
+﻿@page "/produtoCriar"
+<div class="blazor-card-list-container">
 
-@using AppWeb.Models;
-@inject ProdutoDAO produtoDAO;
-@inject NavigationManager Navigation;
+    <h1 class="titulo-principal-blazor">produtos</h1>
+    <div class="tag-filtro-blazor">alimentos</div>
 
-<PageTitle>Produto - Novo</PageTitle>
+    <div class="lista-de-cards-blazor">
+        @foreach (var produto in Produtos)
+        {
+            <div class="produto-card-linha">
+                <div class="item-nome-blazor">@produto.Nome</div>
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Produto</h1>
+                <div class="item-quantidade-blazor">@produto.Quantidade</div>
 
-@if (erro != null)
-{
-    <div class="alert alert-danger">
-        @erro
+                <button class="item-acao-blazor item-editar">editar</button>
+
+                <button class="item-acao-blazor item-deletar">🗑️</button>
+            </div>
+        }
     </div>
-}
 
-<div class="row">
-    <div class="col">
-        <EditForm Model="_novoProduto" OnSubmit="Salvar">
-            <div class="form-group mb-4">
-                <label>Nome</label>
-                <input @bind-value="_novoProduto!.Nome" type="text" class="form-control" name="nome"
-                       placeholder="Informe o nome do produto" />
-            </div>
-
-            <div class="form-group mb-4">
-                <label>Quantidade</label>
-                <input @bind-value="_novoProduto!.Quantidade" type="text" class="form-control" name="quantidade"
-                       placeholder="Informe a quantidade de produtos" />
-            </div>
-
-            <div class="form-group mb-4">
-                <label>Preço</label>
-                <input @bind-value="_novoProduto!.Valor" type="text" class="form-control" name="valor"
-                       placeholder="Informe o preço do produtos" />
-            </div>
-
-            <div class="form-group mb-4">
-                <label>Descricão</label>
-                <textarea class="form-control" rows="5">@_novoProduto!.Descricao</textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </EditForm>
-    </div>
+    <button class="botao-adicionar-blazor">adicionar</button>
 </div>
 
 @code {
-    private string? erro = null;
-    [SupplyParameterFromForm]
-    private Produto? _novoProduto { get; set; } = new Produto();
-
-
-    private void Salvar()
+    // Simulação dos dados que vieram da tabela da esquerda
+    public class Produto
     {
-        try
-        {
-            if (_novoProduto.Nome is null || _novoProduto.Nome == "")
-            {
-                throw new Exception(message: "O campo nome é obrigatório");
-            }
-            produtoDAO.Inserir(_novoProduto);
-
-            Navigation.NavigateTo(uri: "/produtos");
-        }
-        catch (Exception ex)
-        {
-            erro = ex.Message;
-        }
-
+        public int Id { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public int Quantidade { get; set; }
+        public decimal Valor { get; set; }
     }
+
+    private List<Produto> Produtos = new List<Produto>
+    {
+        new Produto { Id = 1, Nome = "vatapá", Quantidade = 4, Valor = 15.00m },
+        new Produto { Id = 2, Nome = "pão caseiro", Quantidade = 5, Valor = 5.00m },
+        new Produto { Id = 3, Nome = "pão de queijo", Quantidade = 15, Valor = 1.50m },
+        new Produto { Id = 4, Nome = "lasanha", Quantidade = 3, Valor = 35.00m },
+        new Produto { Id = 5, Nome = "frango assado", Quantidade = 1, Valor = 28.00m }
+    };
 }
