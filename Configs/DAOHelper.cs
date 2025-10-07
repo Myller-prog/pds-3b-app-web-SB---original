@@ -1,5 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-    
+
 namespace AppWeb.Configs
 {
     public static class DAOHelper

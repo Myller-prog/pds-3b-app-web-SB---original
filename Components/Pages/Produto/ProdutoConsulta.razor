@@ -42,16 +42,12 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
     </svg>
 
-    <span class="sidebar-text">Adicionar produto</span>
-
-
-
-    <button @onclick="IrParaNovoProduto">Ir para nova página</button>
+    <button @onclick="IrParaNovoProduto">ADICIONAR PRODUTO</button>
 
     @code {
         void IrParaNovoProduto()
         {
-            NavigationManager.NavigateTo("/rota-desejada");
+            NavigationManager.NavigateTo("/produtos/novo");
         }
     }
 
