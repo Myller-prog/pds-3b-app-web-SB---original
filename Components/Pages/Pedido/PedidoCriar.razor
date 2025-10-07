@@ -20,13 +20,13 @@
     <div class="col">
         <EditForm Model="_novoPedido" OnSubmit="Salvar">
             <div class="form-group mb-4">
-                <label>Nome do Cliente</label>
+                <label>Nome do cliente</label>
                 <input @bind-value="_novoPedido!.NomeCliente" type="text" class="form-control"
                        placeholder="Informe o nome do cliente" />
             </div>
 
 
-
+    
             <div class="form-group mb-4">
                 <label>Nº Pedido</label>
                 <input @bind-value="_novoPedido!.NumeroPedido" type="text" class="form-control"
@@ -39,11 +39,32 @@
                        placeholder="Valor total do pedido" />
             </div>
 
-            <div class="form-buttons">
-                <button type="button" class="btn btn-secondary">Editar</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
-                <button type="button" class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
-            </div>
         </EditForm>
     </div>
 </div>
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Pedido? _novoPedido { get; set; } = new Pedido();
+
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novoPedido.NomeCliente is null || _novoPedido.NomeCliente == "")
+            {
+                throw new Exception(message: "O campo nome do cliente é obrigatório");
+            }
+            pedidoDAO.Inserir(_novoPedido);
+
+            Navigation.NavigateTo(uri: "/pedidos");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+
+    }
+}
