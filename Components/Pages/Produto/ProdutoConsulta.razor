@@ -1,5 +1,5 @@
 ﻿@page "/produtos"
-@using AppWeb.Models;
+
 @inject ProdutoDAO produtoDAO;
 @inject NavigationManager NavigationManager
 <PageTitle>Produtos</PageTitle>
@@ -66,10 +66,10 @@
 
     protected override void OnInitialized()
     {
-        CarregarProdutos();
+        CarregarDados();
     }
 
-    private void CarregarProdutos()
+    private void CarregarDados()
     {
         listaProdutos = produtoDAO.listarTodos();
     }

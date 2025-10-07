@@ -1,3 +1,6 @@
+create database pds_atv_SB;
+use pds_atv_SB;
+
 CREATE TABLE
   fornecedor (
     id_for INT NOT NULL AUTO_INCREMENT,
@@ -92,3 +95,38 @@ VALUES
     30,
     350.00
   );
+  
+create table alimento (
+id_ali int not null primary key auto_increment,
+nome_ali varchar (200) not null,
+tipo_ali varchar (200),
+valor_ali int,
+ingrediente_ali varchar (200)
+);
+
+insert into alimento values (null, 'iorgute', 'Laticinio', '15.00', 'leite');
+insert into alimento values (null, 'pão', 'carboidrato', '12.00', 'leite, ovos, trigo...');
+insert into alimento values (null, 'torta', 'carboidrato', '14.00', 'frango, leite, ovos...');
+
+create table funcionarios (
+id_func int not null primary key auto_increment,
+nome_func varchar (200),
+cargo_func varchar (200),
+dataNasc_func varchar (200),
+email_func varchar (200),
+telefone_func varchar (200),
+cpf_func int,
+cep_func int
+);
+alter table funcionarios change cpf_func cpf_func varchar (300);
+
+insert into funcionarios values (null, 'Maria', 'cozinheira', '1988-10-30', 'maria@gmail.com', '69 84111155', '123.544.311-99', '76900345');
+insert into funcionarios values (null, 'Joana', 'boleira', '1965-1-20', 'joana@gmail.com', '11 454546511',  '565.888.988-88', '54656698');
+insert into funcionarios values (null, 'Miguel', 'entregador', '1990-05-23', 'miguel@gmail.com', '69 5555 4444', '998.999.789-55', '5465623'); 
+
+
+
+
+
+
+
