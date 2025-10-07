@@ -24,6 +24,7 @@ namespace AppWeb.Models
             {
                 var pedido = new Pedido();
                 pedido.Id = leitor.GetInt32("id_ped");
+                pedido.Status = leitor.GetString("status_ped");
                 pedido.NomeCliente = DAOHelper.GetString(leitor, "NomeCliente");
                 pedido.FormaPagamento = DAOHelper.GetString(leitor, "forma_pagamento");
                 pedido.NumeroPedido = DAOHelper.GetString(leitor, "numero_pedido");
