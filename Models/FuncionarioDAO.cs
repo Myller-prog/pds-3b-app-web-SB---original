@@ -1,4 +1,6 @@
 ﻿using AppWeb.Configs;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace AppWeb.Models
 {
