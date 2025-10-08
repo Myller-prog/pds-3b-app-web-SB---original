@@ -1,115 +1,55 @@
-﻿@page "/gestaorecebimento"
+﻿@page "/produtoConsulta"
 
-<<<<<<< HEAD
-@using System.ComponentModel.DataAnnotations
-
-<PageTitle>Gestão de Recebimento</PageTitle>
-
-
-<div class="container-recebimento">
-    <h1 class="titulo">Gestão de Recebimento</h1>
-
-    <table class="tabela">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Proprietário</th>
-                <th>Descrição</th>
-                <th>Tipo</th>
-                <th>Obrigatório</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var campo in Campos)
-=======
 @inject ProdutoDAO produtoDAO;
-@inject NavigationManager NavigationManager
-<PageTitle>Produtos</PageTitle>
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Produtos</h1>
+<PageTitle>Produto</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Funcionarios</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>Id</th>
             <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Valor</th>
+            <th>descricao</th>
+            <th>quantidade</th>
+            <th>valor</th>
         </tr>
     </thead>
     <tbody>
         @{
             int contador = 1;
 
-            @foreach (var produto in listaProdutos)
->>>>>>> 80c51099beecd806221a4a950e2f6d3723ee086f
+            @foreach (var produto in listarProduto)
             {
                 <tr>
-                    <td>@campo.Id</td>
-                    <td>@campo.Proprietario</td>
-                    <td>@campo.Descricao</td>
-                    <td>@campo.Tipo</td>
-                    <td>@campo.Obrigatorio</td>
+                    <td>@produto.Id</td>
+                    <td>@produto.Nome</td>
+                    <td>@produto.Descricao</td>
+                    <td>@produto.Quantidade</td>
+                    <td>@produto.Valor</td>
                 </tr>
-            }
-<<<<<<< HEAD
-        </tbody>
-    </table>
-</div>
 
-@code {
-    public class CampoRecebimento
-=======
+                contador++;
+            }
         }
     </tbody>
-
 </table>
-<a href="/cadastrar_produto"
-   class="flex items-center gap-3 p-2 rounded-lg border border-indigo-600 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-gray-700 dark:text-gray-200">
-
-    <!-- Ícone aqui -->
-    <svg xmlns="sinal.png" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-    </svg>
-
-    <button @onclick="IrParaNovoProduto">ADICIONAR PRODUTO</button>
-
-    @code {
-        void IrParaNovoProduto()
-        {
-            NavigationManager.NavigateTo("/produtos/novo");
-        }
-    }
-
-</a>
-
-
-
 
 @code {
-
-    private List<Produto> listaProdutos = new();
+    private List<Produto> listarProduto = new();
 
     protected override void OnInitialized()
->>>>>>> 80c51099beecd806221a4a950e2f6d3723ee086f
     {
-        public int Id { get; set; }
-        public string Proprietario { get; set; } = string.Empty;
-        public string Descricao { get; set; } = string.Empty;
-        public string Tipo { get; set; } = string.Empty;
-        public string Obrigatorio { get; set; } = string.Empty;
+        CarregarDados();
     }
 
-    private List<CampoRecebimento> Campos = new()
+    private void CarregarDados()
     {
-        new CampoRecebimento { Id = 1, Proprietario = "id", Descricao = "Código para a identificação do pagamento.", Tipo = "Int(FK)", Obrigatorio = "Sim" },
-        new CampoRecebimento { Id = 2, Proprietario = "Pedido", Descricao = "O produto que foi pedido pelo cliente.", Tipo = "VARCHAR", Obrigatorio = "Sim" },
-        new CampoRecebimento { Id = 3, Proprietario = "Valor", Descricao = "O valor do produto.", Tipo = "Float", Obrigatorio = "Sim" },
-        new CampoRecebimento { Id = 4, Proprietario = "Forma de pagamento", Descricao = "Qual foi a forma de pagamento; exemplo: Pix, Dinheiro ou Cartão.", Tipo = "VARCHAR - Campo de Seleção", Obrigatorio = "Sim" },
-        new CampoRecebimento { Id = 5, Proprietario = "Data e Hora", Descricao = "A data e o horário em que o pagamento foi realizado.", Tipo = "DateTime", Obrigatorio = "Sim" },
-        new CampoRecebimento { Id = 6, Proprietario = "Comprovante", Descricao = "O comprovante que o pagamento foi realizado.", Tipo = "VARCHAR - Campo de Seleção", Obrigatorio = "Não" },
-        new CampoRecebimento { Id = 7, Proprietario = "Cliente", Descricao = "Dados do cliente.", Tipo = "VARCHAR", Obrigatorio = "Sim" }
-    };
-
+        listarProduto = produtoDAO.listarTodos();
+    }
 
 }
+
+
