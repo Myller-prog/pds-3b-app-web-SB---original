@@ -49,6 +49,22 @@ insert into funcionarios values (null, 'Miguel', 'entregador', '1990-05-23', 'mi
 
 # CLIENTE - Stuart
 
+CREATE TABLE 
+  cliente (
+  id_cli INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome_cli VARCHAR (255) NOT NULL,
+  telefone_cli VARCHAR (15),
+  email_cli VARCHAR (255),
+  cidade_cli VARCHAR (255),
+  estado_cli VARCHAR (255)
+  );
+
+INSERT INTO cliente VALUES ('1', 'Gabriel Oliveira', '11987654321', 'gabriel@gmail.com', 'São Paulo', 'SP');
+INSERT INTO cliente VALUES ('2', 'Camila Costa', '21991234567', 'camila.costa@yahoo.com', 'Rio de Janeiro', 'RJ');
+INSERT INTO cliente VALUES ('3', 'Larissa Ferreira', '31999887766', 'larissa.ferreira@outlook.com', 'Belo Horizonte', 'MG');
+INSERT INTO cliente VALUES ('4', 'Isadora Bellucci', '41998765432', 'isadora.bellucci@gmail.com', 'Curitiba', 'PR');
+INSERT INTO cliente VALUES ('5', 'Sofia Cantarini', '51997654321', 'sofia.cantarini@hotmail.com', 'Porto Alegre', 'RS');
+
 # PEDIDO - Stuart
 
 CREATE TABLE 
@@ -65,7 +81,20 @@ INSERT INTO pedido VALUES (null,'Madalena', 'Pendente', 'Pix', 'n 1', '7.00');
 INSERT INTO pedido VALUES (null, 'Ana Souza', 'Pronto', 'Dinheiro', 'n 3', '50.00');
 
 # RECEBIMENTO - Thauane
+create table recebimento(
+id_receb int not null primary key auto_increment,
+pedido_receb varchar(100) not null,
+valor_receb decimal (10,2) not null,
+formaPag_receb varchar (50) not null,
+comprovante_receb varchar(100),
+cliente_receb varchar(100) not nulL
+);
 
+insert into recebimento values ('1', 'vatapa', '20.00', 'pix', 'transferido', 'Matheus Silva');
+insert into recebimento values ('2', 'pão de forma', '12.00','cartão', 'transferido', 'Luana Ribeiro');
+insert into recebimento values ('3', 'salpicão', '15.00', 'Dinheiro', 'tranferido', 'Maria Luiza Motta');
+insert into recebimento values ('4', 'feijoada', '25.00', 'Dinheiro', 'transferido', 'Douglas Purubora');
+insert into recebimento values ('5', 'arroz tropeiro', '10.00', 'pix', 'tranferido', 'Maryanna Souza');
 
 
 
