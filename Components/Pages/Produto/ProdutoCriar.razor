@@ -1,123 +1,71 @@
-﻿@page "/produto"
+﻿@page "/produtos/novo"
 @rendermode InteractiveServer
-
 @using AppWeb.Models;
 @inject ProdutoDAO produtoDAO;
 @inject NavigationManager Navigation;
 
-<PageTitle>Produtos - Listagem</PageTitle>
+<PageTitle>Produto - Novo</PageTitle>
 
-<div class="p-4 md:p-8 bg-white min-h-screen border-r-8 border-l-8 border-stone-200 font-serif">
-
-    <div class="text-center mb-8">
-        <a href="#" class="float-left text-stone-700 hover:text-stone-900">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </a>
-        <h1 class="text-4xl text-stone-800 tracking-wider inline-block">produtos</h1>
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Produto</h1>
+<h1>OI </h1>
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
     </div>
+}
 
-    <div class="text-center mb-6">
-        <span class="inline-block px-6 py-1.5 rounded-full bg-amber-200 text-stone-700 text-lg shadow-md">alimentos</span>
-    </div>
-
-    <div class="max-w-xl mx-auto p-4 bg-white rounded-xl shadow-lg border border-stone-300">
-
-        @if (erro != null)
-        {
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                @erro
+<div class="row">
+    <div class="col">
+        <EditForm Model="_novoProduto" OnSubmit="Salvar">
+            <div class="form-group mb-4">
+                <label>Nome</label>
+                <input @bind-value="_novoProduto!.Nome" type="text" class="form-control" name="nome"
+                       placeholder="Informe o nome do produto" />
             </div>
-        }
 
-        <div class="space-y-3">
-            @if (_produtos == null || !_produtos.Any())
-            {
-                <p class="text-center text-stone-500 py-4">Nenhum produto cadastrado.</p>
-            }
-            else
-            {
-                @foreach (var produto in _produtos)
-                {
-                    <div class="flex items-center justify-between space-x-2">
+            <div class="form-group mb-4">
+                <label>Quantidade</label>
+                <input @bind-value="_novoProduto!.Quantidade" type="text" class="form-control" name="quantidade"
+                       placeholder="Informe a quantidade de produtos" />
+            </div>
 
-                        <div class="flex-1 px-4 py-2 bg-amber-100 text-stone-800 rounded-full text-lg font-medium truncate shadow-inner">
-                            @produto.Nome
-                        </div>
+            <div class="form-group mb-4">
+                <label>Preço</label>
+                <input @bind-value="_novoProduto!.Valor" type="text" class="form-control" name="valor"
+                       placeholder="Informe o preço do produtos" />
+            </div>
 
-                        <div class="px-4 py-2 bg-stone-500 text-white rounded-full font-bold text-lg text-center w-16 shadow-md">
-                            @* AQUI DEVE SER UM CAMPO DE QUANTIDADE/ESTOQUE DO SEU MODELO *@
-                            5
-                        </div>
+            <div class="form-group mb-4">
+                <label>Descricão</label>
+                <textarea class="form-control" rows="5">@_novoProduto!.Descricao</textarea>
+            </div>
 
-                        <button @onclick="() => EditarProduto(produto.Id)"
-                                class="px-4 py-2 bg-stone-700 text-white rounded-full text-lg font-bold hover:bg-stone-800 transition duration-150 shadow-md">
-                            editar
-                        </button>
-
-                        <button @onclick="() => ExcluirProduto(produto.Id)"
-                                class="p-2 bg-amber-100 text-stone-700 rounded-full hover:bg-red-200 transition duration-150 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                }
-            }
-        </div>
-
-        <div class="mt-6">
-            <button @onclick="NovoProduto"
-                    class="w-full py-3 rounded-full bg-stone-700 text-white font-bold text-lg hover:bg-stone-800 transition duration-150 shadow-lg">
-                adicionar
-            </button>
-        </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </EditForm>
     </div>
 </div>
 
 @code {
     private string? erro = null;
-    private List<Produto> _produtos = new List<Produto>();
+    [SupplyParameterFromForm]
+    private Produto? _novoProduto { get; set; } = new Produto();
 
-    protected override void OnInitialized()
-    {
-        // Simulação: Carrega os produtos
-        // Na sua aplicação real: _produtos = produtoDAO.ListarTodos();
-        _produtos = new List<Produto>
-        {
-            new Produto { Id = 1, Nome = "vatapá" },
-            new Produto { Id = 2, Nome = "pão caseiro" },
-            new Produto { Id = 3, Nome = "pão de queijo" },
-            new Produto { Id = 4, Nome = "lasanha" },
-            new Produto { Id = 5, Nome = "frango assado" }
-        };
-    }
-
-    private void NovoProduto()
-    {
-        Navigation.NavigateTo("/produto/novo");
-    }
-
-    private void EditarProduto(int id)
-    {
-        Navigation.NavigateTo($"/produto/editar/{id}");
-    }
-
-    private void ExcluirProduto(int id)
+    private void Salvar()
     {
         try
         {
-            // Simulação: Chamar o método de exclusão do DAO
-            // produtoDAO.Excluir(id);
-            _produtos.RemoveAll(p => p.Id == id);
+            if (_novoProduto.Nome is null || _novoProduto.Nome == "")
+            {
+                throw new Exception(message: "O campo nome é obrigatório");
+            }
 
-            // Recarrega o componente para atualizar a lista
-            StateHasChanged();
+            produtoDAO.Inserir(_novoProduto);
+            Navigation.NavigateTo(uri: "/produtos");
         }
         catch (Exception ex)
         {
-            erro = $"Erro ao excluir produto: {ex.Message}";
+            erro = ex.Message;
         }
     }
 }
