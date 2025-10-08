@@ -28,7 +28,7 @@ namespace AppWeb.Models
                 funcionario.DataNasc = DAOHelper.GetString(leitor, "dataNasc_func");
                 funcionario.Email = DAOHelper.GetString(leitor, "email_func");
                 funcionario.Telefone = DAOHelper.GetString(leitor, "telefone_func");
-                funcionario.Cpf = leitor.GetInt32("cpf_func");
+                funcionario.Cpf = DAOHelper.GetString(leitor, "cpf_func");
                 funcionario.Cep = DAOHelper.GetString(leitor, "cep_func");
 
 
