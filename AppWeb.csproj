@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Pages\Recebimentos\GestaoRecebimento.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Pages\Recebimentos\GestaoRecebimento.razor.cs">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="9.4.0" />
   </ItemGroup>
 

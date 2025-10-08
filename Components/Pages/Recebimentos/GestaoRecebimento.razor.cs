@@ -1,4 +1,5 @@
-﻿.container - recebimento {
+﻿
+.container - recebimento {
     background - color: #111;
     color: #fff;
     padding: 2rem;
