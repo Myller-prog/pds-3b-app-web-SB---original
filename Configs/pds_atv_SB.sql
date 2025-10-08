@@ -38,8 +38,8 @@ cargo_func varchar (200),
 dataNasc_func varchar (200),
 email_func varchar (200),
 telefone_func varchar (200),
-cpf_func int,
-cep_func int
+cpf_func varchar(100),
+cep_func varchar(100)
 );
 alter table funcionarios change cpf_func cpf_func varchar (300);
 
