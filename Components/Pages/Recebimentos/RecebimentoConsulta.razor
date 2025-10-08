@@ -1,11 +1,11 @@
-﻿@page "/pedidos"
+﻿@page "/Recebimentos"
 
-@inject PedidoDAO pedidoDAO;
+@inject RecebimentoDAO recebimentoDAO;
 
-<PageTitle>Pedidos</PageTitle>
+<PageTitle>Recebimentos</PageTitle>
 
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Pedidos</h1>
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Recebimentos</h1>
 
 <table class="table">
     <thead>
@@ -13,25 +13,23 @@
             <th>Id</th>
             <th>Pedido</th>
             <th>Valor</th>
-            <th>FormaPagamento</th>
-            <th>Data e Hora</th>
+            <th>FormaPagamentoRec</th>
             <th>Comprovante</th>
-            <th>Cliente</th>
+            <th>ClienteRec</th>
         </tr>
     </thead>
     <tbody>
         @{
             int contador = 1;
 
-            @foreach (var pedido in listaPedidos)
+            @foreach (var recebimento in listaRecebimentos)
             {
                 <tr>
-                    <td>@pedido.Id</td>
-                    <td>@pedido.Pedido</td>
-                    <td>@pedido.Valor</td>
-                    <td>@pedido.FormaPagamento </td>
-                    <td>@pedido.Comprovante</td>
-                    <td>@pedido.Cliente</td>
+                    <td>@recebimento.Id</td>
+                    <td>@recebimento.Pedido</td>
+                    <td>@recebimento.FormaPagamentoRec</td>
+                    <td>@recebimento.Comprovante</td>
+                    <td>@recebimento.ClienteRec</td>
                 </tr>
 
                 contador++;
@@ -41,7 +39,7 @@
 </table>
 
 @code {
-    private List<Pedido> listaPedidos = new();
+    private List<Recebimento> listaRecebimentos = new();
 
     protected override void OnInitialized()
     {
@@ -50,7 +48,7 @@
 
     private void CarregarDados()
     {
-        listaPedidos = pedidoDAO.listarTodos();
+        listaRecebimentos = recebimentoDAO.listarTodos();
     }
 
 }

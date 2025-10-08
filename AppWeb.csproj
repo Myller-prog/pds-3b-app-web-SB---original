@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Models\GestaoRecebimento.cs" />
+    <Content Include="Models\Recebimento.cs" />
   </ItemGroup>
 
   <ItemGroup>
