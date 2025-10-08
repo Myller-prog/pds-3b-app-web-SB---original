@@ -1,5 +1,6 @@
 ﻿@page "/gestaorecebimento"
 
+<<<<<<< HEAD
 @using System.ComponentModel.DataAnnotations
 
 <PageTitle>Gestão de Recebimento</PageTitle>
@@ -20,6 +21,28 @@
         </thead>
         <tbody>
             @foreach (var campo in Campos)
+=======
+@inject ProdutoDAO produtoDAO;
+@inject NavigationManager NavigationManager
+<PageTitle>Produtos</PageTitle>
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Produtos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var produto in listaProdutos)
+>>>>>>> 80c51099beecd806221a4a950e2f6d3723ee086f
             {
                 <tr>
                     <td>@campo.Id</td>
@@ -29,12 +52,46 @@
                     <td>@campo.Obrigatorio</td>
                 </tr>
             }
+<<<<<<< HEAD
         </tbody>
     </table>
 </div>
 
 @code {
     public class CampoRecebimento
+=======
+        }
+    </tbody>
+
+</table>
+<a href="/cadastrar_produto"
+   class="flex items-center gap-3 p-2 rounded-lg border border-indigo-600 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-gray-700 dark:text-gray-200">
+
+    <!-- Ícone aqui -->
+    <svg xmlns="sinal.png" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+    </svg>
+
+    <button @onclick="IrParaNovoProduto">ADICIONAR PRODUTO</button>
+
+    @code {
+        void IrParaNovoProduto()
+        {
+            NavigationManager.NavigateTo("/produtos/novo");
+        }
+    }
+
+</a>
+
+
+
+
+@code {
+
+    private List<Produto> listaProdutos = new();
+
+    protected override void OnInitialized()
+>>>>>>> 80c51099beecd806221a4a950e2f6d3723ee086f
     {
         public int Id { get; set; }
         public string Proprietario { get; set; } = string.Empty;

@@ -11,6 +11,8 @@ builder.Services.AddRazorComponents()
 //Conexão com as outras tabelas
 builder.Services.AddSingleton<Conexao>();
 builder.Services.AddSingleton<ProdutoDAO>();
+builder.Services.AddSingleton<FuncionarioDAO>();
+builder.Services.AddSingleton<PedidoDAO>();
 
 var app = builder.Build();
 
