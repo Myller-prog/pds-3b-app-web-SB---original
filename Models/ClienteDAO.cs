@@ -35,7 +35,26 @@ namespace AppWeb.Models
             return lista;
         }
 
-      
+        public void Inserir(Cliente cliente)
+        {
+            try
+            {
+                var comando = _conexao.CreateCommand("INSERT INTO cliente VALUES (@_nome, @_telefone, @_email, @_cidade, @_estado)");
+
+                comando.Parameters.AddWithValue("@_nome", cliente.Nome);
+                comando.Parameters.AddWithValue("@_telefone", cliente.Telefone);
+                comando.Parameters.AddWithValue("@_email", cliente.Email);
+                comando.Parameters.AddWithValue("@_cidade", cliente.Cidade);
+                comando.Parameters.AddWithValue("@_estado", cliente.Estado);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
 
     }
 }
