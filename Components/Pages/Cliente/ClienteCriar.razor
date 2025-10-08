@@ -1,5 +1,83 @@
-﻿<h3>ClienteCriar</h3>
+﻿@page "/pedidos/novo"
+@rendermode InteractiveServer
+
+@using AppWeb.Models;
+@inject ClienteDAO clienteDAO;
+@inject NavigationManager Navigation;
+
+<PageTitle>Cliente - Novo</PageTitle>
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Cliente</h1>
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+
+<div class="row">
+    <div class="col">
+        <EditForm Model="_novoCliente" OnSubmit="Salvar">
+
+            <div class="form-group mb-4">
+                <label>Nome</label>
+                <input @bind-value="_novoCliente.Nome" type="text" class="form-control"
+                       placeholder="Informe o nome do cliente" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Telefone</label>
+                <input @bind-value="_novoCliente.Telefone" type="text" class="form-control"
+                       placeholder="Informe o telefone do cliente" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Email</label>
+                <input @bind-value="_novoCliente.Email" type="email" class="form-control"
+                       placeholder="Informe o e-mail do cliente" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Cidade</label>
+                <input @bind-value="_novoCliente.Cidade" type="text" class="form-control"
+                       placeholder="Informe a cidade do cliente" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Estado</label>
+                <input @bind-value="_novoCliente.Estado" type="text" class="form-control"
+                       placeholder="Informe o estado" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </EditForm>
+    </div>
+</div>
+
 
 @code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Cliente? _novoCliente { get; set; } = new Cliente();
 
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novoCliente.Nome is null || _novoCliente.Nome == "")
+            {
+                throw new Exception(message: "O campo nome do cliente é obrigatório");
+            }
+            clienteDAO.Inserir(_novoCliente);
+
+            Navigation.NavigateTo(uri: "/clientes");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+
+    }
 }
