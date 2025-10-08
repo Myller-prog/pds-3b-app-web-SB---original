@@ -1,101 +1,22 @@
 create database pds_atv_SB;
 use pds_atv_SB;
 
-CREATE TABLE
-  fornecedor (
-    id_for INT NOT NULL AUTO_INCREMENT,
-    nome_for VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id_for)
-  );
-
-CREATE TABLE
-  produto (
-    id_pro INT NOT NULL AUTO_INCREMENT,
-    id_for_fk INT NULL,
+# PRODUTO - Mazzye
+CREATE TABLE produto (
+    id_pro int not null primary key auto_increment,
     nome_pro VARCHAR(255) NOT NULL,
-    descricao_pro TEXT NULL,
     quantidade_pro INT NOT NULL,
-    preco_pro DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY (id_pro),
-    FOREIGN KEY (id_for_fk) REFERENCES fornecedor (id_for)
+    descricao_pro VARCHAR(255),
+    preco_pro DECIMAL(10, 2) NOT NULL
   );
+insert into produto values (null, 'vatap√°', 15, 'comida', '15.00');
+insert into produto values (null, 'p√£o caseiro', 12, 'p√£o caseiro', '12.00');
+insert into produto values (null, 'coxinha', 12,'comida', '5.00');
+insert into produto values (null, 'lasanha', 25, 'comida', '16.00');
+insert into produto values (null, 'frango assado', 40, 'comida', '10.00');
 
--- Inserindo fornecedores
-INSERT INTO
-  fornecedor (nome_for)
-VALUES
-  ('Fornecedor Alpha'),
-  ('Fornecedor Beta'),
-  ('Fornecedor Gamma'),
-  ('Fornecedor Delta');
+# ALIMENTO - Max
 
--- Inserindo produtos vinculados aos fornecedores
-INSERT INTO
-  produto (
-    id_for_fk,
-    nome_pro,
-    descricao_pro,
-    quantidade_pro,
-    preco_pro
-  )
-VALUES
-  (
-    1,
-    'Notebook X',
-    'Notebook de alto desempenho com 16GB RAM e SSD 512GB',
-    10,
-    4500.00
-  ),
-  (
-    1,
-    'Mouse ”ptico',
-    'Mouse com fio, 1200 DPI',
-    50,
-    45.90
-  ),
-  (
-    2,
-    'Smartphone Y',
-    'Smartphone 6.5 polegadas, 128GB',
-    20,
-    2100.00
-  ),
-  (
-    2,
-    'Carregador R·pido',
-    'Carregador USB-C 25W',
-    100,
-    89.90
-  ),
-  (
-    3,
-    'Cadeira Gamer',
-    'Cadeira ergonÙmica ajust·vel',
-    15,
-    1250.00
-  ),
-  (
-    3,
-    'Mesa de EscritÛrio',
-    'Mesa em L com suporte para monitor',
-    8,
-    980.00
-  ),
-  (
-    4,
-    'Monitor 27"',
-    'Monitor LED Full HD 27 polegadas',
-    12,
-    1150.00
-  ),
-  (
-    4,
-    'Teclado Mec‚nico',
-    'Teclado RGB switch blue',
-    30,
-    350.00
-  );
-  
 create table alimento (
 id_ali int not null primary key auto_increment,
 nome_ali varchar (200) not null,
@@ -104,9 +25,11 @@ valor_ali int,
 ingrediente_ali varchar (200)
 );
 
-insert into alimento values (null, 'n„o', 'Laticinio', '15.00', 'leite');
-insert into alimento values (null, 'p„o', 'carboidrato', '12.00', 'leite, ovos, trigo...');
+insert into alimento values (null, 'n√£o', 'Laticinio', '15.00', 'leite');
+insert into alimento values (null, 'p√£o', 'carboidrato', '12.00', 'leite, ovos, trigo...');
 insert into alimento values (null, 'torta', 'carboidrato', '14.00', 'frango, leite, ovos...');
+
+# FUNCION√ÅRIO - Max
 
 create table funcionarios (
 id_func int not null primary key auto_increment,
@@ -124,6 +47,10 @@ insert into funcionarios values (null, 'Maria', 'cozinheira', '1988-10-30', 'mar
 insert into funcionarios values (null, 'Joana', 'boleira', '1965-1-20', 'joana@gmail.com', '11 454546511',  '565.888.988-88', '54656698');
 insert into funcionarios values (null, 'Miguel', 'entregador', '1990-05-23', 'miguel@gmail.com', '69 5555 4444', '998.999.789-55', '5465623'); 
 
+# CLIENTE - Stuart
+
+# PEDIDO - Stuart
+
 CREATE TABLE 
   pedido (
   id_ped INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -136,6 +63,12 @@ CREATE TABLE
 
 INSERT INTO pedido VALUES (null,'Madalena', 'Pendente', 'Pix', 'n 1', '7.00');
 INSERT INTO pedido VALUES (null, 'Ana Souza', 'Pronto', 'Dinheiro', 'n 3', '50.00');
+
+# RECEBIMENTO - Thauane
+
+
+
+
 
 
 
