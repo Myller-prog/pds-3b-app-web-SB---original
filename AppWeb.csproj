@@ -11,10 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Components\Pages\Recebimentos\GestaoRecebimento.razor.cs">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <Content Include="Models\GestaoRecebimento.cs" />
   </ItemGroup>
 
   <ItemGroup>

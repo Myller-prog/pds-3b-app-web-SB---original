@@ -1,43 +1,58 @@
-﻿.container - recebimento {
-    background - color: #111;
-    color: #fff;
-    padding: 2rem;
-    border - radius: 10px;
-    font - family: "Segoe UI", sans - serif;
+﻿@page "/pedidos"
+
+@inject PedidoDAO pedidoDAO;
+
+<PageTitle>Pedidos</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Pedidos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Pedido</th>
+            <th>Valor</th>
+            <th>FormaPagamento</th>
+            <th>Data e Hora</th>
+            <th>Comprovante</th>
+            <th>Cliente</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var pedido in listaPedidos)
+            {
+                <tr>
+                    <td>@pedido.Id</td>
+                    <td>@pedido.Pedido</td>
+                    <td>@pedido.Valor</td>
+                    <td>@pedido.FormaPagamento </td>
+                    <td>@pedido.Comprovante</td>
+                    <td>@pedido.Cliente</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Pedido> listaPedidos = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listaPedidos = pedidoDAO.listarTodos();
+    }
+
 }
 
-.titulo {
-    text-align: center;
-margin - bottom: 2rem;
-color: #fff;
-}
 
-.tabela {
-    width: 100 %;
-border - collapse: collapse;
-background - color: #1f1f1f;
-    border - radius: 8px;
-overflow: hidden;
-}
-
-.tabela th
-{
-    background-color: #6C554F;
-    color: white;
-    padding: 12px;
-}
-
-.tabela td
-{
-    border: 1px solid #4C3C3B;
-    padding: 10px;
-    text-align: center;
-}
-
-.tabela tr:nth - child(even) {
-    background - color: #2c2c2c;
-}
-
-.tabela tr:nth - child(odd) {
-    background - color: #1a1a1a;
-}
