@@ -13,6 +13,7 @@ builder.Services.AddSingleton<Conexao>();
 builder.Services.AddSingleton<ProdutoDAO>();
 builder.Services.AddSingleton<FuncionarioDAO>();
 builder.Services.AddSingleton<PedidoDAO>();
+builder.Services.AddSingleton<AlimentoDAO>();
 builder.Services.AddSingleton<RecebimentoDAO>();
 
 var app = builder.Build();
