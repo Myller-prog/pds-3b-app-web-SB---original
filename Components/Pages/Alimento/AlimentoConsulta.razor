@@ -1,0 +1,55 @@
+﻿@page "/alimento"
+
+@inject AlimentoDAO alimentoDAO;
+
+<PageTitle>Alimentos</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Alimentos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Ingredientes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var alimento in listarAlimento)
+            {
+                <tr>
+                    <td>@alimento.Id</td>
+                    <td>@alimento.Nome</td>
+                    <td>@alimento.Tipo</td>
+                    <td>@alimento.Valor</td>
+                    <td>@alimento.Ingredientes</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Alimento> listarAlimento = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listarAlimento = alimentoDAO.listarTodos();
+    }
+
+}
+
+
