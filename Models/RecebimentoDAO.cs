@@ -24,7 +24,7 @@ namespace AppWeb.Models
                 var recebimento = new Recebimento();
                 recebimento.Id = leitor.GetInt32("id_receb");
                 recebimento.Pedido = DAOHelper.GetString(leitor, "pedido_receb");
-                recebimento.Valor = DAOHelper.GetString(leitor, "valor_receb");
+                recebimento.Valor = leitor.GetDecimal("valor_receb");
                 recebimento.FormaPagamentoRec = DAOHelper.GetString(leitor, "formaPag_receb");
                 recebimento.Comprovante = DAOHelper.GetString(leitor, "comprovante_receb");
                 recebimento.ClienteRec = DAOHelper.GetString(leitor, "cliente_receb");

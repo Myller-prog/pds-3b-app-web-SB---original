@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string? Pedido { get; set; }
-        public string? Valor { get; set; }
+        public decimal? Valor { get; set; }
         public string? FormaPagamentoRec { get; set; }
         public string? Comprovante { get; set; }
         public string? ClienteRec { get; set; }
