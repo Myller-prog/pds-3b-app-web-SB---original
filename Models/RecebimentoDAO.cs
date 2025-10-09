@@ -16,7 +16,7 @@ namespace AppWeb.Models
         {
             var lista = new List<Recebimento>();
 
-            var comando = _conexao.CreateCommand("SELECT * FROM recebimentos;");
+            var comando = _conexao.CreateCommand("SELECT * FROM recebimento;");
             var leitor = comando.ExecuteReader();
 
             while (leitor.Read()) // enquanto tiver condição, o while vai rodar
