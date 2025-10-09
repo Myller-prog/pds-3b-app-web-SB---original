@@ -1,7 +1,7 @@
 create database pds_atv_SB;
 use pds_atv_SB;
 
-# PRODUTO - Mazzye
+# PRODUTO - Mazzie
 CREATE TABLE produto (
     id_pro int not null primary key auto_increment,
     nome_pro VARCHAR(255) NOT NULL,
@@ -16,7 +16,6 @@ insert into produto values (null, 'lasanha', 25, 'comida', '16.00');
 insert into produto values (null, 'frango assado', 40, 'comida', '10.00');
 
 # ALIMENTO - Max
-
 create table alimento (
 id_ali int not null primary key auto_increment,
 nome_ali varchar (200) not null,
@@ -30,7 +29,6 @@ insert into alimento values (null, 'pão', 'carboidrato', '12.00', 'leite, ovos,
 insert into alimento values (null, 'torta', 'carboidrato', '14.00', 'frango, leite, ovos...');
 
 # FUNCIONÁRIO - Max
-
 create table funcionarios (
 id_func int not null primary key auto_increment,
 nome_func varchar (200),
@@ -48,7 +46,6 @@ insert into funcionarios values (null, 'Joana', 'boleira', '1965-1-20', 'joana@g
 insert into funcionarios values (null, 'Miguel', 'entregador', '1990-05-23', 'miguel@gmail.com', '69 5555 4444', '998.999.789-55', '5465623'); 
 
 # CLIENTE - Stuart
-
 CREATE TABLE 
   cliente (
   id_cli INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -66,7 +63,6 @@ INSERT INTO cliente VALUES ('4', 'Isadora Bellucci', '41998765432', 'isadora.bel
 INSERT INTO cliente VALUES ('5', 'Sofia Cantarini', '51997654321', 'sofia.cantarini@hotmail.com', 'Porto Alegre', 'RS');
 
 # PEDIDO - Stuart
-
 CREATE TABLE 
   pedido (
   id_ped INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
