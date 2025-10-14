@@ -9,7 +9,7 @@
 
 <a href="/produtos/novo"
    class="btn btn-primary">
-     Adicionar Produtos
+     Cadastrar Produtos
 </a>
 
 <table class="table">
@@ -46,6 +46,7 @@
 
 @code {
     private List<Produto> listarProduto = new();
+    private List<Produto> CadastrarProduto = new();
 
     protected override void OnInitialized()
     {
@@ -55,7 +56,8 @@
     private void CarregarDados()
     {
         listarProduto = produtoDAO.listarTodos();
+        CadastrarProduto = produtoDAO.cadastrarProdutos();
     }
-
+    
 }
 

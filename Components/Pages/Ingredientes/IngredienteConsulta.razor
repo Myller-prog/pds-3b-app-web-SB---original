@@ -1,0 +1,61 @@
+﻿@page "/ingredientes"
+
+@inject IngredientesDAO ingredientesDAO;
+
+<PageTitle>ingredientes</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Ingredientes</h1>
+
+<a href="/ingredientes/novo"
+   class="btn btn-primary">
+    Cadastrar ingredientes
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>descricao</th>
+            <th>quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var ingredientes in listarIngrediente)
+            {
+                <tr>
+                    <td>@ingredientes.Id</td>
+                    <td>@ingredientes.Nome</td>
+                    <td>@ingredientes.Descricao</td>
+                    <td>@ingredientes.Quantidade</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+
+</table>
+
+
+@code {
+    private List<Ingredientes> listarIngrediente = new();
+    private List<Ingredientes> CadastrarIngrediente = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listarIngrediente = ingredientesDAO.listarTodos();
+        CadastrarIngrediente = ingredientesDAO.cadastrarIngrediente();
+    }
+
+}
+

@@ -32,6 +32,27 @@ namespace AppWeb.Models
 
             return lista;
         }
+        public List<Produto> cadastrarProdutos()
+        {
+            var lista = new List<Produto>();
+
+            var comando = _conexao.CreateCommand("SELECT * FROM produto;");
+            var leitor = comando.ExecuteReader();
+
+            while (leitor.Read()) // enquanto tiver condição, o while vai rodar
+            {
+                var produto = new Produto();
+                produto.Id = leitor.GetInt32("id_pro");
+                produto.Nome = DAOHelper.GetString(leitor, "nome_pro");
+                produto.Descricao = DAOHelper.GetString(leitor, "descricao_pro");
+                produto.Quantidade = leitor.GetInt32("quantidade_pro");
+                produto.Valor = leitor.GetDecimal("preco_pro");
+
+                lista.Add(produto);
+            }
+
+            return lista;
+        }
 
         public void Inserir(Produto produto)
         {

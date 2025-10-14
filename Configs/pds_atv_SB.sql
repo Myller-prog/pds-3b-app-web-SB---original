@@ -15,6 +15,20 @@ insert into produto values (null, 'coxinha', 12,'comida', '5.00');
 insert into produto values (null, 'lasanha', 25, 'comida', '16.00');
 insert into produto values (null, 'frango assado', 40, 'comida', '10.00');
 
+# INGREDIENTES - MAZZIE
+CREATE TABLE ingredientes (
+    id_ing int not null primary key auto_increment,
+    nome_ing VARCHAR(255) NOT NULL,
+    quantidade_ing INT NOT NULL,
+    descricao_ing VARCHAR(255)
+  );
+insert into ingredientes values (null, 'leite', 15, 'frios');
+insert into ingredientes values (null, 'manteiga', 1, 'frios');
+insert into ingredientes values (null, 'sal', 12,'comida');
+insert into ingredientes values (null, 'açucar', 35, 'comida');
+insert into ingredientes values (null, 'trigo', 57, 'comida');
+
+
 # ALIMENTO - Max
 create table alimento (
 id_ali int not null primary key auto_increment,
