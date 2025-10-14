@@ -1,3 +1,15 @@
+--cor-fundo-principal: #f8f0e5;
+--cor-primaria: #5d4037;
+--cor-secundaria: #e3c8a4;
+--cor-terciaria: #f5e4cc;
+--borda-raio: 10px;
+--sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+body {
+    background-color: var(--fundo-pagina);
+    font-family: 'Georgia', serif; /* Fonte que simula o estilo da imagem */
+    align-items: center;
+}
 .btn-primary {
     background-color: #7B542F;
     border-color: #7B542F;
@@ -12,15 +24,7 @@
 /*MAZZIE - FIM*/
 
 /*MAX - FUNCIONÁRIO*/
-body {
-    background-color: var(--fundo-pagina);
-    font-family: 'Georgia', serif; /* Fonte que simula o estilo da imagem */
-    margin: 0;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente o container */
-    padding: 20px;
-    min-height: 100vh;
-}
+
 
 .container-principal {
     width: 600px; /* Largura definida para o conteúdo principal */
@@ -35,12 +39,14 @@ body {
     margin-bottom: 20px;
     font-size: 24px;
     color: var(--borda-detalhe);
+
 }
 
 /* Título e Subtítulo */
 .header-pagina {
     text-align: center;
     margin-bottom: 80px;
+    display:flex;
 }
 
 h1 {
@@ -48,6 +54,7 @@ h1 {
     color: var(--texto-titulo);
     margin: 0;
     font-weight: normal;
+    display: flex;
 }
 
 .subtitulo {
@@ -56,6 +63,7 @@ h1 {
     padding: 8px 30px;
     border-radius: 15px;
     font-size: 18px;
+    display: flex;
 }
 
 /* Combo Box de Filtro */
