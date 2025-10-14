@@ -7,6 +7,18 @@
 
 <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Pedidos</h1>
 
+<div class="blazor-canva-dropdown-container mb-6">
+    <div class="blazor-canva-dropdown-title">
+        selecionar cliente:
+    </div>
+    <select class="blazor-canva-dropdown-select" @onchange="FiltrarPedidos" value="@clienteSelecionado">
+        @foreach (var cliente in clientes)
+        {
+            <option value="@cliente">@cliente</option>
+        }
+    </select>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -42,6 +54,10 @@
 @code {
     private List<Pedido> listaPedidos = new();
 
+    // Adicione a lista de clientes e o valor selecionado
+    private List<string> clientes = new List<string> { "Todos os Clientes", "Madalena", "Ana Souza", "Outro Cliente" };
+    private string clienteSelecionado = "Todos os Clientes"; // Valor inicial
+
     protected override void OnInitialized()
     {
         CarregarDados();
@@ -49,9 +65,26 @@
 
     private void CarregarDados()
     {
+        // Altere a chamada para usar a sua DAO.
+        // A lógica real de listar/filtrar estaria aqui:
         listaPedidos = pedidoDAO.listarTodos();
+
+        // Exemplo de lógica de filtro (você precisaria implementar no seu DAO):
+        if (clienteSelecionado != "Todos os Clientes")
+        {
+            // Na sua aplicação real, você chamaria um método tipo:
+            // listaPedidos = pedidoDAO.ListarPorCliente(clienteSelecionado);
+
+            // Aqui, apenas para teste:
+            listaPedidos = listaPedidos.Where(p => p.NomeCliente == clienteSelecionado).ToList();
+        }
+    }
+
+    private void FiltrarPedidos(ChangeEventArgs e)
+    {
+        clienteSelecionado = e.Value?.ToString() ?? "Todos os Clientes";
+        CarregarDados(); // Recarrega os dados com o novo filtro aplicado
     }
 
 }
-
 

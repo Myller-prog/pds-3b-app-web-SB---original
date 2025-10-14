@@ -228,3 +228,119 @@ h1 {
 /*MAX - PEDIDO*/
 
 /*MAX - FIM*/
+
+
+/*STUART - PEDIDO*/
+
+
+/*Selecionar cliente*/
+:root {
+    --cor-fundo-principal: #f8f0e5;
+    --cor-primaria: #5d4037;
+    --cor-secundaria: #e3c8a4;
+    --cor-terciaria: #f5e4cc;
+    --borda-raio: 10px;
+    --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.blazor-canva-dropdown-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 10px;
+    background-color: var(--cor-primaria); 
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    margin-bottom: 25px;
+    gap: 10px; 
+}
+
+
+.blazor-canva-dropdown-title {
+    color: #ffffff; 
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+   
+}
+
+.blazor-canva-dropdown-select {
+    background-color: var(--cor-secundaria); 
+    color: var(--cor-primaria); 
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 5px 30px 5px 15px; 
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    appearance: none; 
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+/* tabela*/
+.table tbody tr:hover td {
+    border-color: var(--cor-secundaria) !important;
+}
+
+
+.table tbody tr:hover {
+    background-color: #f5e0c5; 
+}
+
+.table {
+    background-color: var(--cor-terciaria);
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+    .table thead {
+        background-color: var(--cor-secundaria);
+        color: var(--cor-primaria); 
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .table th {
+        border: none !important; 
+        padding: 15px !important;
+        text-align: left;
+        border-bottom: 1px solid var(--cor-primaria) !important;
+    }
+
+    .table tbody {
+        background-color: var(--cor-terciaria);
+    }
+
+    .table td {
+        border-top: none !important;
+        border-bottom: 1px solid var(--cor-secundaria) !important;
+        padding: 12px 15px !important;
+        color: var(--cor-primaria);
+    }
+
+
+.table tbody tr:hover {
+    background-color: #f5e0c5 !important;
+}
+
+    /*bordas*/
+    .table tbody tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    .table thead tr:first-child th:first-child {
+        border-top-left-radius: var(--borda-raio);
+    }
+
+    .table thead tr:first-child th:last-child {
+        border-top-right-radius: var(--borda-raio);
+    }
+
+
+/*STUART - FIM*/
