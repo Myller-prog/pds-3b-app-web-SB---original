@@ -1,0 +1,54 @@
+﻿@page "/Notificacoes"
+
+@inject NotificacaoDAO notificacaoDAO;
+
+<PageTitle>Notificações</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Notificacoes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>NumeroPedido</th>
+            <th>NomeClientePed</th>
+            <th>StatusPed</th>
+            <th>TotalPed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int contador = 1;
+
+            @foreach (var notificacao in listaNotificacao)
+            {
+                <tr>
+                    <td>@notificacao.Id</td>
+                    <td>@notificacao.NumeroPedido</td>
+                    <td>@notificacao.NomeClientePed</td>
+                    <td>@notificacao.StatusPed</td>
+                    <td>@notificacao.TotalPed</td>
+                </tr>
+
+                contador++;
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Notificacao> listaNotificacao = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarDados();
+    }
+
+    private void CarregarDados()
+    {
+        listaNotificacao = notificacaoDAO.listarTodos();
+
+    }
+
+}
