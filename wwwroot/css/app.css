@@ -6,7 +6,7 @@
 --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 body {
-    background-color: var(--fundo-pagina);
+    background-color: var(--cor-fundo-principal);
     font-family: 'Georgia', serif; /* Fonte que simula o estilo da imagem */
     align-items: center;
 }
