@@ -9,13 +9,17 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 //Conexão com as outras tabelas
-builder.Services.AddSingleton<Conexao>();
+
+
+//Adicionar a linha acima antes de `var app = builder.Build();
+builder.Services.AddSingleton<AppWeb.Configs.Conexao>();
 builder.Services.AddSingleton<ProdutoDAO>();
 builder.Services.AddSingleton<FuncionarioDAO>();
 builder.Services.AddSingleton<PedidoDAO>();
 builder.Services.AddSingleton<AlimentoDAO>();
 builder.Services.AddSingleton<RecebimentoDAO>();
 builder.Services.AddSingleton<ClienteDAO>();
+builder.Services.AddSingleton<IngredientesDAO>();
 
 var app = builder.Build();
 

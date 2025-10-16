@@ -14,14 +14,15 @@ namespace AppWeb.Configs
         public MySqlConnection GetConnection()
         {
             var conn = new MySqlConnection(_connectionString);
-           
+            conn.Open();
+
             return conn;
         }
-
         public MySqlCommand CreateCommand(string query, MySqlConnection? conn = null)
         {
             conn ??= GetConnection();
             return new MySqlCommand(query, conn);
         }
+
     }
 }

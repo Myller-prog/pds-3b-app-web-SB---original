@@ -105,10 +105,3 @@ insert into recebimento values ('2', 'pão de forma', '12.00','cartão', 'transf
 insert into recebimento values ('3', 'salpicão', '15.00', 'Dinheiro', 'tranferido', 'Maria Luiza Motta');
 insert into recebimento values ('4', 'feijoada', '25.00', 'Dinheiro', 'transferido', 'Douglas Purubora');
 insert into recebimento values ('5', 'arroz tropeiro', '10.00', 'pix', 'tranferido', 'Maryanna Souza');
-
-
-
-
-
-
-
