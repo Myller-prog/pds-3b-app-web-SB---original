@@ -105,3 +105,17 @@ insert into recebimento values ('2', 'pão de forma', '12.00','cartão', 'transf
 insert into recebimento values ('3', 'salpicão', '15.00', 'Dinheiro', 'tranferido', 'Maria Luiza Motta');
 insert into recebimento values ('4', 'feijoada', '25.00', 'Dinheiro', 'transferido', 'Douglas Purubora');
 insert into recebimento values ('5', 'arroz tropeiro', '10.00', 'pix', 'tranferido', 'Maryanna Souza');
+
+create table notificacao(
+  id_noti int not null primary key auto_increment,
+  numero_pedido_noti int,
+  nome_cliente_noti varchar (500),
+  status_noti varchar (50) not null,
+  total_noti decimal (10, 2) not null
+  );
+
+insert into notificacao values ('1', '20', 'Lucas', 'Em análise', '3.00');
+insert into notificacao values ('2', '7', 'Ricardo', 'Pagamento Reprovado', '10');
+insert into notificacao values ('3', '1', 'Maryanna', 'Aguardando Transição', '19');
+insert into notificacao values ('4', '6', 'Júlia', 'Pagamento recusado', '3');
+insert into notificacao values ('5', '2', 'Flávia', 'Pagamento Aprovado', '2');
