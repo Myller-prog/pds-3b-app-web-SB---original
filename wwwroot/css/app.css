@@ -23,8 +23,8 @@ body {
 
 /*MAZZIE - FIM*/
 
-/*MAX - FUNCIONÁRIO*/
 
+/*MAX - FUNCIONÁRIO*/
 
 .container-principal {
     width: 600px; /* Largura definida para o conteúdo principal */
@@ -46,29 +46,29 @@ body {
 .header-pagina {
     text-align: center;
     margin-bottom: 80px;
-    display:flex;
+    display:center;
 }
 
 h1 {
-    font-size: 40px;
-    color: var(--texto-titulo);
+    font-size: 100px;
+    color: #5d4037;
     margin: 0;
     font-weight: normal;
-    display: flex;
+    display: center;
 }
 
 .subtitulo {
-    background-color: var(--cor-principal-clara);
-    color: var(--cor-principal-escura);
+    background-color: #5d4037;
+    color: #f5e4cc;
     padding: 8px 30px;
     border-radius: 15px;
     font-size: 18px;
-    display: flex;
+    display: center;
 }
 
 /* Combo Box de Filtro */
 .filtro-cargo {
-    display: flex;
+    display: center;
     margin-bottom: 30px;
     width: 100%;
     max-width: 450px; /* Ajuste a largura do combo */
