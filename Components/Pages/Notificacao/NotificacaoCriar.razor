@@ -1,0 +1,71 @@
+﻿@page "/notificacao/novo"
+@rendermode InteractiveServer
+
+@using AppWeb.Models;
+@inject NotificacaoDAO notificacaoDAO;
+@inject NavigationManager Navigation;
+
+<PageTitle>Notificação - Nova</PageTitle>
+
+
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Nova Notificacao</h1>
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <EditForm Model="_novaNotificacao" OnSubmit="Salvar">
+
+            <div class="form-group mb-4">
+                <label for="numeroPedido">Número do Pedido</label>
+                <InputText id="numeroPedido" @bind-Value="_novaNotificacao.NumeroPedido" class="form-control" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="nomeCliente">Nome do Cliente</label>
+                <InputText id="nomeCliente" @bind-Value="_novaNotificacao.NomeClientePed" class="form-control" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="status">Status</label>
+                <InputText id="status" @bind-Value="_novaNotificacao.StatusPed" class="form-control" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="total">Total do Pedido</label>
+                <InputNumber id="total" @bind-Value="_novaNotificacao.TotalPed" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Notificação</button>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? erro = null;
+    private Notificacao _novaNotificacao = new();
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novaNotificacao.NumeroPedido is null || _novaNotificacao.NumeroPedido == "")
+            {
+                throw new Exception(message: "O campo nome é obrigatório");
+            }
+            notificacaoDAO.Inserir(_novaNotificacao);
+            Navigation.NavigateTo("/notificacaoes");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+    }
+}
