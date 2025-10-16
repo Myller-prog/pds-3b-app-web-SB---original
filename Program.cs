@@ -16,8 +16,6 @@ builder.Services.AddSingleton<PedidoDAO>();
 builder.Services.AddSingleton<AlimentoDAO>();
 builder.Services.AddSingleton<RecebimentoDAO>();
 builder.Services.AddSingleton<ClienteDAO>();
-builder.Services.AddSingleton<NotificacaoDAO>();
-
 
 var app = builder.Build();
 
