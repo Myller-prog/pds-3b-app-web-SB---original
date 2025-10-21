@@ -39,7 +39,7 @@ namespace AppWeb.Models
         {
             try
             {
-                var comando = _conexao.CreateCommand("INSERT INTO cliente VALUES (@_nome, @_telefone, @_email, @_cidade, @_estado)");
+                var comando = _conexao.CreateCommand("INSERT INTO notificacao VALUES (@_numeroPedido, @_nomeCliente, @_status, @_total)");
 
                 comando.Parameters.AddWithValue("@_numeroPedido", notificacao.NumeroPedido);
                 comando.Parameters.AddWithValue("@_nomeCliente", notificacao.NomeClientePed);
