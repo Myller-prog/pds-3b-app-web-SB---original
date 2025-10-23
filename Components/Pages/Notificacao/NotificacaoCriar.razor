@@ -24,7 +24,7 @@
 
             <div class="form-group mb-4">
                 <label for="numeroPedido">Número do Pedido</label>
-                <InputText id="numeroPedido" @bind-Value="_novaNotificacao.NumeroPedido" class="form-control" />
+                <InputNumber id="numeroPedido" @bind-Value="_novaNotificacao.NumeroPedido" class="form-control" />
             </div>
 
             <div class="form-group mb-4">
@@ -56,7 +56,7 @@
     {
         try
         {
-            if (_novaNotificacao.NumeroPedido is null || _novaNotificacao.NumeroPedido == "")
+            if (_novaNotificacao.NumeroPedido is null || _novaNotificacao.NumeroPedido is null)
             {
                 throw new Exception(message: "O campo nome é obrigatório");
             }

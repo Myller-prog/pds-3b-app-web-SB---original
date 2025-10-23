@@ -23,10 +23,9 @@ namespace AppWeb.Models
             {
                 var notificacao = new Notificacao();
                 notificacao.Id = leitor.GetInt32("id_noti");
-                notificacao.NumeroPedido = DAOHelper.GetString(leitor, "numero_pedido_noti");
+                notificacao.NumeroPedido = leitor.GetDecimal("numero_pedido_noti");
                 notificacao.NomeClientePed = DAOHelper.GetString(leitor, "nome_cliente_noti");
                 notificacao.StatusPed = DAOHelper.GetString(leitor, "status_noti");
-                comando.Parameters.AddWithValue("@_total_noti", notificacao.TotalPed);
 
 
                 lista.Add(notificacao);
