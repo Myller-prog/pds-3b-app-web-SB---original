@@ -1,15 +1,4 @@
---cor-fundo-principal: #f8f0e5;
---cor-primaria: #5d4037;
---cor-secundaria: #e3c8a4;
---cor-terciaria: #f5e4cc;
---borda-raio: 10px;
---sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-body {
-    background-color: var(--cor-fundo-principal);
-    font-family: 'Georgia', serif; /* Fonte que simula o estilo da imagem */
-    align-items: center;
-}
 .btn-primary {
     background-color: #7B542F;
     border-color: #7B542F;
@@ -25,213 +14,282 @@ body {
 
 
 /*MAX - FUNCIONÁRIO*/
+:root {
+    --cor-fundo-principal: #f8f0e5;
+    --cor-primaria: #5d4037;
+    --cor-secundaria: #e3c8a4;
+    --cor-terciaria: #f5e4cc;
+    --borda-raio: 10px;
+    --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+body {
+    background-color: var(--cor-fundo-principal);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* O 'container-principal' é o wrapper de todo o conteúdo da página de funcionários. 
+  Considerando que pode haver um menu lateral (não visível no código, mas mencionado
+  no pedido), estamos centralizando o conteúdo principal e dando um max-width.
+  O 'margin-left' e 'padding-right' são suposições para acomodar um menu lateral 
+  fictício, mas o 'margin: 0 auto' garante a centralização horizontal do conteúdo.
+*/
 .container-principal {
-    width: 600px; /* Largura definida para o conteúdo principal */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza itens como título e botão adicionar */
+    align-items: center; /* Centraliza o conteúdo (header, filtro, tabela, botão) */
+    padding: 20px;
+    padding-left: 20px; /* Ajuste para o menu lateral, se houver */
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-/* Seta de Voltar (Posicionada no canto superior esquerdo do container) */
+/* Seta de Voltar (ajustada para canto superior esquerdo do container) */
 .seta-voltar {
-    align-self: flex-start; /* Move para a esquerda dentro do container */
-    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: var(--cor-primaria);
     font-size: 24px;
-    color: var(--borda-detalhe);
-
+    cursor: pointer;
+    background-color: var(--cor-terciaria);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--sombra-suave);
+    z-index: 10;
 }
 
-/* Título e Subtítulo */
+/* Estilização do Header e Título */
 .header-pagina {
     text-align: center;
-    margin-bottom: 80px;
-    display:center;
+    margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 100px;
-    color: #5d4037;
-    margin: 0;
-    font-weight: normal;
-    display: center;
-}
+    .header-pagina h1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: var(--cor-primaria);
+        text-transform: lowercase; /* Mantendo o estilo da imagem */
+        margin: 0;
+        padding: 0;
+        font-family: serif; /* Dando um toque mais clássico/artesanal */
+    }
 
 .subtitulo {
-    background-color: #5d4037;
-    color: #f5e4cc;
-    padding: 8px 30px;
-    border-radius: 15px;
-    font-size: 18px;
-    display: center;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 5px 15px;
+    border-radius: var(--borda-raio);
+    font-weight: 600;
+    text-transform: lowercase;
+    margin-top: 10px;
+    display: inline-block; /* Faz a caixa se ajustar ao conteúdo */
+    box-shadow: var(--sombra-suave);
 }
 
-/* Combo Box de Filtro */
+/* Estilização do Filtro de Cargo */
 .filtro-cargo {
-    display: center;
-    margin-bottom: 30px;
-    width: 100%;
-    max-width: 450px; /* Ajuste a largura do combo */
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-primaria);
+    border-radius: var(--borda-raio);
+    padding: 10px 15px;
+    margin: 30px 0 20px 0;
+    width: 300px; /* Ajuste a largura conforme o necessário */
+    max-width: 90%;
     position: relative;
-    border-radius: 5px;
-    overflow: hidden; /* Garante que os cantos arredondados sejam aplicados corretamente */
+    box-shadow: var(--sombra-suave);
 }
 
 .label-cargo {
-    background-color: var(--cor-combo-box);
-    color: white;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
+    color: var(--cor-terciaria);
+    text-transform: lowercase;
+    font-weight: 500;
+    margin-right: 10px;
 }
 
 .combo-cargo {
     flex-grow: 1;
-    background-color: var(--cor-principal-escura);
-    color: white;
-    padding: 10px 15px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
     border: none;
+    padding: 0;
+    margin: 0;
     appearance: none; /* Remove a seta padrão do navegador */
     -webkit-appearance: none;
     -moz-appearance: none;
-    font-size: 14px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.seta-combo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    background-color: var(--cor-principal-escura);
-    color: white;
-    pointer-events: none; /* Permite o clique no select abaixo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
-
-/* Tabela/Lista de Funcionários */
-.tabela-funcionarios {
-    width: 100%;
-    max-width: 500px;
-    background-color: var(--cor-principal-clara);
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* Para posicionar a barra de rolagem simulada */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
-    /* Simula a altura do container de lista, se necessário */
-    /* max-height: 400px; */
-    /* overflow-y: scroll;  Descomente se quiser rolagem real */
-}
-
-/* Estilo do Item da Tabela */
-.funcionario-item {
-    display: flex;
-    align-items: center;
-    background-color: var(--nome-fundo);
-    padding: 10px 15px;
-    border-radius: 8px;
-    color: var(--texto-titulo);
-}
-
-    .funcionario-item .nome {
-        flex-basis: 50%;
-        font-weight: 500;
+    .combo-cargo:focus {
+        outline: none;
     }
 
-/* Tag de Cargo */
-.cargo-tag {
-    flex-grow: 1;
-    background-color: var(--cor-principal-clara);
-    color: var(--cor-principal-escura);
-    padding: 5px 15px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 14px;
-    margin-right: 10px;
-    /* Ajustes para simular os diferentes tons de marrom/bege das tags */
-}
-
-.cargo-cozinheira {
-    background-color: var(--cor-principal-clara);
-}
-
-.cargo-tesoureira {
-    background-color: #E2C3A7;
-}
-
-.cargo-boleira {
-    background-color: #A38B74;
-}
-
-.cargo-entregadora {
-    background-color: #E2C3A7;
-}
-
-
-/* Botões de Ação (Editar e Excluir) */
-.btn-acao {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: 1px solid var(--borda-detalhe);
-    background-color: var(--nome-fundo);
-    color: var(--cor-principal-escura);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
+.seta-combo {
+    color: var(--cor-terciaria);
+    font-weight: bold;
+    pointer-events: none; /* Impede que o 'v' interfira no clique do select */
     margin-left: 5px;
 }
 
-.btn-editar {
-    /* Empurra os botões de ação para a direita */
-    margin-left: auto;
+/* Tabela de Funcionários (Main) */
+.tabela-funcionarios {
+    width: 450px; /* Largura fixa para se assemelhar à imagem */
+    max-width: 95%;
+    background-color: var(--cor-terciaria);
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    padding: 10px;
+    max-height: 400px; /* Limite de altura para simular a barra de rolagem */
+    overflow-y: auto;
+    position: relative;
+    margin-bottom: 20px;
+    /* Estilização da barra de rolagem */
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-primaria) var(--cor-terciaria);
 }
 
-/* Barra de rolagem simulada (apenas visual) */
-.scroll-bar-simulado {
-    position: absolute;
-    right: 5px;
-    top: 10px;
-    bottom: 10px;
-    width: 5px;
-    background-color: var(--borda-detalhe);
-    border-radius: 5px;
+    /* Estilo para navegadores baseados em WebKit (Chrome, Safari) */
+    .tabela-funcionarios::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .tabela-funcionarios::-webkit-scrollbar-track {
+        background: var(--cor-terciaria);
+        border-radius: var(--borda-raio);
+    }
+
+    .tabela-funcionarios::-webkit-scrollbar-thumb {
+        background-color: var(--cor-primaria);
+        border-radius: var(--borda-raio);
+        border: 2px solid var(--cor-terciaria);
+    }
+
+.funcionario-item {
+    display: grid;
+    grid-template-columns: 3fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 8px;
+    background-color: white; /* Fundo branco ou claro para a linha */
+    border-radius: var(--borda-raio);
+    padding: 5px 10px;
 }
+
+.nome {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: 500;
+}
+
+.cargo-tag {
+    text-align: center;
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+/* Cores específicas para os cargos (adaptadas da imagem) */
+.cargo-cozinheira {
+    background-color: #d1b490; /* Tom de marrom mais claro */
+}
+
+.cargo-tesoureira {
+    background-color: #d1b490;
+}
+
+.cargo-boleira {
+    background-color: #b79f87; /* Tom diferente */
+}
+
+.cargo-entregadora {
+    background-color: #a08c76; /* Tom mais escuro */
+}
+
+
+.btn-acao {
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-editar {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+    .btn-editar:hover {
+        background-color: #cbb497;
+    }
+
+.btn-excluir {
+    background-color: #a08c76; /* Um marrom médio para o ícone de lixeira */
+    color: white;
+}
+
+    .btn-excluir:hover {
+        background-color: #8c7865;
+    }
 
 /* Botão Adicionar */
 .btn-adicionar {
-    width: 100%;
-    max-width: 500px;
-    padding: 15px 0;
-    background-color: var(--cor-principal-escura);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    text-transform: uppercase;
-    cursor: pointer;
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    text-transform: lowercase;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+    border-radius: var(--borda-raio);
+    cursor: pointer;
+    text-decoration: none; /* Remover sublinhado do <a> */
+    border: none;
+    box-shadow: var(--sombra-suave);
+    margin-top: 20px;
+    width: 450px;
+    max-width: 95%;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+    .btn-adicionar:hover {
+        background-color: #4a332c;
+    }
+
+/* Removendo o H1 extra que não está no layout */
+.container-principal > h1 {
+    display: none;
+}
+
+/* Removendo o botão "Consultar" que não está no layout principal */
+.container-principal + .btn {
+    display: none;
 }
 /*MAX - FIM*/
 
-/*MAX - PEDIDO*/
+/*MAX - ALIMENTO*/
 
 /*MAX - FIM*/
 
 
-/*STUART - PEDIDO*/
-
+/*STUART - PARTE DELE*/
 
 /*Selecionar cliente*/
 :root {
