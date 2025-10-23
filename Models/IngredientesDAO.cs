@@ -70,6 +70,49 @@ namespace AppWeb.Models
             }
 
         }
+        public Ingredientes? BuscarPorId(int id)
+        {
+            var comando = _conexao.CreateCommand(
+                "SELECT * FROM ingredientes WHERE id_ingr = @id;");
+            comando.Parameters.AddWithValue("@id", id);
+
+            var leitor = comando.ExecuteReader();
+
+            if (leitor.Read())
+            {
+                var ingrediente = new Ingredientes();
+                ingrediente.Id = leitor.GetInt32("id_ing");
+                ingrediente.Nome = DAOHelper.GetString(leitor, "nome_ing");
+                ingrediente.Descricao = DAOHelper.GetString(leitor, "descricao_ing");
+                ingrediente.Quantidade = leitor.GetInt32("quantidade_ing");
+
+                return ingrediente;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public void Atualizar(Ingredientes ingrediente)
+        {
+            try
+            {
+                var comando = _conexao.CreateCommand(
+                    "UPDATE produto SET nome_ing = @_nome, descricao_ing = @_descricao, " +
+                    "quantidade_ing = @_quantidade WHERE id_ing = @_id;");
+
+                comando.Parameters.AddWithValue("@_nome", ingrediente.Nome);
+                comando.Parameters.AddWithValue("@_descricao", ingrediente.Descricao);
+                comando.Parameters.AddWithValue("@_quantidade", ingrediente.Quantidade);
+                comando.Parameters.AddWithValue("@_id", ingrediente.Id);
+
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
     }
 

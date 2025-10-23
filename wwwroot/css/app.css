@@ -20,8 +20,66 @@ body {
         border-color: #5c3a1a;
     }
 /*MAZZIE - PRODUTOS*/
+/* Paleta de Cores baseada na imagem:
+   Fundo da Sidebar (Marrom Escuro): ~#7A5B4C
+   Fundo dos Botões (Cáqui/Bege): ~#D4B9A2
+   Texto dos Botões (Marrom): ~#5D4336 
+*/
 
+/* 1. Estilo para o cabeçalho/área de Usuário */
+.user-header {
+    /* Cor de fundo do cabeçalho igual ao do corpo da sidebar */
+    background-color: #7A5B4C;
+    color: #F8E7D7; /* Cor do texto "Usuário" (bege claro) */
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+    .user-header svg {
+        margin-right: 10px;
+        width: 28px;
+        height: 28px;
+    }
+
+/* 2. Estilo dos links de navegação como botões (a.menu-button) */
+a.menu-button {
+    /* Desativa o Tailwind 'flex items-center gap-3 p-2 rounded-lg' para usar nosso estilo de botão */
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    /* Cores e Formato da Imagem */
+    background-color: #D4B9A2; /* Fundo do botão (Cáqui/Bege) */
+    color: #5D4336; /* Cor do texto (Marrom) */
+    padding: 15px 10px;
+    margin: 10px 10px; /* Espaçamento entre os botões e bordas da sidebar */
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 1.05em;
+    font-weight: 600;
+    /* Borda sutil para o efeito de profundidade (opcional) */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+    /* Efeito ao passar o mouse */
+    a.menu-button:hover {
+        background-color: #E6D0BA; /* Um tom um pouco mais claro */
+        transform: translateY(-1px); /* Efeito sutil de 'levantar' */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Esconde os SVGs dentro dos botões (pois na foto só tem texto) */
+    a.menu-button svg {
+        display: none;
+    }
 /*MAZZIE - FIM*/
+
+
 
 
 /*MAX - FUNCIONÁRIO*/
@@ -225,13 +283,15 @@ h1 {
 }
 /*MAX - FIM*/
 
+
+
 /*MAX - PEDIDO*/
 
 /*MAX - FIM*/
 
 
-/*STUART - PEDIDO*/
 
+/*STUART - PEDIDO*/
 
 /*Selecionar cliente*/
 :root {
