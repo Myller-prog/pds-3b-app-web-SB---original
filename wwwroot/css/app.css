@@ -42,11 +42,12 @@
         height: 28px;
 }
 
-mb-4 {
-    color: #F8E7D7;
-    background-color: #5c3a1a;
+form-group mb-4 {
+    color: 7A5B4C;
+    background-color: #5d4037;
     border-radius: 8px;
 }
+
 /* 2. Estilo dos links de navegação como botões (a.menu-button) */
 a.menu-button {
     /* Desativa o Tailwind 'flex items-center gap-3 p-2 rounded-lg' para usar nosso estilo de botão */
