@@ -98,35 +98,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o conteúdo (header, filtro, tabela, botão) */
-    padding: 20px;
+    padding: 2px;
     padding-left: 20px; /* Ajuste para o menu lateral, se houver */
     min-height: 100vh;
     box-sizing: border-box;
 }
 
 /* Seta de Voltar (ajustada para canto superior esquerdo do container) */
-.seta-voltar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: var(--cor-primaria);
-    font-size: 24px;
-    cursor: pointer;
-    background-color: var(--cor-terciaria);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: var(--sombra-suave);
-    z-index: 10;
-}
+
 
 /* Estilização do Header e Título */
 .header-pagina {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 24px
 }
 
     .header-pagina h1 {
@@ -142,7 +126,7 @@ body {
 .subtitulo {
     background-color: var(--cor-secundaria);
     color: var(--cor-primaria);
-    padding: 5px 15px;
+    padding: 5px 150px;
     border-radius: var(--borda-raio);
     font-weight: 600;
     text-transform: lowercase;
@@ -268,11 +252,11 @@ body {
 }
 
 .cargo-boleira {
-    background-color: #b79f87; /* Tom diferente */
+    background-color: #d1b490;
 }
 
 .cargo-entregadora {
-    background-color: #a08c76; /* Tom mais escuro */
+    background-color: #d1b490;
 }
 
 
@@ -342,23 +326,15 @@ body {
 }
 /*MAX - FIM*/
 
-<<<<<<< HEAD
+
 /*MAX - ALIMENTO*/
-=======
-
-
-/*MAX - PEDIDO*/
->>>>>>> ac8eb38e634d4c8c0f2b8d4f74fb65037eb8eb54
 
 /*MAX - FIM*/
 
 
-<<<<<<< HEAD
 /*STUART - PARTE DELE*/
-=======
 
 /*STUART - PEDIDO*/
->>>>>>> ac8eb38e634d4c8c0f2b8d4f74fb65037eb8eb54
 
 /*Selecionar cliente*/
 :root {
