@@ -141,9 +141,9 @@ body {
     align-items: center;
     background-color: var(--cor-primaria);
     border-radius: var(--borda-raio);
-    padding: 10px 15px;
+    padding: 10px 20px;
     margin: 30px 0 20px 0;
-    width: 300px; /* Ajuste a largura conforme o necessário */
+    width: px; /* Ajuste a largura conforme o necessário */
     max-width: 90%;
     position: relative;
     box-shadow: var(--sombra-suave);
@@ -153,7 +153,7 @@ body {
     color: var(--cor-terciaria);
     text-transform: lowercase;
     font-weight: 500;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .combo-cargo {
@@ -168,7 +168,7 @@ body {
     -moz-appearance: none;
     cursor: pointer;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
 }
 
     .combo-cargo:focus {
@@ -179,12 +179,12 @@ body {
     color: var(--cor-terciaria);
     font-weight: bold;
     pointer-events: none; /* Impede que o 'v' interfira no clique do select */
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 /* Tabela de Funcionários (Main) */
 .tabela-funcionarios {
-    width: 450px; /* Largura fixa para se assemelhar à imagem */
+    width: 600px; /* Largura fixa para se assemelhar à imagem */
     max-width: 95%;
     background-color: var(--cor-terciaria);
     border-radius: var(--borda-raio);
@@ -217,13 +217,13 @@ body {
 
 .funcionario-item {
     display: grid;
-    grid-template-columns: 3fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
+    grid-template-columns: 4fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
     gap: 5px;
     align-items: center;
     margin-bottom: 8px;
     background-color: white; /* Fundo branco ou claro para a linha */
     border-radius: var(--borda-raio);
-    padding: 5px 10px;
+    padding: 5px 5px;
 }
 
 .nome {
@@ -244,7 +244,7 @@ body {
 
 /* Cores específicas para os cargos (adaptadas da imagem) */
 .cargo-cozinheira {
-    background-color: #d1b490; /* Tom de marrom mais claro */
+    background-color: #d1b490;
 }
 
 .cargo-tesoureira {
