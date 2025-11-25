@@ -19,6 +19,7 @@
             <th>Nome</th>
             <th>descricao</th>
             <th>quantidade</th>
+            <th>    Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,15 @@
                     <td>@ingredientes.Nome</td>
                     <td>@ingredientes.Descricao</td>
                     <td>@ingredientes.Quantidade</td>
+
+                    <td>
+                        <a href="/produtos/@ingredientes.Id/editar" class="bts bts-sm bts-primary mr-2">
+                            <i class="fas fa-edit"></i> atualizar
+                        </a>
+                        <a href="/produtos/@ingredientes.Id/excluir" class="bts bts-sm bts-primary mr-2">
+                            <i class="fas fa-edit"></i> excluir
+                        </a>
+                    </td>
                 </tr>
 
                 contador++;

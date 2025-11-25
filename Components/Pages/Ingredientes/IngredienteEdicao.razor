@@ -1,13 +1,13 @@
-﻿@page "/produtos/{Id:int}/editar"
+﻿@page "/ingredientes/{Id:int}/editar"
 @rendermode InteractiveServer
 
 @using AppWeb.Models;
-@inject ProdutoDAO produtoDAO;
+@inject IngredientesDAO ingredientesDAO;
 @inject NavigationManager Navigation;
 
-<PageTitle>Produtos</PageTitle>
+<PageTitle>Ingredientes</PageTitle>
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Atualização Produto - @produto.Nome</h1>
+<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Atualização Ingredientes - @ingrediente.Nome</h1>
 
 @if (erro != string.Empty)
 {
@@ -17,27 +17,21 @@
     </div>
 }
 
-<EditForm Model="produto" OnSubmit="Salvar">
+<EditForm Model="ingrediente" OnSubmit="Salvar">
     <div class="mb-4">
         <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
-        <input @bind-value="produto.Nome" type="text" id="nome"
+        <input @bind-value="ingrediente.Nome" type="text" id="nome"
                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
     </div>
     <div class="mb-4">
         <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
-        <input @bind-value="produto.Quantidade" type="number" id="quantidade"
+        <input @bind-value="ingrediente.Quantidade" type="number" id="quantidade"
                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
     </div>
-    <div class="mb-4">
-        <label for="valor" class="block text-sm font-medium text-gray-700">Valor</label>
-        <input @bind-value="produto.Valor" type="text" id="valor"
-               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
-    </div>
-
     <div class="mb-4">
         <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
         <textarea id="descricao"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">@produto.Descricao</textarea>
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">@ingrediente.Descricao</textarea>
     </div>
 
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Salvar</button>
@@ -51,42 +45,36 @@
     public int Id { get; set; }
 
     [SupplyParameterFromForm]
-    private Produto produto { get; set; } = new();
+    private Ingredientes ingrediente { get; set; } = new();
 
     protected override void OnInitialized()
     {
-        var _produto = produtoDAO.BuscarPorId(Id);
+        var _ingredientes = ingredientesDAO.BuscarPorId(Id);
 
-        if (_produto != null)
+        if (_ingredientes != null)
         {
-            produto = _produto;
+            ingrediente = _ingredientes;
         }
         else
         {
-            erro = "Produto não encontrado.";
+            erro = "ingrediente não encontrado.";
         }
     }
 
     private void Salvar()
     {
-        bool sucesso = false;
         try
         {
-            produtoDAO.Atualizar(produto);
-            sucesso = true;
+            ingredientesDAO.Atualizar(ingrediente);
 
+            Navigation.NavigateTo("/ingredientes");
         }
         catch (Exception ex)
         {
-            erro = $"Erro ao salvar o produto: {ex.Message}";
+            erro = $"Erro ao salvar o ingrediente: {ex.Message}";
         }
         ;
 
-        // CORREÇÃO: Navega APENAS se a atualização for bem-sucedida
-        if (sucesso)
-        {
-            // Navega para a lista de produtos
-            Navigation.NavigateTo(uri: "/produtos");
-        }
+        Navigation.NavigateTo(uri: "/ingredientes");
     }
 }
