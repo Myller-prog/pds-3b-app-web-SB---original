@@ -14,6 +14,14 @@
    Fundo dos Botões (Cáqui/Bege): ~#D4B9A2
    Texto dos Botões (Marrom): ~#5D4336 
 */
+:root {
+    --cor-fundo-principal: #f8f0e5;
+    --cor-primaria: #5d4037;
+    --cor-secundaria: #e3c8a4;
+    --cor-terciaria: #f5e4cc;
+    --borda-raio: 10px;
+    --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 /* 1. Estilo para o cabeçalho/área de Usuário */
 .user-header {
@@ -28,11 +36,17 @@
     font-weight: 500;
 }
 
-    .user-header svg {
+.user-header svg {
         margin-right: 10px;
         width: 28px;
         height: 28px;
-    }
+}
+
+form-group mb-4 {
+    color: 7A5B4C;
+    background-color: #5d4037;
+    border-radius: 8px;
+}
 
 /* 2. Estilo dos links de navegação como botões (a.menu-button) */
 a.menu-button {
