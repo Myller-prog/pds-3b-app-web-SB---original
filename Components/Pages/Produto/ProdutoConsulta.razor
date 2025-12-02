@@ -35,7 +35,7 @@
                     <td>@produto.Descricao</td>
                     <td>@produto.Quantidade</td>
                     <td>@produto.Valor</td>
-
+                    lista.Add(produto);
                     <td> <a href="/produtos/@produto.Id/editar" class="bts bts-sm bts-primary mr-2">
                                 <i class="fas fa-edit"></i> atualizar
                          </a>
@@ -44,9 +44,10 @@
                         </a>
                     </td>
                 </tr>
-
+                
                 contador++;
             }
+
         }
     </tbody>
    
@@ -66,6 +67,7 @@
     {
         listarProduto = produtoDAO.listarTodos();
         CadastrarProduto = produtoDAO.cadastrarProdutos();
+
     }
     
 }

@@ -69,6 +69,7 @@
 
     private void Salvar()
     {
+        var lista = new List<Produto>();
         bool sucesso = false;
         try
         {
@@ -88,5 +89,6 @@
             // Navega para a lista de produtos
             Navigation.NavigateTo(uri: "/produtos");
         }
+        lista.Add(produto);
     }
 }

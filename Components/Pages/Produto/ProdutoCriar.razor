@@ -57,22 +57,24 @@
 
     private void Salvar()
     {
-
+        var lista = new List<Produto>();
         try
         {
             if (_novoProduto.Nome is null || _novoProduto.Nome == "")
             {
                 throw new Exception(message: "O campo nome é obrigatório");
             }
-
-            Navigation.NavigateTo(uri: "/produtos");
-
+            produtoDAO.Atualizar(_novoProduto);
+            Navigation.NavigateTo(uri: "/produto");
+            lista.Add(_novoProduto);
         }
         catch (Exception ex)
         {
             erro = ex.Message;
         }
+        
     }
+
     
     private List<Produto> listarProduto = new();
     private List<Produto> CadastrarProduto = new();
