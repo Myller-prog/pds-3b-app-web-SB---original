@@ -9,5 +9,6 @@
         public string? Comprovante { get; set; }
         public string? ClienteRec { get; set; }
         
+        
     }
 }
