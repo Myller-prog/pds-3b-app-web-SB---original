@@ -347,12 +347,62 @@ body {
 
 
 /*STUART - PARTE DELE*/
+/* 1. Garante que todo o corpo use a cor de fundo */
+body, html {
+    background-color: var(--cor-fundo-principal) !important;
+}
+
+/* 2. Container principal do Layout (área à direita da sidebar) */
+.page {
+    /* O componente 'Page' (Content) costuma ter fundo branco por padrão */
+    background-color: var(--cor-fundo-principal) !important;
+}
+
+/* 3. Container da área de conteúdo (o espaço onde seu componente Novo.razor é renderizado) */
+.main {
+    background-color: var(--cor-fundo-principal) !important;
+}
+
+/* 4. O container onde o Blazor se inicia (se for um Blazor Server/WASM clássico) */
+#app {
+    background-color: var(--cor-fundo-principal) !important;
+}
+/* CUSTOMIZAÇÃO DO BOTÃO "CADASTRAR CLIENTE" (btn-success) */
+.btn-success {
+    background-color: var(--cor-primaria); /* Marrom Escuro: #5d4037 */
+    border-color: var(--cor-primaria);
+    color: var(--cor-terciaria); /* Texto Bege: #f5e4cc */
+    font-weight: bold;
+}
+
+    .btn-success:hover {
+        background-color: #4a332c; /* Marrom um pouco mais escuro no hover */
+        border-color: #4a332c;
+    }
+
+/* CUSTOMIZAÇÃO DO BOTÃO "CANCELAR" (btn-secondary) */
+.btn-secondary {
+    background-color: var(--cor-secundaria); /* Bege Claro: #e3c8a4 */
+    border-color: var(--cor-secundaria);
+    color: var(--cor-primaria); /* Texto Marrom Escuro: #5d4037 */
+    font-weight: bold;
+}
+
+    .btn-secondary:hover {
+        background-color: #d1b497;
+        border-color: #d1b497;
+    }
 
 /*STUART - PEDIDO*/
 
 /*Selecionar cliente*/
+
+body {
+    background-color: var(--cor-fundo-principal);
+    /* ... outras propriedades ... */
+}
 :root {
-    --cor-fundo-principal: #f8f0e5;
+    --cor-fundo-principal: #fbf5e6;
     --cor-primaria: #5d4037;
     --cor-secundaria: #e3c8a4;
     --cor-terciaria: #f5e4cc;
