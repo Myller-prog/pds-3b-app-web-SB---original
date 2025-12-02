@@ -1,28 +1,58 @@
 ﻿@page "/funcionariosAdicinar"
 
+@using AppWeb.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations
+
 @inject FuncionarioDAO funcionarioDAO;
 
 <PageTitle>Funcionários</PageTitle>
 
-
 <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Funcionarios</h1>
 
+<button class="btn btn-primary mb-4" @onclick="ToggleFormulario">
+    @if (mostrarFormulario)
+    {
+        <span>Cancelar Adição</span>
+    }
+    else
+    {
+        <span>➕ Adicionar Novo Funcionário</span>
+    }
+</button>
+
+<hr class="mb-4" />
+
+@if (mostrarFormulario)
+{
+    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-xl mb-6">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Adicionar Novo Funcionário</h2>
+
+        <EditForm Model="@novoFuncionario" OnValidSubmit="AdicionarFuncionario">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div><label>Nome</label><InputText @bind-Value="novoFuncionario.Nome" class="form-control" /></div>
+                <div><label>Cargo</label><InputText @bind-Value="novoFuncionario.Cargo" class="form-control" /></div>
+                <div><label>Email</label><InputText @bind-Value="novoFuncionario.Email" class="form-control" /></div>
+                <div><label>Telefone</label><InputText @bind-Value="novoFuncionario.Telefone" class="form-control" /></div>
+                <div><label>CPF</label><InputText @bind-Value="novoFuncionario.Cpf" class="form-control" /></div>
+                <div><label>CEP</label><InputText @bind-Value="novoFuncionario.Cep" class="form-control" /></div>
+
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button type="submit" class="btn btn-success">Salvar Funcionário</button>
+            </div>
+        </EditForm>
+    </div>
+}
+
 <table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Cargo</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Cpf</th>
-            <th>Cep</th>
-        </tr>
-    </thead>
     <tbody>
         @{
-            int contador = 1;
-
             @foreach (var funcionario in listarFuncionario)
             {
                 <tr>
@@ -34,26 +64,52 @@
                     <td>@funcionario.Cpf</td>
                     <td>@funcionario.Cep</td>
                 </tr>
-
-                contador++;
             }
         }
     </tbody>
 </table>
 
 @code {
-    private List<Funcionario> listarFuncionario = new();
-
-    protected override void OnInitialized()
+    // Se a classe Funcionario não estiver em SeuProjeto.Models, defina-a aqui.
+    public class Funcionario
     {
-        CarregarDados();
+        // Certifique-se de que as propriedades correspondem ao seu modelo de dados
+        public int Id { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Cargo { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Telefone { get; set; } = string.Empty;
+        public string Cpf { get; set; } = string.Empty;
+        public string Cep { get; set; } = string.Empty;
     }
 
-    private void CarregarDados()
+    private List<Funcionario> listarFuncionario = new();
+    private bool mostrarFormulario = false;
+    private Funcionario novoFuncionario = new Funcionario();
+
+    // Lógica para alternar a visibilidade
+    private void ToggleFormulario()
     {
-        listarFuncionario = funcionarioDAO.listarTodos();
+        mostrarFormulario = !mostrarFormulario;
+        if (mostrarFormulario)
+        {
+            novoFuncionario = new Funcionario();
+        }
+    }
+
+    // Lógica para adicionar
+    private void AdicionarFuncionario()
+    {
+        // 1. Chamar o DAO para persistir
+        // funcionarioDAO.Inserir(novoFuncionario);
+
+        // Simulação de atualização (REMOVA ESTE BLOCO APÓS IMPLEMENTAR O DAO)
+        novoFuncionario.Id = listarFuncionario.Any() ? listarFuncionario.Max(f => f.Id) + 1 : 1;
+        listarFuncionario.Add(novoFuncionario);
+
+        mostrarFormulario = false;
+        novoFuncionario = new Funcionario();
+        StateHasChanged();
     }
 
 }
-
-
