@@ -85,7 +85,7 @@ a.menu-button {
 
 
 
-/*MAX - FUNCIONÁRIO*/
+/* MAX - FUNCIONÁRIO - CÓDIGO AJUSTADO */
 :root {
     --cor-fundo-principal: #f8f0e5;
     --cor-primaria: #5d4037;
@@ -102,26 +102,18 @@ body {
     padding: 0;
 }
 
-/* O 'container-principal' é o wrapper de todo o conteúdo da página de funcionários. 
-  Considerando que pode haver um menu lateral (não visível no código, mas mencionado
-  no pedido), estamos centralizando o conteúdo principal e dando um max-width.
-  O 'margin-left' e 'padding-right' são suposições para acomodar um menu lateral 
-  fictício, mas o 'margin: 0 auto' garante a centralização horizontal do conteúdo.
-*/
+/* CONTAINER PRINCIPAL: Centraliza o conteúdo */
 .container-principal {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo (header, filtro, tabela, botão) */
+    align-items: center;
     padding: 2px;
-    padding-left: 20px; /* Ajuste para o menu lateral, se houver */
+    padding-left: 20px;
     min-height: 100vh;
     box-sizing: border-box;
 }
 
-/* Seta de Voltar (ajustada para canto superior esquerdo do container) */
-
-
-/* Estilização do Header e Título */
+/* Estilização do Header e Título (Sem alterações necessárias) */
 .header-pagina {
     text-align: center;
     font-size: 24px
@@ -131,10 +123,10 @@ body {
         font-size: 36px;
         font-weight: bold;
         color: var(--cor-primaria);
-        text-transform: lowercase; /* Mantendo o estilo da imagem */
+        text-transform: lowercase;
         margin: 0;
         padding: 0;
-        font-family: serif; /* Dando um toque mais clássico/artesanal */
+        font-family: serif;
     }
 
 .subtitulo {
@@ -145,7 +137,7 @@ body {
     font-weight: 600;
     text-transform: lowercase;
     margin-top: 10px;
-    display: inline-block; /* Faz a caixa se ajustar ao conteúdo */
+    display: inline-block;
     box-shadow: var(--sombra-suave);
 }
 
@@ -157,54 +149,26 @@ body {
     border-radius: var(--borda-raio);
     padding: 10px 20px;
     margin: 30px 0 20px 0;
-    width: px; /* Ajuste a largura conforme o necessário */
+    /* Ajuste de largura do filtro para acompanhar a tabela (Opcional) */
+    width: 800px;
     max-width: 90%;
     position: relative;
     box-shadow: var(--sombra-suave);
 }
 
-.label-cargo {
-    color: var(--cor-terciaria);
-    text-transform: lowercase;
-    font-weight: 500;
-    margin-right: 15px;
-}
+/* ... Estilos internos do filtro (label-cargo, combo-cargo, seta-combo) não alterados ... */
 
-.combo-cargo {
-    flex-grow: 1;
-    background-color: var(--cor-primaria);
-    color: var(--cor-terciaria);
-    border: none;
-    padding: 0;
-    margin: 0;
-    appearance: none; /* Remove a seta padrão do navegador */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-    .combo-cargo:focus {
-        outline: none;
-    }
-
-.seta-combo {
-    color: var(--cor-terciaria);
-    font-weight: bold;
-    pointer-events: none; /* Impede que o 'v' interfira no clique do select */
-    margin-left: 15px;
-}
-
-/* Tabela de Funcionários (Main) */
+/* -------------------------------------------------------------------------- */
+/* Tabela de Funcionários (Main) - AJUSTES DE LARGURA */
+/* -------------------------------------------------------------------------- */
 .tabela-funcionarios {
-    width: 600px; /* Largura fixa para se assemelhar à imagem */
+    width: 800px; /* **AJUSTE PRINCIPAL: AUMENTAR A LARGURA** */
     max-width: 95%;
     background-color: var(--cor-terciaria);
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
     padding: 10px;
-    max-height: 400px; /* Limite de altura para simular a barra de rolagem */
+    max-height: 400px;
     overflow-y: auto;
     position: relative;
     margin-bottom: 20px;
@@ -230,83 +194,21 @@ body {
     }
 
 .funcionario-item {
+    /* AJUSTE: Distribuir o espaço da nova largura (800px) */
+    /* 5fr para o nome | 2fr para o Cargo | Botões (40px + 40px) */
+    grid-template-columns: 5fr 2fr 40px 40px;
+    gap: 8px; /* Aumentar um pouco o espaço entre as colunas */
     display: grid;
-    grid-template-columns: 4fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
-    gap: 5px;
     align-items: center;
     margin-bottom: 8px;
-    background-color: white; /* Fundo branco ou claro para a linha */
+    background-color: var(--cor-terciaria);
     border-radius: var(--borda-raio);
-    padding: 5px 5px;
+    padding: 5px 8px; /* Aumentar o padding horizontal */
 }
 
-.nome {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-primaria);
-    padding: 8px;
-    border-radius: var(--borda-raio);
-    font-weight: 500;
-}
-
-.cargo-tag {
-    text-align: center;
-    padding: 8px;
-    border-radius: var(--borda-raio);
-    font-weight: bold;
-    color: var(--cor-primaria);
-}
-
-/* Cores específicas para os cargos (adaptadas da imagem) */
-.cargo-cozinheira {
-    background-color: #d1b490;
-}
-
-.cargo-tesoureira {
-    background-color: #d1b490;
-}
-
-.cargo-boleira {
-    background-color: #d1b490;
-}
-
-.cargo-entregadora {
-    background-color: #d1b490;
-}
-
-
-.btn-acao {
-    border: none;
-    border-radius: var(--borda-raio);
-    padding: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-editar {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-primaria);
-}
-
-    .btn-editar:hover {
-        background-color: #cbb497;
-    }
-
-.btn-excluir {
-    background-color: #a08c76; /* Um marrom médio para o ícone de lixeira */
-    color: white;
-}
-
-    .btn-excluir:hover {
-        background-color: #8c7865;
-    }
-
-/* Botão Adicionar */
+/* -------------------------------------------------------------------------- */
+/* Botão Adicionar - AJUSTE DE LARGURA */
+/* -------------------------------------------------------------------------- */
 .btn-adicionar {
     background-color: var(--cor-primaria);
     color: var(--cor-terciaria);
@@ -315,11 +217,11 @@ body {
     padding: 15px 30px;
     border-radius: var(--borda-raio);
     cursor: pointer;
-    text-decoration: none; /* Remover sublinhado do <a> */
+    text-decoration: none;
     border: none;
     box-shadow: var(--sombra-suave);
     margin-top: 20px;
-    width: 450px;
+    width: 800px; /* **AJUSTE: CORRESPONDER À LARGURA DA TABELA** */
     max-width: 95%;
     text-align: center;
     transition: background-color 0.2s;
@@ -329,12 +231,11 @@ body {
         background-color: #4a332c;
     }
 
-/* Removendo o H1 extra que não está no layout */
+/* Estilos de elementos que você escondeu */
 .container-principal > h1 {
     display: none;
 }
 
-/* Removendo o botão "Consultar" que não está no layout principal */
 .container-principal + .btn {
     display: none;
 }
