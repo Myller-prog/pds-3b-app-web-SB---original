@@ -73,7 +73,7 @@
         bool sucesso = false;
         try
         {
-            produtoDAO.Atualizar(produto);
+            produtoDAO.Inserir(produto);
             sucesso = true;
 
         }
@@ -83,12 +83,11 @@
         }
         ;
 
-        // CORREÇÃO: Navega APENAS se a atualização for bem-sucedida
         if (sucesso)
         {
-            // Navega para a lista de produtos
             Navigation.NavigateTo(uri: "/produtos");
         }
         lista.Add(produto);
+
     }
 }

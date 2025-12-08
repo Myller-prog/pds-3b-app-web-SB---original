@@ -59,7 +59,7 @@
                 throw new Exception(message: "O campo nome é obrigatório");
             }
 
-            ingredientesDAO.Inserir(_novoIngrediente);
+            ingredientesDAO.Atualizar(_novoIngrediente);
             Navigation.NavigateTo(uri: "/ingredientes");
 
         }

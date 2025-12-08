@@ -36,11 +36,11 @@
     font-weight: 500;
 }
 
-.user-header svg {
+    .user-header svg {
         margin-right: 10px;
         width: 28px;
         height: 28px;
-}
+    }
 
 form-group mb-4 {
     color: 7A5B4C;
@@ -302,6 +302,7 @@ body {
     background-color: var(--cor-fundo-principal);
     /* ... outras propriedades ... */
 }
+
 :root {
     --cor-fundo-principal: #fbf5e6;
     --cor-primaria: #5d4037;
@@ -317,32 +318,31 @@ body {
     align-items: center;
     position: relative;
     padding: 10px 10px;
-    background-color: var(--cor-primaria); 
+    background-color: var(--cor-primaria);
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
     margin-bottom: 25px;
-    gap: 10px; 
+    gap: 10px;
 }
 
 
 .blazor-canva-dropdown-title {
-    color: #ffffff; 
+    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
-   
 }
 
 .blazor-canva-dropdown-select {
-    background-color: var(--cor-secundaria); 
-    color: var(--cor-primaria); 
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
     border: none;
     border-radius: var(--borda-raio);
-    padding: 5px 30px 5px 15px; 
+    padding: 5px 30px 5px 15px;
     font-family: inherit;
     font-size: 1rem;
     font-weight: bold;
-    appearance: none; 
+    appearance: none;
     cursor: pointer;
     line-height: 1.5;
 }
@@ -354,7 +354,7 @@ body {
 
 
 .table tbody tr:hover {
-    background-color: #f5e0c5; 
+    background-color: #f5e0c5;
 }
 
 .table {
@@ -367,15 +367,16 @@ body {
     width: 100%;
     margin-top: 20px;
 }
+
     .table thead {
         background-color: var(--cor-secundaria);
-        color: var(--cor-primaria); 
+        color: var(--cor-primaria);
         text-transform: uppercase;
         font-weight: bold;
     }
 
     .table th {
-        border: none !important; 
+        border: none !important;
         padding: 15px !important;
         text-align: left;
         border-bottom: 1px solid var(--cor-primaria) !important;
@@ -393,9 +394,9 @@ body {
     }
 
 
-.table tbody tr:hover {
-    background-color: #f5e0c5 !important;
-}
+    .table tbody tr:hover {
+        background-color: #f5e0c5 !important;
+    }
 
     /*bordas*/
     .table tbody tr:last-child td {
