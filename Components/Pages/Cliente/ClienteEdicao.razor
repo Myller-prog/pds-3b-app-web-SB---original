@@ -1,0 +1,102 @@
+﻿@page "/clientes/editar/{Id:int}"
+@using AppWeb.Models
+@inject ClienteDAO clienteDAO;
+@inject NavigationManager NavigationManager;
+@inject IJSRuntime JSRuntime;
+
+<PageTitle>Editar Cliente</PageTitle>
+
+<div class="container-principal">
+    <div class="header-pagina">
+        <h1>editar cliente</h1>
+        <span class="subtitulo">altere as informações do cliente</span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(MensagemErro))
+    {
+        <div class="alert alert-danger" role="alert" style="margin-top: 20px;">
+            @MensagemErro
+        </div>
+    }
+
+    <div class="tabela-funcionarios">
+
+        <EditForm Model="@clienteAtual" OnValidSubmit="@SalvarClienteEditado" FormName="editarClienteForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group mb-3">
+                <label for="id">Id:</label>
+                <InputNumber id="id" @bind-Value="clienteAtual.Id" class="form-control" disabled />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="nome">Nome:</label>
+                <InputText id="nome" @bind-Value="clienteAtual.Nome" class="form-control" />
+                <ValidationMessage For="@(() => clienteAtual.Nome)" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="telefone">Telefone:</label>
+                <InputText id="telefone" @bind-Value="clienteAtual.Telefone" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="email">Email:</label>
+                <InputText id="email" @bind-Value="clienteAtual.Email" class="form-control" />
+                <ValidationMessage For="@(() => clienteAtual.Email)" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="cidade">Cidade:</label>
+                <InputText id="cidade" @bind-Value="clienteAtual.Cidade" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="estado">Estado:</label>
+                <InputText id="estado" @bind-Value="clienteAtual.Estado" class="form-control" />
+            </div>
+
+            <hr style="border-color: var(--cor-secundaria); margin-top: 20px;" />
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Cliente clienteAtual = new Cliente();
+    private string? MensagemErro;
+
+    protected override void OnInitialized()
+    {
+        // Tenta buscar o cliente pelo ID fornecido na URL
+        clienteAtual = clienteDAO.BuscarPorId(Id);
+        if (clienteAtual == null)
+        {
+            clienteAtual = new Cliente();
+            MensagemErro = "Cliente não encontrado ou ID inválido.";
+        }
+    }
+
+    private async Task SalvarClienteEditado()
+    {
+        // 1. Atualiza o banco de dados
+            clienteDAO.Atualizar(clienteAtual);
+
+         
+            NavigationManager.NavigateTo("/clientes");
+     
+        
+        // É importante que o manipulador de eventos seja 'Task' e não 'void' se for assíncrono.
+        await Task.CompletedTask;
+    }
+
+}

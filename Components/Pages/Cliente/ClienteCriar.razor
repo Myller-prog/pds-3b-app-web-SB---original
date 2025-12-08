@@ -5,14 +5,17 @@
 
 <PageTitle>Novo Cliente</PageTitle>
 
-<div class="container-principal">
 
+<div class="container-principal">
     <div class="header-pagina">
         <h1>adicionar novo cliente</h1>
         <span class="subtitulo">preencha as informações do novo cliente</span>
     </div>
 
-    <div class="tabela-funcionarios" style="padding: 20px;">
+    @* Se você usou MensagemStatus no bloco @code, exiba aqui *@
+    @* @if (!string.IsNullOrEmpty(MensagemStatus)) { <div class="alert alert-warning">@MensagemStatus</div> } *@
+
+    <div class="tabela-funcionarios" style="padding: 20px; margin-top: 30px;">
 
         <EditForm Model="@novoCliente" OnValidSubmit="@SalvarNovoCliente">
             <DataAnnotationsValidator />
@@ -27,6 +30,7 @@
             <div class="form-group mb-3">
                 <label for="telefone">Telefone:</label>
                 <InputText id="telefone" @bind-Value="novoCliente.Telefone" class="form-control" />
+                <ValidationMessage For="@(() => novoCliente.Telefone)" />
             </div>
 
             <div class="form-group mb-3">
@@ -45,7 +49,7 @@
                 <InputText id="estado" @bind-Value="novoCliente.Estado" class="form-control" />
             </div>
 
-            <hr style="border-color: #e3c8a4; margin-top: 20px;" />
+            <hr style="border-color: var(--cor-secundaria); margin-top: 20px;" />
 
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="submit" class="btn btn-success">Cadastrar Cliente</button>
@@ -53,16 +57,25 @@
             </div>
 
         </EditForm>
-
     </div>
 </div>
 
 @code {
     private Cliente novoCliente = new Cliente();
+    // Você pode adicionar uma variável para mostrar mensagens de erro
+    // private string? MensagemStatus;
 
     private void SalvarNovoCliente()
     {
-        clienteDAO.Inserir(novoCliente);
-        NavigationManager.NavigateTo("/clientes");
+        try
+        {
+            clienteDAO.Inserir(novoCliente);
+            NavigationManager.NavigateTo("/clientes");
+        }
+        catch (Exception)
+        {
+            // Se o DAO lançar exceção, você pode capturar e mostrar no MensagemStatus
+            // Ex: MensagemStatus = ex.Message;
+        }
     }
 }

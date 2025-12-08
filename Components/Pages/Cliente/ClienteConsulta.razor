@@ -1,7 +1,7 @@
 ﻿@page "/clientes"
-@inject IJSRuntime jsRuntime;
+@using AppWeb.Models
+@inject IJSRuntime JSRuntime;
 @inject ClienteDAO clienteDAO;
-
 <PageTitle>Clientes</PageTitle>
 
 <div class="container-principal-clientes">
@@ -13,42 +13,51 @@
 
     <a href="/clientes/novo" class="btn-adicionar mb-4">Adicionar Novo Cliente</a>
 
+    <div class="tabela-scroll-box">
+        <table class="table">
+        </table>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome do cliente</th>
-                <th>Telefone</th>
-                <th>Email</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th style="width: 80px;">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
+</div>
+
+    <div style="max-height: 400px; overflow-y: auto; border: 1px solid #e0e0e0; padding: 5px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome do cliente</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th style="width: 80px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
             @{
-
                 @foreach (var cliente in listaClientes)
                 {
-                            <tr>
-                                <td>@cliente.Id</td>
-                                <td>@cliente.Nome</td>
-                                <td>@cliente.Telefone</td>
-                                <td>@cliente.Email</td>
-                                <td>@cliente.Cidade</td>
-                                <td>@cliente.Estado</td>
-
-                                <td class="botoes-acao-celula">
-                                    <a href="/clientes/editar/@cliente.Id" class="btn-acao btn-editar">✏️</a>
-                                    <button @onclick="() => ExcluirCliente(cliente.Id)" class="btn-acao btn-excluir">🗑️</button>
-                                </td>
-                            </tr>
+                    // CORREÇÃO: Renderiza a linha APENAS se houver um ID válido
+                    @if (cliente.Id > 0)
+                    {
+                        <tr>
+                            <td>@cliente.Id</td>
+                            <td>@cliente.Nome</td>
+                            <td>@cliente.Telefone</td>
+                            <td>@cliente.Email</td>
+                            <td>@cliente.Cidade</td>
+                            <td>@cliente.Estado</td>
+                            <td class="botoes-acao-celula">
+                                <a href="/clientes/editar/@cliente.Id" class="btn-acao btn-editar">✏️</a>
+                                <button @onclick="() => ExcluirCliente(cliente.Id)" class="btn-acao btn-excluir">🗑️</button>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
-</div>
+                }
+            </tbody>
+        </table>
+    </div>
 
 @code {
     private List<Cliente> listaClientes = new();
@@ -63,18 +72,22 @@
         listaClientes = clienteDAO.listarTodos();
     }
 
-   private async Task ExcluirCliente(int id)
+    private async Task ExcluirCliente(int id)
     {
-
-        bool confirmado = await jsRuntime.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir o cliente " + id + "?");
+        bool confirmado = await JSRuntime.InvokeAsync<bool>("confirm",
+            $"Tem certeza que deseja excluir o cliente {id}?");
 
         if (confirmado)
         {
-
-            clienteDAO.Excluir(id);
-
-
-            CarregarDados();
+            try
+            {
+                clienteDAO.Excluir(id);
+                CarregarDados();
+            }
+            catch (Exception ex)
+            {
+                await JSRuntime.InvokeVoidAsync("alert", $"Erro ao excluir cliente: {ex.Message}");
+            }
         }
     }
 }
