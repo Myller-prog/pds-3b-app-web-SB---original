@@ -8,7 +8,7 @@
         background-color: #5c3a1a;
         border-color: #5c3a1a;
     }
-/*MAZZIE - PRODUTOS*/
+/* MAZZIE - PRODUTOS */
 /* Paleta de Cores baseada na imagem:
    Fundo da Sidebar (Marrom Escuro): ~#7A5B4C
    Fundo dos Botões (Cáqui/Bege): ~#D4B9A2
@@ -36,11 +36,11 @@
     font-weight: 500;
 }
 
-.user-header svg {
+    .user-header svg {
         margin-right: 10px;
         width: 28px;
         height: 28px;
-}
+    }
 
 form-group mb-4 {
     color: 7A5B4C;
@@ -80,12 +80,9 @@ a.menu-button {
     a.menu-button svg {
         display: none;
     }
-/*MAZZIE - FIM*/
+/* MAZZIE - FIM */
 
-
-
-
-/* MAX - FUNCIONÁRIO - CÓDIGO AJUSTADO */
+/* MAX - FUNCIONÁRIO */
 :root {
     --cor-fundo-principal: #f8f0e5;
     --cor-primaria: #5d4037;
@@ -149,20 +146,24 @@ body {
     border-radius: var(--borda-raio);
     padding: 10px 20px;
     margin: 30px 0 20px 0;
-    /* Ajuste de largura do filtro para acompanhar a tabela (Opcional) */
-    width: 800px;
-    max-width: 90%;
+    width: 500px;
+    max-width: 60%;
     position: relative;
     box-shadow: var(--sombra-suave);
+    font-size: 20px;
+    0 font-weight: bold;
+    color: var(--cor-secundaria);
 }
 
-/* ... Estilos internos do filtro (label-cargo, combo-cargo, seta-combo) não alterados ... */
-
-/* -------------------------------------------------------------------------- */
-/* Tabela de Funcionários (Main) - AJUSTES DE LARGURA */
-/* -------------------------------------------------------------------------- */
+.combo-cargo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    margin-left:80px;
+}
+/* Tabela de Funcionários (Main) - LARGURA AJUSTADA */
 .tabela-funcionarios {
-    width: 800px; /* **AJUSTE PRINCIPAL: AUMENTAR A LARGURA** */
+    width: 800px;
     max-width: 95%;
     background-color: var(--cor-terciaria);
     border-radius: var(--borda-raio);
@@ -172,7 +173,6 @@ body {
     overflow-y: auto;
     position: relative;
     margin-bottom: 20px;
-    /* Estilização da barra de rolagem */
     scrollbar-width: thin;
     scrollbar-color: var(--cor-primaria) var(--cor-terciaria);
 }
@@ -194,21 +194,86 @@ body {
     }
 
 .funcionario-item {
-    /* AJUSTE: Distribuir o espaço da nova largura (800px) */
-    /* 5fr para o nome | 2fr para o Cargo | Botões (40px + 40px) */
-    grid-template-columns: 5fr 2fr 40px 40px;
-    gap: 8px; /* Aumentar um pouco o espaço entre as colunas */
+    /* AJUSTE: Distribuição de espaço com largura maior */
+    grid-template-columns: 5fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
+    gap: 8px;
     display: grid;
     align-items: center;
     margin-bottom: 8px;
-    background-color: var(--cor-terciaria);
+    background-color: white;
     border-radius: var(--borda-raio);
-    padding: 5px 8px; /* Aumentar o padding horizontal */
+    padding: 5px 8px;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Botão Adicionar - AJUSTE DE LARGURA */
-/* -------------------------------------------------------------------------- */
+.nome {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: 500;
+}
+
+.cargo-tag {
+    /* AJUSTE ESSENCIAL: Garante que a cor preencha toda a célula */
+    display: block;
+    width: 100%;
+    /* ----------------------------------------------------------- */
+
+    text-align: center;
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+/* NOVA CLASSE BASE e Classes Específicas */
+.cargo-base-fundo {
+    background-color: #d1b490; /* Cor de fundo para todos os cargos que não têm cor específica */
+}
+
+/* As classes específicas agora usam a base e podem ser removidas se todas tiverem a mesma cor */
+.cargo-cozinheira,
+.cargo-tesoureira,
+.cargo-boleira,
+.cargo-entregador, /* Corrigido para 'entregador' (minúsculo) */
+.cargo-entregadora {
+    background-color: #d1b490;
+}
+
+
+.btn-acao {
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-editar {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+    .btn-editar:hover {
+        background-color: #cbb497;
+    }
+
+.btn-excluir {
+    background-color: #a08c76;
+    color: white;
+}
+
+    .btn-excluir:hover {
+        background-color: #8c7865;
+    }
+
+/* Botão Adicionar - LARGURA AJUSTADA */
 .btn-adicionar {
     background-color: var(--cor-primaria);
     color: var(--cor-terciaria);
@@ -221,7 +286,7 @@ body {
     border: none;
     box-shadow: var(--sombra-suave);
     margin-top: 20px;
-    width: 800px; /* **AJUSTE: CORRESPONDER À LARGURA DA TABELA** */
+    width: 800px; /* Corresponde à largura da tabela */
     max-width: 95%;
     text-align: center;
     transition: background-color 0.2s;
@@ -231,7 +296,7 @@ body {
         background-color: #4a332c;
     }
 
-/* Estilos de elementos que você escondeu */
+/* Elementos escondidos */
 .container-principal > h1 {
     display: none;
 }
@@ -302,6 +367,7 @@ body {
     background-color: var(--cor-fundo-principal);
     /* ... outras propriedades ... */
 }
+
 :root {
     --cor-fundo-principal: #fbf5e6;
     --cor-primaria: #5d4037;
@@ -317,32 +383,31 @@ body {
     align-items: center;
     position: relative;
     padding: 10px 10px;
-    background-color: var(--cor-primaria); 
+    background-color: var(--cor-primaria);
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
     margin-bottom: 25px;
-    gap: 10px; 
+    gap: 10px;
 }
 
 
 .blazor-canva-dropdown-title {
-    color: #ffffff; 
+    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
-   
 }
 
 .blazor-canva-dropdown-select {
-    background-color: var(--cor-secundaria); 
-    color: var(--cor-primaria); 
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
     border: none;
     border-radius: var(--borda-raio);
-    padding: 5px 30px 5px 15px; 
+    padding: 5px 30px 5px 15px;
     font-family: inherit;
     font-size: 1rem;
     font-weight: bold;
-    appearance: none; 
+    appearance: none;
     cursor: pointer;
     line-height: 1.5;
 }
@@ -354,7 +419,7 @@ body {
 
 
 .table tbody tr:hover {
-    background-color: #f5e0c5; 
+    background-color: #f5e0c5;
 }
 
 .table {
@@ -367,15 +432,16 @@ body {
     width: 100%;
     margin-top: 20px;
 }
+
     .table thead {
         background-color: var(--cor-secundaria);
-        color: var(--cor-primaria); 
+        color: var(--cor-primaria);
         text-transform: uppercase;
         font-weight: bold;
     }
 
     .table th {
-        border: none !important; 
+        border: none !important;
         padding: 15px !important;
         text-align: left;
         border-bottom: 1px solid var(--cor-primaria) !important;
@@ -393,9 +459,9 @@ body {
     }
 
 
-.table tbody tr:hover {
-    background-color: #f5e0c5 !important;
-}
+    .table tbody tr:hover {
+        background-color: #f5e0c5 !important;
+    }
 
     /*bordas*/
     .table tbody tr:last-child td {
