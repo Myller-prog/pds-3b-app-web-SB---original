@@ -1,4 +1,6 @@
-﻿@page "/funcionarios"
+﻿@using AppWeb.Models
+
+@page "/funcionarios"
 
 @inject FuncionarioDAO funcionarioDAO;
 
@@ -23,56 +25,41 @@
             <option value="boleira">Boleira</option>
             <option value="entregadora">Entregadora</option>
         </select>
-        <div class="seta-combo">v</div>
     </div>
 
     <main class="tabela-funcionarios">
-        <div class="funcionario-item">
-            <span class="nome">Maria de Luz</span>
-            <span class="cargo-tag cargo-cozinheira">cozinheira</span>
-            <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-        </div>
-        <div class="funcionario-item">
-            <span class="nome">Carolina Ferreira</span>
-            <span class="cargo-tag cargo-cozinheira">cozinheira</span>
-            <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-        </div>
-        <div class="funcionario-item">
-            <span class="nome">Emanuella Ilario</span>
-            <span class="cargo-tag cargo-tesoureira">tesoureira</span>
-            <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-        </div>
-        <div class="funcionario-item">
-            <span class="nome">Maria Madalena Lima</span>
-            <span class="cargo-tag cargo-boleira">boleira</span>
-            <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-        </div>
-        <div class="funcionario-item">
-            <span class="nome">Fulana Fulaninha</span>
-            <span class="cargo-tag cargo-entregadora">entregadora</span>
-            <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-        </div>
+
+        @if (listarFuncionario != null && listarFuncionario.Any())
+        {
+            @foreach (var funcionario in listarFuncionario)
+            {
+                <div class="funcionario-item">
+                    <span class="nome">@funcionario.Nome</span>
+                    <span class="cargo-tag @("cargo-" + funcionario.Cargo.ToLower())">@funcionario.Cargo</span>
+
+                    <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Carregando funcionários ou a lista está vazia...</p>
+        }
 
         <div class="scroll-bar-simulado"></div>
     </main>
 
-    <h1>Funcionário</h1>
-    <a href="funcionariosConsulta"
-       class="btn-adicionar">
-        adicionar
-    </a>
+
+    <div class="container-principal">
+        <h1>Funcionário</h1>
+        <a href="funcionarios/novo"
+           class="btn-adicionar">
+            adicionar
+        </a>
+    </div>
 
 </div>
-
-<a href="funcionariosConsulta"
-   class="btn btn-primary">
-    Consultar
-</a>
 
 @code {
     private List<Funcionario> listarFuncionario = new();

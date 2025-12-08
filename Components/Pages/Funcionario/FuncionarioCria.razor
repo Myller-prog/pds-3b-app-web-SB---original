@@ -2,11 +2,13 @@
 @rendermode InteractiveServer
 
 @using AppWeb.Models;
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations
+
 @inject FuncionarioDAO funcionarioDAO;
 @inject NavigationManager Navigation;
 
 <PageTitle>Funcionario - Novo</PageTitle>
-
 
 <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Funcionario</h1>
 
@@ -16,50 +18,52 @@
         @erro
     </div>
 }
+
 <div class="row">
     <div class="col">
-        <EditForm Model="_novoFuncionario" OnSubmit="Salvar">
+        <EditForm Model="_novoFuncionario" OnValidSubmit="Salvar">
 
-            <div class="form-group mb-4">
+            <DataAnnotationsValidator />
+            <ValidationSummary /> <div class="form-group mb-4">
                 <label>Nome</label>
-                <input @bind-value="_novoFuncionario!.Nome" type="text" class="form-control" name="nome"
-                       placeholder="Nome completo do funcionário" />
+                <InputText @bind-Value="_novoFuncionario!.Nome" class="form-control" placeholder="Nome completo do funcionário" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Nome)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>Cargo</label>
-                <input @bind-value="_novoFuncionario!.Cargo" type="text" class="form-control" name="cargo"
-                       placeholder="Cargo/Função" />
+                <InputText @bind-Value="_novoFuncionario!.Cargo" class="form-control" placeholder="Cargo/Função" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Cargo)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>Data de Nascimento</label>
-                <input @bind-value="_novoFuncionario!.DataNasc" type="text" class="form-control" name="dataNasc"
-                       placeholder="Ex: DD/MM/AAAA" />
+                <InputText @bind-Value="_novoFuncionario!.DataNasc" class="form-control" placeholder="Ex: DD/MM/AAAA" />
+                <ValidationMessage For="@(() => _novoFuncionario!.DataNasc)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>Email</label>
-                <input @bind-value="_novoFuncionario!.Email" type="email" class="form-control" name="email"
-                       placeholder="email@exemplo.com" />
+                <InputText @bind-Value="_novoFuncionario!.Email" type="email" class="form-control" placeholder="email@exemplo.com" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Email)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>Telefone</label>
-                <input @bind-value="_novoFuncionario!.Telefone" type="tel" class="form-control" name="telefone"
-                       placeholder="Ex: (XX) XXXX-XXXX" />
+                <InputText @bind-Value="_novoFuncionario!.Telefone" type="tel" class="form-control" placeholder="Ex: (XX) XXXX-XXXX" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Telefone)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>CPF</label>
-                <input @bind-value="_novoFuncionario!.Cpf" type="number" class="form-control" name="cpf"
-                       placeholder="Apenas números" />
+                <InputText @bind-Value="_novoFuncionario!.Cpf" class="form-control" placeholder="Apenas números" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Cpf)" />
             </div>
 
             <div class="form-group mb-4">
                 <label>CEP</label>
-                <input @bind-value="_novoFuncionario!.Cep" type="text" class="form-control" name="cep"
-                       placeholder="Ex: XXXXX-XXX" />
+                <InputText @bind-Value="_novoFuncionario!.Cep" class="form-control" placeholder="Ex: XXXXX-XXX" />
+                <ValidationMessage For="@(() => _novoFuncionario!.Cep)" />
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -77,10 +81,6 @@
     {
         try
         {
-            if (_novoFuncionario.Nome is null || _novoFuncionario.Nome == "")
-            {
-                throw new Exception(message: "O campo nome é obrigatório");
-            }
             funcionarioDAO.Inserir(_novoFuncionario);
 
             Navigation.NavigateTo(uri: "/funcionarios");

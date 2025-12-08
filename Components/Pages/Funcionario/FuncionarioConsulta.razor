@@ -1,5 +1,7 @@
 ﻿@page "/funcionariosConsulta"
 
+@using AppWeb.Models
+
 @inject FuncionarioDAO funcionarioDAO;
 
 <PageTitle>Funcionários</PageTitle>
@@ -21,8 +23,6 @@
     </thead>
     <tbody>
         @{
-            int contador = 1;
-
             @foreach (var funcionario in listarFuncionario)
             {
                 <tr>
@@ -33,15 +33,18 @@
                     <td>@funcionario.Telefone</td>
                     <td>@funcionario.Cpf</td>
                     <td>@funcionario.Cep</td>
-                </tr>
+                    <td>
 
-                contador++;
+                    </td>
+                </tr>
+                
             }
         }
     </tbody>
 </table>
 
 @code {
+
     private List<Funcionario> listarFuncionario = new();
 
     protected override void OnInitialized()
@@ -53,5 +56,4 @@
     {
         listarFuncionario = funcionarioDAO.listarTodos();
     }
-
 }

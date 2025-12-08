@@ -39,8 +39,10 @@ namespace AppWeb.Models
             var comando = _conexao.CreateCommand("SELECT * FROM produto;");
             var leitor = comando.ExecuteReader();
 
-            while (leitor.Read()) // enquanto tiver condição, o while vai rodar
+
+            while (leitor.Read()) 
             {
+
                 var produto = new Produto();
                 produto.Id = leitor.GetInt32("id_pro");
                 produto.Nome = DAOHelper.GetString(leitor, "nome_pro");
@@ -53,9 +55,11 @@ namespace AppWeb.Models
 
             return lista;
         }
+     
 
         public void Inserir(Produto produto)
         {
+            var lista = new List<Produto>();
             try
             {
                 var comando = _conexao.CreateCommand("INSERT INTO produto VALUES (null, null, @_nome, @_descricao, @qtd, @_preco)");
@@ -64,8 +68,9 @@ namespace AppWeb.Models
                 comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
                 comando.Parameters.AddWithValue("@_qtd", produto.Quantidade);
                 comando.Parameters.AddWithValue("@_preco", produto.Valor);
-
+                
                 comando.ExecuteNonQuery();
+                lista.Add(produto);                                 
             }
             catch (Exception)
             {
@@ -99,6 +104,7 @@ namespace AppWeb.Models
         }
         public void Atualizar(Produto produto)
         {
+            var lista = new List<Produto>();
             try
             {
                 var comando = _conexao.CreateCommand(
@@ -112,11 +118,37 @@ namespace AppWeb.Models
                 comando.Parameters.AddWithValue("@_id", produto.Id);
 
                 comando.ExecuteNonQuery();
+                lista.Add(produto);
             }
             catch
             {
                 throw;
             }
+
+        }
+        public void Excluir(Produto produto)
+        {
+            var lista = new List<Produto>();
+            try
+            {
+                var comando = _conexao.CreateCommand(
+                    "ALTER TABLE produto DROP COLUMN nome_pro = @_nome, descricao_pro = @_descricao, " +
+                    "quantidade_pro = @_quantidade, preco_pro = @_preco WHERE id_pro = @_id;");
+
+                comando.Parameters.AddWithValue("@_nome", produto.Nome);
+                comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
+                comando.Parameters.AddWithValue("@_quantidade", produto.Quantidade);
+                comando.Parameters.AddWithValue("@_preco", produto.Valor);
+                comando.Parameters.AddWithValue("@_id", produto.Id);
+
+                comando.ExecuteNonQuery();
+                lista.Add(produto);
+            }
+            catch
+            {
+                throw;
+            }
+
         }
 
 

@@ -15,28 +15,29 @@
     </div>
 }
 
+
 <div class="row">
-    <div class="col">
+    <div class="color: 7A5B4C background-color: #5d4037 border-radius: 8px">
         <EditForm Model="_novoProduto" OnSubmit="Salvar">
-            <div class="form-group mb-4">
+            <div class="nomepro">
                 <label>Nome</label>
                 <input @bind-value="_novoProduto!.Nome" type="text" class="form-control" name="nome"
                        placeholder="Informe o nome do produto" />
             </div>
 
-            <div class="form-group mb-4">
+            <div class="quantpro">
                 <label>Quantidade</label>
                 <input @bind-value="_novoProduto!.Quantidade" type="text" class="form-control" name="quantidade"
                        placeholder="Informe a quantidade de produto" />
             </div>
 
-            <div class="form-group mb-4">
+            <div class="precopro">
                 <label>Preço</label>
                 <input @bind-value="_novoProduto!.Valor" type="text" class="form-control" name="valor"
                        placeholder="Informe o preço do produto" />
             </div>
 
-            <div class="form-group mb-4">
+            <div class="descricaopro">
                 <label>Descricão</label>
                 <input @bind-value="_novoProduto!.Descricao" type="text" class="form-control" name="descricao"
                        placeholder="Informe a descricao do produto" />
@@ -57,22 +58,25 @@
 
     private void Salvar()
     {
-
+        var lista = new List<Produto>();
         try
         {
             if (_novoProduto.Nome is null || _novoProduto.Nome == "")
             {
                 throw new Exception(message: "O campo nome é obrigatório");
             }
-
-            Navigation.NavigateTo(uri: "/produtos");
-
+            produtoDAO.Atualizar(_novoProduto);
+            Navigation.NavigateTo(uri: "/produto");
+            lista.Add(_novoProduto);
         }
         catch (Exception ex)
         {
             erro = ex.Message;
         }
+
+        
     }
+
     
     private List<Produto> listarProduto = new();
     private List<Produto> CadastrarProduto = new();
