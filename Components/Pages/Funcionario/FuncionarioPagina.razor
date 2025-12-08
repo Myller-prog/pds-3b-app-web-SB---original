@@ -57,7 +57,21 @@
            class="btn-adicionar">
             adicionar
         </a>
+
     </div>
+    @foreach (var funcionario in listarFuncionario)
+    {
+        <div class="funcionario-item">
+            <span class="nome">@funcionario.Nome</span>
+            <span class="cargo-tag @("cargo-" + funcionario.Cargo.ToLower())">@funcionario.Cargo</span>
+
+            <a href="/funcionarios/@funcionario.Id/editar">
+                <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
+            </a>
+
+            <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    }
 
 </div>
 

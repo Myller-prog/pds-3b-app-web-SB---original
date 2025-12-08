@@ -34,10 +34,10 @@
                     <td>@funcionario.Cpf</td>
                     <td>@funcionario.Cep</td>
                     <td>
-
+                    <a href="@($"/funcionarios/atualizar/{funcionario.Id}")" class="btn btn-primary">Atualizar</a>
+                    <a href="@($"/funcionarios/excluir/{funcionario.Id}")" class="btn btn-primary">Excluir</a>
                     </td>
                 </tr>
-                
             }
         }
     </tbody>
