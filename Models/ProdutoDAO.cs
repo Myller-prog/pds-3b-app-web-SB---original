@@ -126,6 +126,30 @@ namespace AppWeb.Models
             }
 
         }
+        public void Excluir(Produto produto)
+        {
+            var lista = new List<Produto>();
+            try
+            {
+                var comando = _conexao.CreateCommand(
+                    "ALTER TABLE produto DROP COLUMN nome_pro = @_nome, descricao_pro = @_descricao, " +
+                    "quantidade_pro = @_quantidade, preco_pro = @_preco WHERE id_pro = @_id;");
+
+                comando.Parameters.AddWithValue("@_nome", produto.Nome);
+                comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
+                comando.Parameters.AddWithValue("@_quantidade", produto.Quantidade);
+                comando.Parameters.AddWithValue("@_preco", produto.Valor);
+                comando.Parameters.AddWithValue("@_id", produto.Id);
+
+                comando.ExecuteNonQuery();
+                lista.Add(produto);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
 
 
 
