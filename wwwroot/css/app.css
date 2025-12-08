@@ -1,19 +1,26 @@
-
 .btn-primary {
     background-color: #7B542F;
     border-color: #7B542F;
 }
 
+
     .btn-primary:hover {
         background-color: #5c3a1a;
         border-color: #5c3a1a;
     }
+
 /*MAZZIE - PRODUTOS*/
+
 /* Paleta de Cores baseada na imagem:
+
    Fundo da Sidebar (Marrom Escuro): ~#7A5B4C
+
    Fundo dos Botões (Cáqui/Bege): ~#D4B9A2
+
    Texto dos Botões (Marrom): ~#5D4336 
+
 */
+
 :root {
     --cor-fundo-principal: #f8f0e5;
     --cor-primaria: #5d4037;
@@ -23,11 +30,15 @@
     --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 /* 1. Estilo para o cabeçalho/área de Usuário */
+
 .user-header {
     /* Cor de fundo do cabeçalho igual ao do corpo da sidebar */
+
     background-color: #7A5B4C;
     color: #F8E7D7; /* Cor do texto "Usuário" (bege claro) */
+
     display: flex;
     align-items: center;
     padding: 15px 20px;
@@ -36,11 +47,13 @@
     font-weight: 500;
 }
 
-.user-header svg {
+
+    .user-header svg {
         margin-right: 10px;
         width: 28px;
         height: 28px;
-}
+    }
+
 
 form-group mb-4 {
     color: 7A5B4C;
@@ -48,44 +61,63 @@ form-group mb-4 {
     border-radius: 8px;
 }
 
+
 /* 2. Estilo dos links de navegação como botões (a.menu-button) */
+
 a.menu-button {
     /* Desativa o Tailwind 'flex items-center gap-3 p-2 rounded-lg' para usar nosso estilo de botão */
+
     display: block;
     text-align: center;
     text-decoration: none;
     /* Cores e Formato da Imagem */
+
     background-color: #D4B9A2; /* Fundo do botão (Cáqui/Bege) */
+
     color: #5D4336; /* Cor do texto (Marrom) */
+
     padding: 15px 10px;
     margin: 10px 10px; /* Espaçamento entre os botões e bordas da sidebar */
+
     border-radius: 8px; /* Cantos arredondados */
+
     font-size: 1.05em;
     font-weight: 600;
     /* Borda sutil para o efeito de profundidade (opcional) */
+
     border: 1px solid rgba(0, 0, 0, 0.1);
     /* Sombra suave */
+
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     transition: background-color 0.2s, transform 0.1s;
 }
 
+
     /* Efeito ao passar o mouse */
+
     a.menu-button:hover {
         background-color: #E6D0BA; /* Um tom um pouco mais claro */
+
         transform: translateY(-1px); /* Efeito sutil de 'levantar' */
+
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
+
     /* Esconde os SVGs dentro dos botões (pois na foto só tem texto) */
+
     a.menu-button svg {
         display: none;
     }
+
 /*MAZZIE - FIM*/
 
 
 
 
+
 /*MAX - FUNCIONÁRIO*/
+
 :root {
     --cor-fundo-principal: #f8f0e5;
     --cor-primaria: #5d4037;
@@ -95,6 +127,7 @@ a.menu-button {
     --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 body {
     background-color: var(--cor-fundo-principal);
     font-family: Arial, sans-serif;
@@ -102,40 +135,55 @@ body {
     padding: 0;
 }
 
+
 /* O 'container-principal' é o wrapper de todo o conteúdo da página de funcionários. 
+
   Considerando que pode haver um menu lateral (não visível no código, mas mencionado
+
   no pedido), estamos centralizando o conteúdo principal e dando um max-width.
+
   O 'margin-left' e 'padding-right' são suposições para acomodar um menu lateral 
+
   fictício, mas o 'margin: 0 auto' garante a centralização horizontal do conteúdo.
+
 */
+
 .container-principal {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o conteúdo (header, filtro, tabela, botão) */
+
     padding: 2px;
     padding-left: 20px; /* Ajuste para o menu lateral, se houver */
+
     min-height: 100vh;
     box-sizing: border-box;
 }
 
+
 /* Seta de Voltar (ajustada para canto superior esquerdo do container) */
 
 
+
 /* Estilização do Header e Título */
+
 .header-pagina {
     text-align: center;
     font-size: 24px
 }
+
 
     .header-pagina h1 {
         font-size: 36px;
         font-weight: bold;
         color: var(--cor-primaria);
         text-transform: lowercase; /* Mantendo o estilo da imagem */
+
         margin: 0;
         padding: 0;
         font-family: serif; /* Dando um toque mais clássico/artesanal */
     }
+
 
 .subtitulo {
     background-color: var(--cor-secundaria);
@@ -146,10 +194,13 @@ body {
     text-transform: lowercase;
     margin-top: 10px;
     display: inline-block; /* Faz a caixa se ajustar ao conteúdo */
+
     box-shadow: var(--sombra-suave);
 }
 
+
 /* Estilização do Filtro de Cargo */
+
 .filtro-cargo {
     display: flex;
     align-items: center;
@@ -158,10 +209,12 @@ body {
     padding: 10px 20px;
     margin: 30px 0 20px 0;
     width: px; /* Ajuste a largura conforme o necessário */
+
     max-width: 90%;
     position: relative;
     box-shadow: var(--sombra-suave);
 }
+
 
 .label-cargo {
     color: var(--cor-terciaria);
@@ -169,6 +222,7 @@ body {
     font-weight: 500;
     margin-right: 15px;
 }
+
 
 .combo-cargo {
     flex-grow: 1;
@@ -178,6 +232,7 @@ body {
     padding: 0;
     margin: 0;
     appearance: none; /* Remove a seta padrão do navegador */
+
     -webkit-appearance: none;
     -moz-appearance: none;
     cursor: pointer;
@@ -185,43 +240,55 @@ body {
     font-size: 15px;
 }
 
+
     .combo-cargo:focus {
         outline: none;
     }
+
 
 .seta-combo {
     color: var(--cor-terciaria);
     font-weight: bold;
     pointer-events: none; /* Impede que o 'v' interfira no clique do select */
+
     margin-left: 15px;
 }
 
+
 /* Tabela de Funcionários (Main) */
+
 .tabela-funcionarios {
     width: 600px; /* Largura fixa para se assemelhar à imagem */
+
     max-width: 95%;
     background-color: var(--cor-terciaria);
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
     padding: 10px;
     max-height: 400px; /* Limite de altura para simular a barra de rolagem */
+
     overflow-y: auto;
     position: relative;
     margin-bottom: 20px;
     /* Estilização da barra de rolagem */
+
     scrollbar-width: thin;
     scrollbar-color: var(--cor-primaria) var(--cor-terciaria);
 }
 
+
     /* Estilo para navegadores baseados em WebKit (Chrome, Safari) */
+
     .tabela-funcionarios::-webkit-scrollbar {
         width: 10px;
     }
+
 
     .tabela-funcionarios::-webkit-scrollbar-track {
         background: var(--cor-terciaria);
         border-radius: var(--borda-raio);
     }
+
 
     .tabela-funcionarios::-webkit-scrollbar-thumb {
         background-color: var(--cor-primaria);
@@ -229,16 +296,20 @@ body {
         border: 2px solid var(--cor-terciaria);
     }
 
+
 .funcionario-item {
     display: grid;
     grid-template-columns: 4fr 2fr 40px 40px; /* Nome | Cargo | Editar | Excluir */
+
     gap: 5px;
     align-items: center;
     margin-bottom: 8px;
     background-color: white; /* Fundo branco ou claro para a linha */
+
     border-radius: var(--borda-raio);
     padding: 5px 5px;
 }
+
 
 .nome {
     background-color: var(--cor-secundaria);
@@ -248,6 +319,7 @@ body {
     font-weight: 500;
 }
 
+
 .cargo-tag {
     text-align: center;
     padding: 8px;
@@ -256,22 +328,28 @@ body {
     color: var(--cor-primaria);
 }
 
+
 /* Cores específicas para os cargos (adaptadas da imagem) */
+
 .cargo-cozinheira {
     background-color: #d1b490;
 }
+
 
 .cargo-tesoureira {
     background-color: #d1b490;
 }
 
+
 .cargo-boleira {
     background-color: #d1b490;
 }
 
+
 .cargo-entregadora {
     background-color: #d1b490;
 }
+
 
 
 .btn-acao {
@@ -288,25 +366,32 @@ body {
     align-items: center;
 }
 
+
 .btn-editar {
     background-color: var(--cor-secundaria);
     color: var(--cor-primaria);
 }
 
+
     .btn-editar:hover {
         background-color: #cbb497;
     }
 
+
 .btn-excluir {
     background-color: #a08c76; /* Um marrom médio para o ícone de lixeira */
+
     color: white;
 }
+
 
     .btn-excluir:hover {
         background-color: #8c7865;
     }
 
+
 /* Botão Adicionar */
+
 .btn-adicionar {
     background-color: var(--cor-primaria);
     color: var(--cor-terciaria);
@@ -316,6 +401,7 @@ body {
     border-radius: var(--borda-raio);
     cursor: pointer;
     text-decoration: none; /* Remover sublinhado do <a> */
+
     border: none;
     box-shadow: var(--sombra-suave);
     margin-top: 20px;
@@ -325,82 +411,140 @@ body {
     transition: background-color 0.2s;
 }
 
+
     .btn-adicionar:hover {
         background-color: #4a332c;
     }
 
+
 /* Removendo o H1 extra que não está no layout */
+
 .container-principal > h1 {
     display: none;
 }
 
+
 /* Removendo o botão "Consultar" que não está no layout principal */
+
 .container-principal + .btn {
     display: none;
 }
+
 /*MAX - FIM*/
+
 
 
 /*MAX - ALIMENTO*/
 
+
 /*MAX - FIM*/
 
 
+
 /*STUART - PARTE DELE*/
+
+
+/* No seu arquivo CSS (ex: app.css) */
+
+
+
+.tabela-scrollable {
+    max-height: 400px; /* Defina a altura máxima desejada */
+
+    overflow-y: auto; /* Força a barra de rolagem vertical */
+
+    border: 1px solid #ccc; /* Opcional: para visualização */
+
+    padding: 5px; /* Opcional: preenchimento interno */
+}
+
+
+.card-table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+    border-radius: 8px; /* Cantos arredondados */
+
+    background-color: white; /* Fundo branco */
+}
+
+
 /* 1. Garante que todo o corpo use a cor de fundo */
+
 body, html {
     background-color: var(--cor-fundo-principal) !important;
 }
 
+
 /* 2. Container principal do Layout (área à direita da sidebar) */
+
 .page {
     /* O componente 'Page' (Content) costuma ter fundo branco por padrão */
+
     background-color: var(--cor-fundo-principal) !important;
 }
 
+
 /* 3. Container da área de conteúdo (o espaço onde seu componente Novo.razor é renderizado) */
+
 .main {
     background-color: var(--cor-fundo-principal) !important;
 }
 
+
 /* 4. O container onde o Blazor se inicia (se for um Blazor Server/WASM clássico) */
+
 #app {
     background-color: var(--cor-fundo-principal) !important;
 }
+
 /* CUSTOMIZAÇÃO DO BOTÃO "CADASTRAR CLIENTE" (btn-success) */
+
 .btn-success {
     background-color: var(--cor-primaria); /* Marrom Escuro: #5d4037 */
+
     border-color: var(--cor-primaria);
     color: var(--cor-terciaria); /* Texto Bege: #f5e4cc */
+
     font-weight: bold;
 }
+
 
     .btn-success:hover {
         background-color: #4a332c; /* Marrom um pouco mais escuro no hover */
+
         border-color: #4a332c;
     }
 
+
 /* CUSTOMIZAÇÃO DO BOTÃO "CANCELAR" (btn-secondary) */
+
 .btn-secondary {
     background-color: var(--cor-secundaria); /* Bege Claro: #e3c8a4 */
+
     border-color: var(--cor-secundaria);
     color: var(--cor-primaria); /* Texto Marrom Escuro: #5d4037 */
+
     font-weight: bold;
 }
+
 
     .btn-secondary:hover {
         background-color: #d1b497;
         border-color: #d1b497;
     }
 
+
 /*STUART - PEDIDO*/
 
+
 /*Selecionar cliente*/
+
 
 body {
     background-color: var(--cor-fundo-principal);
     /* ... outras propriedades ... */
 }
+
 :root {
     --cor-fundo-principal: #fbf5e6;
     --cor-primaria: #5d4037;
@@ -411,50 +555,56 @@ body {
 }
 
 
+
 .blazor-canva-dropdown-container {
     display: inline-flex;
     align-items: center;
     position: relative;
     padding: 10px 10px;
-    background-color: var(--cor-primaria); 
+    background-color: var(--cor-primaria);
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
     margin-bottom: 25px;
-    gap: 10px; 
+    gap: 10px;
 }
+
 
 
 .blazor-canva-dropdown-title {
-    color: #ffffff; 
+    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
-   
 }
 
+
 .blazor-canva-dropdown-select {
-    background-color: var(--cor-secundaria); 
-    color: var(--cor-primaria); 
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
     border: none;
     border-radius: var(--borda-raio);
-    padding: 5px 30px 5px 15px; 
+    padding: 5px 30px 5px 15px;
     font-family: inherit;
     font-size: 1rem;
     font-weight: bold;
-    appearance: none; 
+    appearance: none;
     cursor: pointer;
     line-height: 1.5;
 }
 
+
 /* tabela*/
+
 .table tbody tr:hover td {
     border-color: var(--cor-secundaria) !important;
 }
 
 
+
 .table tbody tr:hover {
-    background-color: #f5e0c5; 
+    background-color: #f5e0c5;
 }
+
 
 .table {
     background-color: var(--cor-terciaria);
@@ -466,23 +616,27 @@ body {
     width: 100%;
     margin-top: 20px;
 }
+
     .table thead {
         background-color: var(--cor-secundaria);
-        color: var(--cor-primaria); 
+        color: var(--cor-primaria);
         text-transform: uppercase;
         font-weight: bold;
     }
 
+
     .table th {
-        border: none !important; 
+        border: none !important;
         padding: 15px !important;
         text-align: left;
         border-bottom: 1px solid var(--cor-primaria) !important;
     }
 
+
     .table tbody {
         background-color: var(--cor-terciaria);
     }
+
 
     .table td {
         border-top: none !important;
@@ -492,25 +646,31 @@ body {
     }
 
 
-.table tbody tr:hover {
-    background-color: #f5e0c5 !important;
-}
+
+    .table tbody tr:hover {
+        background-color: #f5e0c5 !important;
+    }
+
 
     /*bordas*/
+
     .table tbody tr:last-child td {
         border-bottom: none !important;
     }
 
+
     .table thead tr:first-child th:first-child {
         border-top-left-radius: var(--borda-raio);
     }
+
 
     .table thead tr:first-child th:last-child {
         border-top-right-radius: var(--borda-raio);
     }
 
 
+
 /*STUART - FIM*/
 
-/*MAZZIE - FIM*/
 
+/*MAZZIE - FIM*/

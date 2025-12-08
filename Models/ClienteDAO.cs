@@ -1,4 +1,5 @@
 ﻿using AppWeb.Configs;
+using System.Collections.Generic; // Garante que List<T> seja reconhecido
 
 namespace AppWeb.Models
 {
@@ -10,14 +11,13 @@ namespace AppWeb.Models
             _conexao = conexao;
         }
 
-
         public List<Cliente> listarTodos()
         {
             var lista = new List<Cliente>();
 
+            // Usando a dependência injetada
             var comando = _conexao.CreateCommand("SELECT * FROM cliente;");
             var leitor = comando.ExecuteReader();
-
 
             while (leitor.Read())
             {
@@ -39,32 +39,34 @@ namespace AppWeb.Models
         {
             try
             {
-                var comando = _conexao.CreateCommand("INSERT INTO cliente VALUES (@_nome, @_telefone, @_email, @_cidade, @_estado)");
+                // ✅ CORRIGIDO: Removida a coluna 'endereco_cli' (resolve 'Unknown column')
+                string sql = @"
+                    INSERT INTO cliente (nome_cli, telefone_cli, email_cli, cidade_cli, estado_cli) 
+                    VALUES (@_nome, @_telefone, @_email, @_cidade, @_estado)";
 
-                comando.Parameters.AddWithValue("@_nome", cliente.Nome);
-                comando.Parameters.AddWithValue("@_telefone", cliente.Telefone);
-                comando.Parameters.AddWithValue("@_email", cliente.Email);
-                comando.Parameters.AddWithValue("@_cidade", cliente.Cidade);
-                comando.Parameters.AddWithValue("@_estado", cliente.Estado);
+                // Usando a dependência injetada
+                using var comando = _conexao.CreateCommand(sql);
+
+                // ✅ CORRIGIDO: Adicionamos ?? string.Empty (resolve 'cannot be null')
+                comando.Parameters.AddWithValue("@_nome", cliente.Nome ?? string.Empty);
+                comando.Parameters.AddWithValue("@_telefone", cliente.Telefone ?? string.Empty);
+                comando.Parameters.AddWithValue("@_email", cliente.Email ?? string.Empty);
+                comando.Parameters.AddWithValue("@_cidade", cliente.Cidade ?? string.Empty);
+                comando.Parameters.AddWithValue("@_estado", cliente.Estado ?? string.Empty);
 
                 comando.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception($"Erro ao inserir cliente: {ex.Message}", ex);
             }
-
         }
 
-        // --- NOVOS MÉTODOS PARA EDITAR E EXCLUIR ---
-
-        /**
-         * Método para buscar um cliente pelo ID (Necessário para a tela de Edição)
-         */
         public Cliente? BuscarPorId(int id)
         {
             var cliente = new Cliente();
 
+            // Usando a dependência injetada
             using (var comando = _conexao.CreateCommand("SELECT * FROM cliente WHERE id_cli = @_id;"))
             {
                 comando.Parameters.AddWithValue("@_id", id);
@@ -83,7 +85,7 @@ namespace AppWeb.Models
                     }
                 }
             }
-            return null; // Retorna nulo se não encontrar
+            return null;
         }
 
         /**
@@ -102,14 +104,16 @@ namespace AppWeb.Models
                         estado_cli = @_estado
                     WHERE id_cli = @_id;";
 
+                // Usando a dependência injetada
                 using (var comando = _conexao.CreateCommand(sql))
                 {
-                    comando.Parameters.AddWithValue("@_nome", cliente.Nome);
-                    comando.Parameters.AddWithValue("@_telefone", cliente.Telefone);
-                    comando.Parameters.AddWithValue("@_email", cliente.Email);
-                    comando.Parameters.AddWithValue("@_cidade", cliente.Cidade);
-                    comando.Parameters.AddWithValue("@_estado", cliente.Estado);
-                    comando.Parameters.AddWithValue("@_id", cliente.Id); // Essencial para o WHERE
+                    // É recomendado usar ?? string.Empty aqui também
+                    comando.Parameters.AddWithValue("@_nome", cliente.Nome ?? string.Empty);
+                    comando.Parameters.AddWithValue("@_telefone", cliente.Telefone ?? string.Empty);
+                    comando.Parameters.AddWithValue("@_email", cliente.Email ?? string.Empty);
+                    comando.Parameters.AddWithValue("@_cidade", cliente.Cidade ?? string.Empty);
+                    comando.Parameters.AddWithValue("@_estado", cliente.Estado ?? string.Empty);
+                    comando.Parameters.AddWithValue("@_id", cliente.Id);
 
                     comando.ExecuteNonQuery();
                 }
@@ -127,22 +131,20 @@ namespace AppWeb.Models
         {
             try
             {
-                using (var comando = _conexao.CreateCommand("DELETE FROM cliente WHERE id_cli = @_id;"))
+                string sql = "DELETE FROM cliente WHERE id_cli = @_id";
+
+                using (var comando = _conexao.CreateCommand(sql))
                 {
                     comando.Parameters.AddWithValue("@_id", id);
-
-                    comando.ExecuteNonQuery(); // Executa o comando de exclusão
+                    comando.ExecuteNonQuery();
                 }
+            
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Tratar ou logar o erro, especialmente se houver chaves estrangeiras
-                throw;
+                // Propaga o erro para que o Blazor possa exibi-lo
+                throw new Exception($"Erro ao excluir cliente: {ex.Message}", ex);
             }
         }
     }
 }
-
-
-
-
