@@ -55,29 +55,20 @@ namespace AppWeb.Models
 
             return lista;
         }
-     
+
 
         public void Inserir(Produto produto)
         {
-            var lista = new List<Produto>();
-            try
-            {
-                var comando = _conexao.CreateCommand("INSERT INTO produto VALUES (null, null, @_nome, @_descricao, @qtd, @_preco)");
-
-                comando.Parameters.AddWithValue("@_nome", produto.Nome);
-                comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
-                comando.Parameters.AddWithValue("@_qtd", produto.Quantidade);
-                comando.Parameters.AddWithValue("@_preco", produto.Valor);
-                
-                comando.ExecuteNonQuery();
-                lista.Add(produto);                                 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            var comando = _conexao.CreateCommand(
+              "INSERT INTO produto (nome_pro, descricao_pro, quantidade_pro, preco_pro) " +
+              "VALUES (@nome, @descricao, @quantidade, @preco);");
+            comando.Parameters.AddWithValue("@nome", produto.Nome);
+            comando.Parameters.AddWithValue("@descricao", produto.Descricao);
+            comando.Parameters.AddWithValue("@quantidade", produto.Quantidade);
+            comando.Parameters.AddWithValue("@preco", produto.Valor);
+            comando.ExecuteNonQuery();
         }
+
         public Produto? BuscarPorId(int id)
         {
             var comando = _conexao.CreateCommand(
@@ -102,53 +93,26 @@ namespace AppWeb.Models
                 return null;
             }
         }
+        
         public void Atualizar(Produto produto)
         {
-            var lista = new List<Produto>();
-            try
-            {
-                var comando = _conexao.CreateCommand(
-                    "UPDATE produto SET nome_pro = @_nome, descricao_pro = @_descricao, " +
-                    "quantidade_pro = @_quantidade, preco_pro = @_preco WHERE id_pro = @_id;");
-
-                comando.Parameters.AddWithValue("@_nome", produto.Nome);
-                comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
-                comando.Parameters.AddWithValue("@_quantidade", produto.Quantidade);
-                comando.Parameters.AddWithValue("@_preco", produto.Valor);
-                comando.Parameters.AddWithValue("@_id", produto.Id);
-
-                comando.ExecuteNonQuery();
-                lista.Add(produto);
-            }
-            catch
-            {
-                throw;
-            }
-
+            var comando = _conexao.CreateCommand(
+              "UPDATE produto SET nome_pro = @nome, descricao_pro = @descricao, " +
+              "quantidade_pro = @quantidade, preco_pro = @preco WHERE id_pro = @id;");
+            comando.Parameters.AddWithValue("@nome", produto.Nome);
+            comando.Parameters.AddWithValue("@descricao", produto.Descricao);
+            comando.Parameters.AddWithValue("@quantidade", produto.Quantidade);
+            comando.Parameters.AddWithValue("@preco", produto.Valor);
+            comando.Parameters.AddWithValue("@id", produto.Id);
+            comando.ExecuteNonQuery();
         }
-        public void Excluir(Produto produto)
+
+        public void Excluir(int id)
         {
-            var lista = new List<Produto>();
-            try
-            {
-                var comando = _conexao.CreateCommand(
-                    "ALTER TABLE produto DROP COLUMN nome_pro = @_nome, descricao_pro = @_descricao, " +
-                    "quantidade_pro = @_quantidade, preco_pro = @_preco WHERE id_pro = @_id;");
-
-                comando.Parameters.AddWithValue("@_nome", produto.Nome);
-                comando.Parameters.AddWithValue("@_descricao", produto.Descricao);
-                comando.Parameters.AddWithValue("@_quantidade", produto.Quantidade);
-                comando.Parameters.AddWithValue("@_preco", produto.Valor);
-                comando.Parameters.AddWithValue("@_id", produto.Id);
-
-                comando.ExecuteNonQuery();
-                lista.Add(produto);
-            }
-            catch
-            {
-                throw;
-            }
-
+            var comando = _conexao.CreateCommand(
+              "DELETE FROM produto WHERE id_pro = @id;");
+            comando.Parameters.AddWithValue("@id", id);
+            comando.ExecuteNonQuery();
         }
 
 
