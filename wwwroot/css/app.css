@@ -150,18 +150,19 @@ body {
     position: relative;
     box-shadow: var(--sombra-suave);
     font-size: 20px;
-    0 font-weight: bold;
-    color: var(--cor-secundaria);
+    font-weight: bold;
+    color: var(--cor-primaria);
 }
 
 .combo-cargo {
     font-size: 20px;
     font-weight: bold;
     color: var(--cor-primaria);
+    margin-left: 40px;
 }
 
 .label-cargo {
-    color: var(--cor-primaria);
+    color: var(--cor-secundaria);
     text-transform: lowercase;
     font-weight: 500;
     margin-right: 25px;
@@ -313,8 +314,176 @@ body {
 /*MAX - FIM*/
 
 
-/*MAX - ALIMENTO*/
+/*MAX - INGREDIENTE*/
 
+.container-principal-ingredientes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    padding-left: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container-principal-ingredientes h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo (tabela e botão) horizontalmente */
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    text-transform: lowercase;
+    margin: 500;
+    padding: 500;
+    font-family: serif;
+}
+
+
+/* BOTÃO CADASTRAR INGREDIENTE (Centralizado e com estilo de Funcionário) */
+.btn-adicionar-ingrediente {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    text-transform: lowercase;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: var(--borda-raio);
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    box-shadow: var(--sombra-suave);
+    /* Configuração de centralização e largura */
+    width: 800px; /* Mesma largura da tabela */
+    max-width: 95%;
+    text-align: center;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+    margin-top: 20px; /* Espaçamento */
+    display: block; /* Necessário para usar a largura e centralização */
+}
+
+    .btn-adicionar-ingrediente:hover {
+        background-color: #4a332c;
+    }
+
+/* Tabela de Ingredientes (Main) - LARGURA FIXA */
+.tabela-ingredientes {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    max-width: 95%;
+    background-color: var(--cor-terciaria);
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+    /* Estilos de scrollbar */
+    .tabela-ingredientes::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .tabela-ingredientes::-webkit-scrollbar-track {
+        background: var(--cor-terciaria);
+        border-radius: var(--borda-raio);
+    }
+
+    .tabela-ingredientes::-webkit-scrollbar-thumb {
+        background-color: var(--cor-primaria);
+        border-radius: var(--borda-raio);
+        border: 2px solid var(--cor-terciaria);
+    }
+
+
+/* Estilo para o cabeçalho (GRID) */
+.ingrediente-header {
+    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÃO 1 | AÇÃO 2 */
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    display: grid;
+    gap: 8px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    padding: 8px;
+    font-weight: bold;
+    border-radius: var(--borda-raio);
+    margin-bottom: 10px;
+}
+
+/* Layout de Item (Linha da Tabela - GRID) */
+.ingrediente-item {
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    gap: 8px;
+    display: grid;
+    align-items: center;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: var(--borda-raio);
+    padding: 5px 8px;
+}
+
+/* Estilo para as células de texto */
+.ingrediente-cell {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: 500;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Estilo para a célula de ID (Pequena) */
+.ingrediente-id {
+    /* Estilo igual ao ingrediente-cell, apenas centralizado */
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- BOTÕES DE AÇÃO (Estilo Escuro = Padrão Adicionar) --- */
+
+/* CLASSE BASE: Define o tamanho, forma, e a cor escura */
+.btn-acao-escuro,
+.btn-excluir-escuro {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--sombra-suave);
+}
+
+    .btn-acao-escuro:hover,
+    .btn-excluir-escuro:hover {
+        background-color: #412d00;
+    }
+
+/* ESTILO DE EXCLUIR: Sobrescreve apenas a cor de fundo para destaque */
+.btn-excluir-escuro {
+    background-color: #7A5B4C;
+}
+
+    .btn-excluir-escuro:hover {
+        background-color: #8c3838;
+    }
 /*MAX - FIM*/
 
 

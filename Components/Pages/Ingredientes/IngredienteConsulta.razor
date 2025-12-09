@@ -1,60 +1,60 @@
 ﻿@page "/ingredientes"
-
+@using AppWeb.Models
 @inject IngredientesDAO ingredientesDAO;
 
-<PageTitle>ingredientes</PageTitle>
+<PageTitle>Ingredientes</PageTitle>
 
+<div class="container-principal-ingredientes">
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Ingredientes</h1>
+    <h1 class="header-pagina">
+        <h1>Ingredientes</h1>
+    </h1>
 
-<a href="/ingredientes/novo"
-   class="btn btn-primary">
-    Cadastrar ingredientes
-</a>
+    <div class="tabela-ingredientes">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>descricao</th>
-            <th>quantidade</th>
-            <th>    Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int contador = 1;
+        @if (listarIngrediente != null && listarIngrediente.Any())
+        {
+            <div class="ingrediente-header">
+                <div>ID</div>
+                <div>NOME</div>
+                <div>DESCRICAO</div>
+                <div>QUANTIDADE</div>
+                <div style="grid-column: span 2; text-align: center;">AÇÕES</div>
+            </div>
 
-            @foreach (var ingredientes in listarIngrediente)
+            @foreach (var ingrediente in listarIngrediente)
             {
-                <tr>
-                    <td>@ingredientes.Id</td>
-                    <td>@ingredientes.Nome</td>
-                    <td>@ingredientes.Descricao</td>
-                    <td>@ingredientes.Quantidade</td>
+                <div class="ingrediente-item">
+                    <span class="ingrediente-id">@ingrediente.Id</span>
+                    <span class="ingrediente-cell">@ingrediente.Nome</span>
+                    <span class="ingrediente-cell">@ingrediente.Descricao</span>
+                    <span class="ingrediente-cell" style="text-align: center;">@ingrediente.Quantidade</span>
 
-                    <td>
-                        <a href="/produtos/@ingredientes.Id/editar" class="bts bts-sm bts-primary mr-2">
-                            <i class="fas fa-edit"></i> atualizar
-                        </a>
-                        <a href="/produtos/@ingredientes.Id/excluir" class="bts bts-sm bts-primary mr-2">
-                            <i class="fas fa-edit"></i> excluir
-                        </a>
-                    </td>
-                </tr>
+                    <a href="/ingredientes/@ingrediente.Id/editar" title="Atualizar">
+                        <button class="btn-acao-escuro"><i class="fas fa-pencil-alt"></i></button>
+                    </a>
 
-                contador++;
+                    <a href="/ingredientes/@ingrediente.Id/excluir" title="Excluir">
+                        <button class="btn-excluir-escuro"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </div>
             }
         }
-    </tbody>
+        else
+        {
+            <p style="text-align: center; color: var(--cor-primaria);">Não há ingredientes cadastrados.</p>
+        }
+    </div>
 
-</table>
+    <a href="/ingredientes/novo" class="btn-adicionar-ingrediente">
+        Cadastrar Ingredientes
+    </a>
+
+</div>
 
 
 @code {
     private List<Ingredientes> listarIngrediente = new();
-    private List<Ingredientes> CadastrarIngrediente = new();
 
     protected override void OnInitialized()
     {
@@ -64,8 +64,5 @@
     private void CarregarDados()
     {
         listarIngrediente = ingredientesDAO.listarTodos();
-        CadastrarIngrediente = ingredientesDAO.cadastrarIngrediente();
     }
-
 }
-
