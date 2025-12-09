@@ -40,9 +40,8 @@
                         <a href="/produtos/@produto.Id/editar"  class="bts bts-sm bts-primary mr-2">
                                 <i class="fas fa-edit"></i> atualizar
                         </a>
-                        <a href="/produtos/@produto.Id/excluir" class="bts bts-sm bts-primary mr-2">
-                                <i class="fas fa-edit"></i> excluir
-                        </a>
+                        <button class="btn btn-danger btn-sm" @onclick="() => OnExcluir(produto.Id)">Excluir</button>
+
                     </td>
                 </tr>
                 
@@ -54,22 +53,31 @@
    
 </table>
 
-
 @code {
     private List<Produto> listarProduto = new();
-    private List<Produto> CadastrarProduto = new();
 
     protected override void OnInitialized()
     {
-        CarregarDados();
+        Carregar();
     }
 
-    private void CarregarDados()
+    private void Carregar()
     {
-        listarProduto = produtoDAO.listarTodos();
-        CadastrarProduto = produtoDAO.cadastrarProdutos();
-
+        var dados = produtoDAO.listarTodos();
+        listarProduto = new List<Produto>(dados);
     }
-    
+
+    private void OnExcluir(int id)
+    {
+        bool sucesso = produtoDAO.Excluir(id);
+        if (!sucesso)
+        {
+            // opcional: mostrar mensagem de erro ou log
+            return;
+        }
+
+        Carregar();
+        StateHasChanged();
+    }
 }
 

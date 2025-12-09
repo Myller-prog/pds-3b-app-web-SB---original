@@ -66,7 +66,12 @@ namespace AppWeb.Models
             comando.Parameters.AddWithValue("@descricao", produto.Descricao);
             comando.Parameters.AddWithValue("@quantidade", produto.Quantidade);
             comando.Parameters.AddWithValue("@preco", produto.Valor);
-            comando.ExecuteNonQuery();
+            int resultado = comando.ExecuteNonQuery();
+            if (resultado != 1)
+            {
+                throw new Exception("Erro ao inserir produto — nenhuma linha afetada");
+            }
+
         }
 
         public Produto? BuscarPorId(int id)
@@ -107,13 +112,17 @@ namespace AppWeb.Models
             comando.ExecuteNonQuery();
         }
 
-        public void Excluir(int id)
+        public bool Excluir(int id)
         {
-            var comando = _conexao.CreateCommand(
+            using var comando = _conexao.CreateCommand(
               "DELETE FROM produto WHERE id_pro = @id;");
             comando.Parameters.AddWithValue("@id", id);
-            comando.ExecuteNonQuery();
+
+            int linhas = comando.ExecuteNonQuery();
+            if (linhas == 0) throw new Exception($"Nenhum produto encontrado com id = {id}");
+            return true;
         }
+
 
 
 
