@@ -8,7 +8,7 @@
         public string? FormaPagamentoRec { get; set; }
         public string? Comprovante { get; set; }
         public string? ClienteRec { get; set; }
-        
-        
+       
+
     }
 }
