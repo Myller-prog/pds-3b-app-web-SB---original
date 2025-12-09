@@ -16,22 +16,26 @@ namespace AppWeb.Models
         {
             var lista = new List<Pedido>();
 
-            var comando = _conexao.CreateCommand("SELECT * FROM pedido;");
-            var leitor = comando.ExecuteReader();
-
-
-            while (leitor.Read())
+            // Use 'using' para garantir que o comando seja descartado
+            using (var comando = _conexao.CreateCommand("SELECT * FROM pedido;"))
             {
-                var pedido = new Pedido();
-                pedido.Id = leitor.GetInt32("id_ped");
-                pedido.Status = leitor.GetString("status_ped");
-                pedido.NomeCliente = DAOHelper.GetString(leitor, "NomeCliente");
-                pedido.FormaPagamento = DAOHelper.GetString(leitor, "forma_pagamento");
-                pedido.NumeroPedido = DAOHelper.GetString(leitor, "numero_pedido");
-                pedido.Total = leitor.GetDecimal("total");
+                // Use 'using' para garantir que o leitor seja fechado
+                using (var leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        var pedido = new Pedido();
+                        pedido.Id = leitor.GetInt32("id_ped");
+                        pedido.Status = leitor.GetString("status_ped");
+                        pedido.NomeCliente = DAOHelper.GetString(leitor, "NomeCliente"); // Verifique o nome da coluna 'NomeCliente'
+                        pedido.FormaPagamento = DAOHelper.GetString(leitor, "forma_pagamento");
+                        pedido.NumeroPedido = DAOHelper.GetString(leitor, "numero_pedido");
+                        pedido.Total = leitor.GetDecimal("total");
 
-                lista.Add(pedido);
-            }
+                        lista.Add(pedido);
+                    }
+                } // O leitor é fechado aqui
+            } // O comando é descartado aqui
 
             return lista;
         }
