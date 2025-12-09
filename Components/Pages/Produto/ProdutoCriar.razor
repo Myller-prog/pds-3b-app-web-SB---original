@@ -66,8 +66,9 @@
                 throw new Exception(message: "O campo nome é obrigatório");
             }
             produtoDAO.Atualizar(_novoProduto);
+            listarProduto = produtoDAO.listarTodos();
             Navigation.NavigateTo(uri: "/produto");
-            lista.Add(_novoProduto);
+            StateHasChanged();
         }
         catch (Exception ex)
         {
