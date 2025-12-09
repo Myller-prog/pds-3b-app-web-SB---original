@@ -150,18 +150,19 @@ body {
     position: relative;
     box-shadow: var(--sombra-suave);
     font-size: 20px;
-    0 font-weight: bold;
-    color: var(--cor-secundaria);
+    font-weight: bold;
+    color: var(--cor-primaria);
 }
 
 .combo-cargo {
     font-size: 20px;
     font-weight: bold;
     color: var(--cor-primaria);
+    margin-left: 40px;
 }
 
 .label-cargo {
-    color: var(--cor-primaria);
+    color: var(--cor-secundaria);
     text-transform: lowercase;
     font-weight: 500;
     margin-right: 25px;
@@ -313,8 +314,99 @@ body {
 /*MAX - FIM*/
 
 
-/*MAX - ALIMENTO*/
+/*MAX - INGREDIENTE*/
+/* --- INGREDIENTES - ESTILOS BASEADOS EM FUNCIONÁRIOS --- */
 
+/* Container Principal da Tabela de Ingredientes */
+.tabela-ingredientes {
+    width: 800px;
+    max-width: 95%;
+    background-color: var(--cor-terciaria);
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+    /* Estilos de scrollbar (opcional, mas mantém o padrão) */
+    .tabela-ingredientes::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .tabela-ingredientes::-webkit-scrollbar-track {
+        background: var(--cor-terciaria);
+        border-radius: var(--borda-raio);
+    }
+
+    .tabela-ingredientes::-webkit-scrollbar-thumb {
+        background-color: var(--cor-primaria);
+        border-radius: var(--borda-raio);
+        border: 2px solid var(--cor-terciaria);
+    }
+
+
+/* Layout de Item (Linha da Tabela) */
+.ingrediente-item {
+    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÕES (Botões) */
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    gap: 8px;
+    display: grid;
+    align-items: center;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: var(--borda-raio);
+    padding: 5px 8px;
+}
+
+/* Estilo para as células de texto */
+.ingrediente-cell {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 8px;
+    border-radius: var(--borda-raio);
+    font-weight: 500;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Estilo para a célula de ID (Pequena) */
+.ingrediente-id {
+    composes: ingrediente-cell; /* Reutiliza estilos base */
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Estilo para o cabeçalho (Para manter o padrão de cores da lista) */
+.ingrediente-header {
+    /* Grid de colunas igual ao item */
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    display: grid;
+    gap: 8px;
+    background-color: var(--cor-primaria); /* Cor mais escura do topo */
+    color: var(--cor-terciaria);
+    padding: 8px;
+    font-weight: bold;
+    border-radius: var(--borda-raio);
+    margin-bottom: 10px;
+}
+
+/* Estilo para o grupo de botões ao lado do "Cadastrar Ingredientes" */
+.acoes-topo {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+    margin-bottom: 20px;
+    width: 800px; /* Alinhar com a tabela */
+    max-width: 95%;
+    justify-content: flex-start; /* Alinha à esquerda */
+    align-items: center;
+}
+
+/* Reutilizando os estilos de botão de ação (btn-acao, btn-editar, btn-excluir) do CSS de funcionário */
 /*MAX - FIM*/
 
 

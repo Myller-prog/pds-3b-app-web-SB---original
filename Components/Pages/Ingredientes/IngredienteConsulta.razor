@@ -1,60 +1,53 @@
 ﻿@page "/ingredientes"
-
+@using AppWeb.Models
 @inject IngredientesDAO ingredientesDAO;
 
-<PageTitle>ingredientes</PageTitle>
-
+<PageTitle>Ingredientes</PageTitle>
 
 <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Ingredientes</h1>
 
-<a href="/ingredientes/novo"
-   class="btn btn-primary">
-    Cadastrar ingredientes
+<a href="/ingredientes/novo" class="btn-ingredientes-cadastrar">
+    Cadastrar Ingredientes
 </a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>descricao</th>
-            <th>quantidade</th>
-            <th>    Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int contador = 1;
+<div class="tabela-ingredientes">
 
-            @foreach (var ingredientes in listarIngrediente)
-            {
-                <tr>
-                    <td>@ingredientes.Id</td>
-                    <td>@ingredientes.Nome</td>
-                    <td>@ingredientes.Descricao</td>
-                    <td>@ingredientes.Quantidade</td>
+    @if (listarIngrediente != null && listarIngrediente.Any())
+    {
+        <div class="ingrediente-header">
+            <div>ID</div>
+            <div>NOME</div>
+            <div>DESCRICAO</div>
+            <div>QUANTIDADE</div>
+            <div style="grid-column: span 2; text-align: center;">AÇÕES</div>
+        </div>
 
-                    <td>
-                        <a href="/produtos/@ingredientes.Id/editar" class="bts bts-sm bts-primary mr-2">
-                            <i class="fas fa-edit"></i> atualizar
-                        </a>
-                        <a href="/produtos/@ingredientes.Id/excluir" class="bts bts-sm bts-primary mr-2">
-                            <i class="fas fa-edit"></i> excluir
-                        </a>
-                    </td>
-                </tr>
+        @foreach (var ingrediente in listarIngrediente)
+        {
+            <div class="ingrediente-item">
+                <span class="ingrediente-id">@ingrediente.Id</span>
+                <span class="ingrediente-cell">@ingrediente.Nome</span>
+                <span class="ingrediente-cell">@ingrediente.Descricao</span>
+                <span class="ingrediente-cell" style="text-align: center;">@ingrediente.Quantidade</span>
 
-                contador++;
-            }
+                <a href="/ingredientes/@ingrediente.Id/editar" title="Atualizar">
+                    <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
+                </a>
+                <a href="/ingredientes/@ingrediente.Id/excluir" title="Excluir">
+                    <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
+                </a>
+            </div>
         }
-    </tbody>
-
-</table>
+    }
+    else
+    {
+        <p>Carregando ingredientes ou a lista está vazia...</p>
+    }
+</div>
 
 
 @code {
     private List<Ingredientes> listarIngrediente = new();
-    private List<Ingredientes> CadastrarIngrediente = new();
 
     protected override void OnInitialized()
     {
@@ -64,8 +57,5 @@
     private void CarregarDados()
     {
         listarIngrediente = ingredientesDAO.listarTodos();
-        CadastrarIngrediente = ingredientesDAO.cadastrarIngrediente();
     }
-
 }
-
