@@ -4,45 +4,52 @@
 
 <PageTitle>Ingredientes</PageTitle>
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Ingredientes</h1>
+<div class="container-principal-ingredientes">
 
-<a href="/ingredientes/novo" class="btn-ingredientes-cadastrar">
-    Cadastrar Ingredientes
-</a>
+    <h1 class="header-pagina">
+        <h1>Ingredientes</h1>
+    </h1>
 
-<div class="tabela-ingredientes">
+    <div class="tabela-ingredientes">
 
-    @if (listarIngrediente != null && listarIngrediente.Any())
-    {
-        <div class="ingrediente-header">
-            <div>ID</div>
-            <div>NOME</div>
-            <div>DESCRICAO</div>
-            <div>QUANTIDADE</div>
-            <div style="grid-column: span 2; text-align: center;">AÇÕES</div>
-        </div>
-
-        @foreach (var ingrediente in listarIngrediente)
+        @if (listarIngrediente != null && listarIngrediente.Any())
         {
-            <div class="ingrediente-item">
-                <span class="ingrediente-id">@ingrediente.Id</span>
-                <span class="ingrediente-cell">@ingrediente.Nome</span>
-                <span class="ingrediente-cell">@ingrediente.Descricao</span>
-                <span class="ingrediente-cell" style="text-align: center;">@ingrediente.Quantidade</span>
-
-                <a href="/ingredientes/@ingrediente.Id/editar" title="Atualizar">
-                    <button class="btn-acao btn-editar"><i class="fas fa-pencil-alt"></i></button>
-                </a>
-                <a href="/ingredientes/@ingrediente.Id/excluir" title="Excluir">
-                    <button class="btn-acao btn-excluir"><i class="fas fa-trash-alt"></i></button>
-                </a>
+            <div class="ingrediente-header">
+                <div>ID</div>
+                <div>NOME</div>
+                <div>DESCRICAO</div>
+                <div>QUANTIDADE</div>
+                <div style="grid-column: span 2; text-align: center;">AÇÕES</div>
             </div>
+
+            @foreach (var ingrediente in listarIngrediente)
+            {
+                <div class="ingrediente-item">
+                    <span class="ingrediente-id">@ingrediente.Id</span>
+                    <span class="ingrediente-cell">@ingrediente.Nome</span>
+                    <span class="ingrediente-cell">@ingrediente.Descricao</span>
+                    <span class="ingrediente-cell" style="text-align: center;">@ingrediente.Quantidade</span>
+
+                    <a href="/ingredientes/@ingrediente.Id/editar" title="Atualizar">
+                        <button class="btn-acao-escuro"><i class="fas fa-pencil-alt"></i></button>
+                    </a>
+
+                    <a href="/ingredientes/@ingrediente.Id/excluir" title="Excluir">
+                        <button class="btn-excluir-escuro"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </div>
+            }
         }
-    }
-    else
-    {
-        <p>Carregando ingredientes ou a lista está vazia...</p>
-    }
+        else
+        {
+            <p style="text-align: center; color: var(--cor-primaria);">Não há ingredientes cadastrados.</p>
+        }
+    </div>
+
+    <a href="/ingredientes/novo" class="btn-adicionar-ingrediente">
+        Cadastrar Ingredientes
+    </a>
+
 </div>
 
 

@@ -315,10 +315,63 @@ body {
 
 
 /*MAX - INGREDIENTE*/
-/* --- INGREDIENTES - ESTILOS BASEADOS EM FUNCIONÁRIOS --- */
 
-/* Container Principal da Tabela de Ingredientes */
+.container-principal-ingredientes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    padding-left: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container-principal-ingredientes h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo (tabela e botão) horizontalmente */
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    text-transform: lowercase;
+    margin: 500;
+    padding: 500;
+    font-family: serif;
+}
+
+
+/* BOTÃO CADASTRAR INGREDIENTE (Centralizado e com estilo de Funcionário) */
+.btn-adicionar-ingrediente {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    text-transform: lowercase;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: var(--borda-raio);
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    box-shadow: var(--sombra-suave);
+    /* Configuração de centralização e largura */
+    width: 800px; /* Mesma largura da tabela */
+    max-width: 95%;
+    text-align: center;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+    margin-top: 20px; /* Espaçamento */
+    display: block; /* Necessário para usar a largura e centralização */
+}
+
+    .btn-adicionar-ingrediente:hover {
+        background-color: #4a332c;
+    }
+
+/* Tabela de Ingredientes (Main) - LARGURA FIXA */
 .tabela-ingredientes {
+    display: flex;
+    flex-direction: column;
     width: 800px;
     max-width: 95%;
     background-color: var(--cor-terciaria);
@@ -327,11 +380,10 @@ body {
     padding: 10px;
     max-height: 400px;
     overflow-y: auto;
-    position: relative;
     margin-bottom: 20px;
 }
 
-    /* Estilos de scrollbar (opcional, mas mantém o padrão) */
+    /* Estilos de scrollbar */
     .tabela-ingredientes::-webkit-scrollbar {
         width: 10px;
     }
@@ -348,9 +400,22 @@ body {
     }
 
 
-/* Layout de Item (Linha da Tabela) */
+/* Estilo para o cabeçalho (GRID) */
+.ingrediente-header {
+    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÃO 1 | AÇÃO 2 */
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    display: grid;
+    gap: 8px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    padding: 8px;
+    font-weight: bold;
+    border-radius: var(--borda-raio);
+    margin-bottom: 10px;
+}
+
+/* Layout de Item (Linha da Tabela - GRID) */
 .ingrediente-item {
-    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÕES (Botões) */
     grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
     gap: 8px;
     display: grid;
@@ -376,37 +441,49 @@ body {
 
 /* Estilo para a célula de ID (Pequena) */
 .ingrediente-id {
-    composes: ingrediente-cell; /* Reutiliza estilos base */
-    text-align: center;
-    font-weight: bold;
-}
-
-/* Estilo para o cabeçalho (Para manter o padrão de cores da lista) */
-.ingrediente-header {
-    /* Grid de colunas igual ao item */
-    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
-    display: grid;
-    gap: 8px;
-    background-color: var(--cor-primaria); /* Cor mais escura do topo */
-    color: var(--cor-terciaria);
+    /* Estilo igual ao ingrediente-cell, apenas centralizado */
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
     padding: 8px;
-    font-weight: bold;
     border-radius: var(--borda-raio);
-    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* Estilo para o grupo de botões ao lado do "Cadastrar Ingredientes" */
-.acoes-topo {
-    display: flex;
-    gap: 10px; /* Espaço entre os botões */
-    margin-bottom: 20px;
-    width: 800px; /* Alinhar com a tabela */
-    max-width: 95%;
-    justify-content: flex-start; /* Alinha à esquerda */
+/* --- BOTÕES DE AÇÃO (Estilo Escuro = Padrão Adicionar) --- */
+
+/* CLASSE BASE: Define o tamanho, forma, e a cor escura */
+.btn-acao-escuro,
+.btn-excluir-escuro {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center;
     align-items: center;
+    box-shadow: var(--sombra-suave);
 }
 
-/* Reutilizando os estilos de botão de ação (btn-acao, btn-editar, btn-excluir) do CSS de funcionário */
+    .btn-acao-escuro:hover,
+    .btn-excluir-escuro:hover {
+        background-color: #412d00;
+    }
+
+/* ESTILO DE EXCLUIR: Sobrescreve apenas a cor de fundo para destaque */
+.btn-excluir-escuro {
+    background-color: #7A5B4C;
+}
+
+    .btn-excluir-escuro:hover {
+        background-color: #8c3838;
+    }
 /*MAX - FIM*/
 
 
