@@ -8,7 +8,8 @@
         public string? FormaPagamentoRec { get; set; }
         public string? Comprovante { get; set; }
         public string? ClienteRec { get; set; }
-        
-        
+        public string Horario { get; set; } = "";
+        public string Status { get; set; } = "";
+
     }
 }

@@ -1,26 +1,9 @@
 ﻿@page "/recebimento/novo"
 @rendermode InteractiveServer
 
-@using AppWeb.Models;
-@inject RecebimentoDAO recebimentoDAO;
-@inject NavigationManager Navigation;
-
-<PageTitle>Recebimento - Novo</PageTitle>
-
-
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Novo Recebimento</h1>
-
-@if (erro != null)
-{
-    <div class="alert alert-danger">
-        @erro
-    </div>
-}
-
-
-@using AppWeb.Models;
-@inject RecebimentoDAO recebimentoDAO;
-@inject NavigationManager Navigation;
+@using AppWeb.Models
+@inject RecebimentoDAO recebimentoDAO
+@inject NavigationManager Navigation
 
 <PageTitle>Recebimento - Novo</PageTitle>
 
@@ -28,9 +11,7 @@
 
 @if (erro != null)
 {
-    <div class="alert alert-danger">
-        @erro
-    </div>
+    <div class="alert alert-danger">@erro</div>
 }
 
 <div class="row">
@@ -39,12 +20,12 @@
 
             <div class="form-group mb-4">
                 <label>Pedido</label>
-                <input @bind-value="_novoRecebimento.Pedido" type="text" class="form-control" name="pedido" />
+                <input @bind-value="_novoRecebimento.Pedido" type="text" class="form-control" />
             </div>
 
             <div class="form-group mb-4">
                 <label>Valor</label>
-                <input @bind-value="_novoRecebimento.Valor" type="number" class="form-control" name="valor" />
+                <input @bind-value="_novoRecebimento.Valor" type="number" class="form-control" />
             </div>
 
             <div class="form-group mb-4">
@@ -57,12 +38,22 @@
                 <input @bind-value="_novoRecebimento.Comprovante" type="text" class="form-control" />
             </div>
 
-            <div class="form-group mb-4">
-                <label>Cliente</label>
-                <input @bind-value="_novoRecebimento.ClienteRec" type="text" class="form-control" />
+            <!-- AQUI ENTRA O SELECT DO CLIENTE -->
+            <div class="filtro-recebimento">
+                <label for="cliente" class="label-recebimento">Selecionar cliente:</label>
+
+                <select id="cliente" class="combo-cargo" @bind="_novoRecebimento.ClienteRec">
+                    <option value="" disabled selected>Todos os Clientes</option>
+
+                    @foreach (var c in ListaClientes)
+                    {
+                        <option value="@c">@c</option>
+                    }
+                </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+
         </EditForm>
     </div>
 </div>
@@ -71,14 +62,22 @@
     private string? erro = null;
     private Recebimento _novoRecebimento = new();
 
+    // LISTA DE CLIENTES (você pode substituir pelo DAO depois)
+    List<string> ListaClientes = new()
+    {
+        "João",
+        "Maria",
+        "Pedro",
+        "Ana"
+    };
+
     private void Salvar()
     {
         try
         {
-            if (_novoRecebimento.Pedido is null || _novoRecebimento.Pedido == "")
-            {
-                throw new Exception(message: "O campo nome é obrigatório");
-            }
+            if (string.IsNullOrWhiteSpace(_novoRecebimento.Pedido))
+                throw new Exception("O campo nome é obrigatório");
+
             recebimentoDAO.Inserir(_novoRecebimento);
             Navigation.NavigateTo("/recebimentos");
         }
