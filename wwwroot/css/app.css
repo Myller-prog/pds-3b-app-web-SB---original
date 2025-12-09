@@ -315,10 +315,63 @@ body {
 
 
 /*MAX - INGREDIENTE*/
-/* --- INGREDIENTES - ESTILOS BASEADOS EM FUNCIONÁRIOS --- */
 
-/* Container Principal da Tabela de Ingredientes */
+.container-principal-ingredientes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    padding-left: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container-principal-ingredientes h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo (tabela e botão) horizontalmente */
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    text-transform: lowercase;
+    margin: 500;
+    padding: 500;
+    font-family: serif;
+}
+
+
+/* BOTÃO CADASTRAR INGREDIENTE (Centralizado e com estilo de Funcionário) */
+.btn-adicionar-ingrediente {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    text-transform: lowercase;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: var(--borda-raio);
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    box-shadow: var(--sombra-suave);
+    /* Configuração de centralização e largura */
+    width: 800px; /* Mesma largura da tabela */
+    max-width: 95%;
+    text-align: center;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+    margin-top: 20px; /* Espaçamento */
+    display: block; /* Necessário para usar a largura e centralização */
+}
+
+    .btn-adicionar-ingrediente:hover {
+        background-color: #4a332c;
+    }
+
+/* Tabela de Ingredientes (Main) - LARGURA FIXA */
 .tabela-ingredientes {
+    display: flex;
+    flex-direction: column;
     width: 800px;
     max-width: 95%;
     background-color: var(--cor-terciaria);
@@ -327,11 +380,10 @@ body {
     padding: 10px;
     max-height: 400px;
     overflow-y: auto;
-    position: relative;
     margin-bottom: 20px;
 }
 
-    /* Estilos de scrollbar (opcional, mas mantém o padrão) */
+    /* Estilos de scrollbar */
     .tabela-ingredientes::-webkit-scrollbar {
         width: 10px;
     }
@@ -348,9 +400,22 @@ body {
     }
 
 
-/* Layout de Item (Linha da Tabela) */
+/* Estilo para o cabeçalho (GRID) */
+.ingrediente-header {
+    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÃO 1 | AÇÃO 2 */
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
+    display: grid;
+    gap: 8px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    padding: 8px;
+    font-weight: bold;
+    border-radius: var(--borda-raio);
+    margin-bottom: 10px;
+}
+
+/* Layout de Item (Linha da Tabela - GRID) */
 .ingrediente-item {
-    /* Layout Grid: ID | NOME | DESCRICAO | QUANTIDADE | AÇÕES (Botões) */
     grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
     gap: 8px;
     display: grid;
@@ -376,37 +441,49 @@ body {
 
 /* Estilo para a célula de ID (Pequena) */
 .ingrediente-id {
-    composes: ingrediente-cell; /* Reutiliza estilos base */
-    text-align: center;
-    font-weight: bold;
-}
-
-/* Estilo para o cabeçalho (Para manter o padrão de cores da lista) */
-.ingrediente-header {
-    /* Grid de colunas igual ao item */
-    grid-template-columns: 0.5fr 2fr 3fr 1fr 40px 40px;
-    display: grid;
-    gap: 8px;
-    background-color: var(--cor-primaria); /* Cor mais escura do topo */
-    color: var(--cor-terciaria);
+    /* Estilo igual ao ingrediente-cell, apenas centralizado */
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
     padding: 8px;
-    font-weight: bold;
     border-radius: var(--borda-raio);
-    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* Estilo para o grupo de botões ao lado do "Cadastrar Ingredientes" */
-.acoes-topo {
-    display: flex;
-    gap: 10px; /* Espaço entre os botões */
-    margin-bottom: 20px;
-    width: 800px; /* Alinhar com a tabela */
-    max-width: 95%;
-    justify-content: flex-start; /* Alinha à esquerda */
+/* --- BOTÕES DE AÇÃO (Estilo Escuro = Padrão Adicionar) --- */
+
+/* CLASSE BASE: Define o tamanho, forma, e a cor escura */
+.btn-acao-escuro,
+.btn-excluir-escuro {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+    border: none;
+    border-radius: var(--borda-raio);
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center;
     align-items: center;
+    box-shadow: var(--sombra-suave);
 }
 
-/* Reutilizando os estilos de botão de ação (btn-acao, btn-editar, btn-excluir) do CSS de funcionário */
+    .btn-acao-escuro:hover,
+    .btn-excluir-escuro:hover {
+        background-color: #412d00;
+    }
+
+/* ESTILO DE EXCLUIR: Sobrescreve apenas a cor de fundo para destaque */
+.btn-excluir-escuro {
+    background-color: #7A5B4C;
+}
+
+    .btn-excluir-escuro:hover {
+        background-color: #8c3838;
+    }
 /*MAX - FIM*/
 
 
@@ -455,6 +532,99 @@ body, html {
     .btn-secondary:hover {
         background-color: #d1b497;
         border-color: #d1b497;
+    }
+
+/* Container de Rolagem e Card */
+.tabela-scroll-box {
+    /* Cria o efeito de CARD com fundo branco para contraste */
+    max-height: 450px; /* Aumentado para melhor visualização */
+    overflow-y: auto;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-card);
+    background-color: var(--cor-card-fundo); /* Fundo branco/claro */
+    padding: 0;
+}
+
+.table {
+    width: 100%;
+    /* ?? ESSENCIAL: Remove todo e qualquer espaçamento entre células/linhas */
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+}
+
+    /* Cabeçalho */
+    .table thead {
+        background-color: var(--cor-secundaria); /* Seu bege/cáqui */
+        color: var(--cor-primaria); /* Texto marrom escuro */
+        text-transform: uppercase;
+        font-size: 0.85em; /* Fonte um pouco menor */
+        letter-spacing: 0.05em; /* Espaçamento sutil para elegância */
+        font-weight: 700;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .table th {
+        padding: 14px 15px !important;
+        border-bottom: 2px solid var(--cor-primaria) !important; /* Linha forte de separação */
+    }
+
+    /* Corpo da Tabela */
+    .table tbody tr {
+        background-color: #fcf9f5; /* Fundo muito claro/quase branco */
+        transition: background-color 0.2s;
+    }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f5f0eb !important; /* Alternância sutil de fundo para melhor leitura */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e6d3ba !important; /* Destaque ao passar o mouse com seu tom bege */
+        }
+
+    .table td {
+        padding: 12px 15px !important;
+        color: var(--cor-primaria);
+        font-size: 0.95em;
+        /* Borda inferior fina e cinza para separar as linhas */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-top: none !important;
+    }
+
+    /* Garante que a última linha não tenha borda (para ficar limpo dentro do Card) */
+    .table tbody tr:last-child td {
+        border-bottom: none !important;
+    }
+
+/* Ações (Lápis e Lixeira) */
+.botoes-acao-celula {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end; /* Alinhando à direita */
+}
+
+.btn-acao {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-secundaria); /* Fundo bege suave nos ícones */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+    .btn-acao:hover {
+        background-color: #c4a88f; /* Um tom de bege mais escuro no hover */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
     }
 
 /*STUART - PEDIDO*/
@@ -538,22 +708,9 @@ body {
         font-weight: bold;
     }
 
-    .table th {
-        border: none !important;
-        padding: 15px !important;
-        text-align: left;
-        border-bottom: 1px solid var(--cor-primaria) !important;
-    }
 
     .table tbody {
         background-color: var(--cor-terciaria);
-    }
-
-    .table td {
-        border-top: none !important;
-        border-bottom: 1px solid var(--cor-secundaria) !important;
-        padding: 12px 15px !important;
-        color: var(--cor-primaria);
     }
 
 
@@ -574,6 +731,24 @@ body {
         border-top-right-radius: var(--borda-raio);
     }
 
+
+    /* Ajuste no CSS (Para um estilo compacto) */
+
+    .table th,
+    .table td {
+        /* Padding reduzido: 8px em cima/baixo e 12px nas laterais */
+        padding: 8px 12px;
+        /* Você pode reduzir ainda mais, se necessário: */
+        /* padding: 5px 8px; */
+        /* Remove a borda inferior das células se você estiver usando o zebrado */
+        border-bottom: none;
+    }
+
+    /* Garante que o cabeçalho não tenha padding exagerado */
+    .table th {
+        font-size: 0.85em; /* Fonte um pouco menor */
+        padding: 10px 12px;
+    }
 
 /*STUART - FIM*/
 

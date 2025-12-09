@@ -12,12 +12,13 @@
         <span class="subtitulo">preencha as informações do novo cliente</span>
     </div>
 
-    @* Se você usou MensagemStatus no bloco @code, exiba aqui *@
-    @* @if (!string.IsNullOrEmpty(MensagemStatus)) { <div class="alert alert-warning">@MensagemStatus</div> } *@
 
     <div class="tabela-funcionarios" style="padding: 20px; margin-top: 30px;">
 
-        <EditForm Model="@novoCliente" OnValidSubmit="@SalvarNovoCliente">
+        <EditForm Model="@novoCliente"
+                  OnValidSubmit="@SalvarNovoCliente"
+                  FormName="NovoClienteForm">
+
             <DataAnnotationsValidator />
             <ValidationSummary />
 
@@ -57,6 +58,9 @@
             </div>
 
         </EditForm>
+
+
+
     </div>
 </div>
 

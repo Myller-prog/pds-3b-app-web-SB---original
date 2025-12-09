@@ -19,30 +19,45 @@
     </select>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome do cliente</th>
-            <th>Forma de pagamento</th>
-            <th>Status</th>
-            <th>Numero do pedido</th>
-            <th>Total</th>
-        </tr>
-    </thead>
+<table class="table w-full border-collapse">
+        <thead class="bg-brown-600 text-white uppercase tracking-wider text-sm">
+            <tr>
+                <th class="p-2 text-left">Id</th>
+                <th class="p-2 text-left">Nome do cliente</th>
+                <th class="p-2 text-left">Forma de pagamento</th>
+                <th class="p-2 text-left">Numero do pedido</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-right">Total</th>
+            </tr>
+        </thead>
     <tbody>
         @{
             int contador = 1;
 
             @foreach (var pedido in listaPedidos)
             {
-                <tr>
-                    <td>@pedido.Id</td>
-                    <td>@pedido.NomeCliente</td>
-                    <td>@pedido.FormaPagamento</td>
-                    <td>@pedido.Status</td>
-                    <td>@pedido.NumeroPedido</td>
-                    <td>@pedido.Total</td>
+                <tr class="hover:bg-amber-200 transition duration-150 ease-in-out @(contador % 2 == 0 ? "bg-amber-50" : "bg-amber-100")">
+                    <td class="p-2">@pedido.Id</td>
+                    <td class="p-2">@pedido.NomeCliente</td>
+                    <td class="p-2">@pedido.NumeroPedido</td>
+                    <td class="p-2">@pedido.Status</td>
+
+                    <td class="p-2">
+                        @{
+                            string statusText = pedido.FormaPagamento;
+                            string statusClass = statusText switch
+                            {
+                                "Pendente" => "bg-yellow-300 text-yellow-900",
+                                "Pronto" => "bg-green-300 text-green-900",
+                                _ => "bg-gray-400 text-gray-800"
+                            };
+                        }
+                        <span class="inline-block px-1 py-0.5 text-xs font-semibold rounded-full @statusClass">
+                            @statusText
+                        </span>
+                    </td>
+
+                    <td class="p-2 text-right font-bold text-red-700">@pedido.Total</td>
                 </tr>
 
                 contador++;
@@ -65,26 +80,32 @@
 
     private void CarregarDados()
     {
-        // Altere a chamada para usar a sua DAO.
-        // A lógica real de listar/filtrar estaria aqui:
-        listaPedidos = pedidoDAO.listarTodos();
+        // 1. CHAMA O DAO CORRIGIDO: Carrega TODOS os pedidos do banco de dados.
+        // É vital que o DAO retorne a lista completa aqui.
+        var todosPedidos = pedidoDAO.listarTodos();
 
-        // Exemplo de lógica de filtro (você precisaria implementar no seu DAO):
+        // 2. Aplica a lógica de filtro
         if (clienteSelecionado != "Todos os Clientes")
         {
-            // Na sua aplicação real, você chamaria um método tipo:
-            // listaPedidos = pedidoDAO.ListarPorCliente(clienteSelecionado);
-
-            // Aqui, apenas para teste:
-            listaPedidos = listaPedidos.Where(p => p.NomeCliente == clienteSelecionado).ToList();
+            // Filtra e atribui o resultado filtrado à lista exibida
+            listaPedidos = todosPedidos
+                // Usa StringComparison.OrdinalIgnoreCase para evitar problemas de maiúsculas/minúsculas
+                .Where(p => p.NomeCliente.Equals(clienteSelecionado, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
+        else
+        {
+            // Se "Todos os Clientes" estiver selecionado, exibe a lista completa
+            listaPedidos = todosPedidos;
+        }
+
+        // 3. Força a atualização da UI (se você não usou Interactive Render Mode)
+        StateHasChanged();
     }
 
     private void FiltrarPedidos(ChangeEventArgs e)
     {
         clienteSelecionado = e.Value?.ToString() ?? "Todos os Clientes";
-        CarregarDados(); // Recarrega os dados com o novo filtro aplicado
+        CarregarDados(); // Chama o método que carrega e filtra
     }
-
 }
-
